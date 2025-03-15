@@ -1,4 +1,5 @@
-﻿@model PaginatedList<AlpineNeeds.Controllers.UserViewModel>
+﻿@page
+@model UsersModel
 @{
     ViewData["Title"] = "Управление на потребители";
 }
@@ -28,7 +29,7 @@
                     <thead class="table-primary">
                         <tr>
                             <th>
-                                <a asp-action="Users" 
+                                <a asp-page="./Users" 
                                    asp-route-sortColumn="username"
                                    asp-route-sortOrder="@(Model.SortColumn == "username" && Model.SortOrder == SortOrder.Ascending ? "desc" : "asc")"
                                    asp-route-pageNumber="@Model.PageIndex"
@@ -52,7 +53,7 @@
                                 </a>
                             </th>
                             <th>
-                                <a asp-action="Users" 
+                                <a asp-page="./Users" 
                                    asp-route-sortColumn="email"
                                    asp-route-sortOrder="@(Model.SortColumn == "email" && Model.SortOrder == SortOrder.Ascending ? "desc" : "asc")"
                                    asp-route-pageNumber="@Model.PageIndex"
@@ -99,7 +100,7 @@
                                 </td>
                                 <td>
                                     <div class="btn-group" role="group">
-                                        <form asp-action="ToggleAdminRole" method="post">
+                                        <form method="post" asp-page-handler="ToggleAdminRole">
                                             <input type="hidden" name="id" value="@user.Id" />
                                             @if (user.IsAdmin)
                                             {
@@ -115,7 +116,7 @@
                                             }
                                         </form>
 
-                                        <form asp-action="ToggleUserLockout" method="post">
+                                        <form method="post" asp-page-handler="ToggleUserLockout">
                                             <input type="hidden" name="id" value="@user.Id" />
                                             @if (user.IsLockedOut)
                                             {
@@ -126,12 +127,12 @@
                                             else
                                             {
                                                 <button type="submit" class="btn btn-sm btn-danger me-1" title="Заключване на потребител">
-                                                    <i class="bi би-lock"></i> Заключване
+                                                    <i class="bi bi-lock"></i> Заключване
                                                 </button>
                                             }
                                         </form>
 
-                                        <form asp-action="DeleteUser" method="post" 
+                                        <form method="post" asp-page-handler="DeleteUser" 
                                               onsubmit="return confirm('Сигурни ли сте, че искате да изтриете този потребител?');">
                                             <input type="hidden" name="id" value="@user.Id" />
                                             <button type="submit" class="btn btn-sm btn-danger" title="Изтриване на потребител">
@@ -150,7 +151,7 @@
                         @if (Model.HasPreviousPage)
                         {
                             <li class="page-item">
-                                <a class="page-link" asp-action="Users" 
+                                <a class="page-link" asp-page="./Users" 
                                    asp-route-pageNumber="@(Model.PageIndex - 1)"
                                    asp-route-sortColumn="@Model.SortColumn"
                                    asp-route-sortOrder="@Model.SortOrder.ToString().ToLower()">Предишна</a>
@@ -166,7 +167,7 @@
                         @for (var i = 1; i <= Model.TotalPages; i++)
                         {
                             <li class="page-item @(i == Model.PageIndex ? "active" : "")">
-                                <a class="page-link" asp-action="Users" 
+                                <a class="page-link" asp-page="./Users" 
                                    asp-route-pageNumber="@i"
                                    asp-route-sortColumn="@Model.SortColumn"
                                    asp-route-sortOrder="@Model.SortOrder.ToString().ToLower()">@i</a>
@@ -176,7 +177,7 @@
                         @if (Model.HasNextPage)
                         {
                             <li class="page-item">
-                                <a class="page-link" asp-action="Users" 
+                                <a class="page-link" asp-page="./Users" 
                                    asp-route-pageNumber="@(Model.PageIndex + 1)"
                                    asp-route-sortColumn="@Model.SortColumn"
                                    asp-route-sortOrder="@Model.SortOrder.ToString().ToLower()">Следваща</a>
