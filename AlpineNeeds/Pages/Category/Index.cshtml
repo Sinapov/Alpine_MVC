@@ -18,21 +18,23 @@
         </div>
     </div>
 
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>Category Name</th>
-                <th>Display Order</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach(var obj in Model.Categories.OrderBy(u => u.DisplayOrder))
-            {
+    <div class="table-responsive-wrapper">
+        <table class="table table-bordered table-striped">
+            <thead>
                 <tr>
-                    <td>@obj.Name</td>
-                    <td>@obj.DisplayOrder</td>
+                    <th>Category Name</th>
+                    <th>Display Order</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach(var obj in Model.Categories.OrderBy(u => u.DisplayOrder))
+                {
+                    <tr>
+                        <td>@obj.Name</td>
+                        <td>@obj.DisplayOrder</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>

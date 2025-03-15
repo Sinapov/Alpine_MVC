@@ -12,8 +12,8 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AlpineNeeds</a>
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-page="/Index">AlpineNeeds</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -46,20 +46,25 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+    
+    <div class="container px-4">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer bg-primary text-muted">
-        <div class="text-center">
-            Made with <i class="bi bi-heart-fill"></i> by Sinapa
+    <footer class="border-top footer text-white">
+        <div class="container px-4">
+            <div class="text-center">
+                Made with <i class="bi bi-heart-fill"></i> by Sinapa
+            </div>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
