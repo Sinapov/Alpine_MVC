@@ -5,67 +5,106 @@
 }
 
 <div class="container">
-    @if (TempData["ErrorMessage"] != null)
-    {
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            @TempData["ErrorMessage"]
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    }
+
+    <div class="mb-3">
+        <partial name="_Alerts" />
+    </div>
 
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2>@(Model.IsNewProduct ? "Add Product" : "Edit Product")</h2>
-        <a asp-page="./Products" class="btn btn-secondary">
+        <a asp-page="./Products"
+            class="btn btn-secondary">
             <i class="bi bi-arrow-left me-2"></i>Back to Products
         </a>
     </div>
 
     <div class="card">
         <div class="card-body">
-            <form method="post">
-                <input type="hidden" asp-for="Product.Id" />
+            <form method="post" id="productForm" class="needs-validation" novalidate>
+                <input type="hidden"
+                    asp-for="Product.Id" />
                 <div class="mb-3">
-                    <label asp-for="Product.Name" class="form-label">Name</label>
-                    <input asp-for="Product.Name" class="form-control" required>
-                    <span asp-validation-for="Product.Name" class="text-danger"></span>
+                    <label asp-for="Product.Name"
+                        class="form-label"></label>
+                    <input asp-for="Product.Name"
+                        class="form-control"
+                        minlength="2"
+                        maxlength="100"
+                        required>
+                    <span asp-validation-for="Product.Name"
+                        class="text-danger"></span>
                 </div>
                 <div class="mb-3">
-                    <label asp-for="Product.Description" class="form-label">Description</label>
-                    <textarea asp-for="Product.Description" class="form-control"></textarea>
-                    <span asp-validation-for="Product.Description" class="text-danger"></span>
+                    <label asp-for="Product.Description"
+                        class="form-label"></label>
+                    <textarea asp-for="Product.Description"
+                        class="form-control"
+                        maxlength="500"></textarea>
+                    <span asp-validation-for="Product.Description"
+                        class="text-danger"></span>
                 </div>
                 <div class="mb-3">
-                    <label asp-for="Product.CategoryId" class="form-label">Category</label>
-                    <select asp-for="Product.CategoryId" asp-items="@(new SelectList(Model.Categories, "Id", "Name"))" class="form-select" required>
+                    <label asp-for="Product.CategoryId"
+                        class="form-label"></label>
+                    <select asp-for="Product.CategoryId"
+                        asp-items="@(new SelectList(Model.Categories, "Id", "Name"))"
+                        class="form-select"
+                        required>
+                        <option value="">Select a category</option>
                     </select>
-                    <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+                    <span asp-validation-for="Product.CategoryId"
+                        class="text-danger"></span>
                 </div>
                 <div class="mb-3">
-                    <label asp-for="Product.Price" class="form-label">Price</label>
-                    <input asp-for="Product.Price" class="form-control" type="number" step="0.01" required>
-                    <span asp-validation-for="Product.Price" class="text-danger"></span>
+                    <label asp-for="Product.Price"
+                        class="form-label"></label>
+                    <input asp-for="Product.Price"
+                        class="form-control"
+                        type="number"
+                        step="0.01"
+                        min="0.01"
+                        max="100000"
+                        required>
+                    <span asp-validation-for="Product.Price"
+                        class="text-danger"></span>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Colors</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" id="colorInput">
-                        <button type="button" class="btn btn-outline-secondary" onclick="addColor()">Add</button>
+                        <input type="text"
+                            class="form-control"
+                            id="colorInput">
+                        <button type="button"
+                            class="btn btn-outline-secondary"
+                            onclick="addColor()">Add</button>
                     </div>
-                    <div id="colorsList" class="mt-2"></div>
+                    <div id="colorsList"
+                        class="mt-2"></div>
                     <div id="colorsContainer"></div>
+                    <div id="colorsError"
+                        class="text-danger"></div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Sizes</label>
                     <div class="input-group">
-                        <input type="text" class="form-control" id="sizeInput">
-                        <button type="button" class="btn btn-outline-secondary" onclick="addSize()">Add</button>
+                        <input type="text"
+                            class="form-control"
+                            id="sizeInput">
+                        <button type="button"
+                            class="btn btn-outline-secondary"
+                            onclick="addSize()">Add</button>
                     </div>
-                    <div id="sizesList" class="mt-2"></div>
+                    <div id="sizesList"
+                        class="mt-2"></div>
                     <div id="sizesContainer"></div>
+                    <div id="sizesError"
+                        class="text-danger"></div>
                 </div>
                 <div class="d-flex justify-content-end gap-2">
-                    <a asp-page="./Products" class="btn btn-secondary">Cancel</a>
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <a asp-page="./Products"
+                        class="btn btn-secondary">Cancel</a>
+                    <button type="submit"
+                        class="btn btn-primary">Save</button>
                 </div>
             </form>
         </div>
@@ -90,12 +129,12 @@
 
             const colorsList = document.getElementById('colorsList');
             colorsList.innerHTML = colors.map((color, index) => `
-                <span class="badge bg-primary me-2 mb-2">
-                    ${color}
-                    <button type="button" class="btn-close btn-close-white" 
-                            aria-label="Remove" onclick="removeColor(${index})"></button>
-                </span>
-            `).join('');
+                    <span class="badge bg-primary me-2 mb-2">
+                        ${color}
+                        <button type="button" class="btn-close btn-close-white" 
+                                aria-label="Remove" onclick="removeColor(${index})"></button>
+                    </span>
+                `).join('');
         }
 
         function updateSizesList() {
@@ -111,12 +150,12 @@
 
             const sizesList = document.getElementById('sizesList');
             sizesList.innerHTML = sizes.map((size, index) => `
-                <span class="badge bg-primary me-2 mb-2">
-                    ${size}
-                    <button type="button" class="btn-close btn-close-white" 
-                            aria-label="Remove" onclick="removeSize(${index})"></button>
-                </span>
-            `).join('');
+                    <span class="badge bg-primary me-2 mb-2">
+                        ${size}
+                        <button type="button" class="btn-close btn-close-white" 
+                                aria-label="Remove" onclick="removeSize(${index})"></button>
+                    </span>
+                `).join('');
         }
 
         function addColor() {
@@ -149,9 +188,50 @@
             updateSizesList();
         }
 
-        // Initialize lists
+        function validateCollections() {
+            const colorsError = document.getElementById('colorsError');
+            const sizesError = document.getElementById('sizesError');
+            
+            // Reset error messages
+            colorsError.textContent = '';
+            sizesError.textContent = '';
+            
+            let isValid = true;
+            
+            // Validate colors
+            if (colors.length === 0) {
+                colorsError.textContent = 'At least one color must be specified';
+                isValid = false;
+            } else if (colors.length > 10) {
+                colorsError.textContent = 'Cannot have more than 10 colors';
+                isValid = false;
+            }
+            
+            // Validate sizes
+            if (sizes.length === 0) {
+                sizesError.textContent = 'At least one size must be specified';
+                isValid = false;
+            } else if (sizes.length > 10) {
+                sizesError.textContent = 'Cannot have more than 10 sizes';
+                isValid = false;
+            }
+            
+            return isValid;
+        }
+
+        document.getElementById('productForm').addEventListener('submit', function(event) {
+            if (!validateCollections()) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+        });
+
+        // Initialize lists and validation
         updateColorsList();
         updateSizesList();
+        validateCollections();
     </script>
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
