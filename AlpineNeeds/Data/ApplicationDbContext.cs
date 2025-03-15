@@ -2,6 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+using System;
+using System.Threading.Tasks;
+using AlpineNeeds.Options;
 
 namespace AlpineNeeds.Data
 {
@@ -60,6 +65,45 @@ namespace AlpineNeeds.Data
                 .WithMany(o => o.OrderProducts)
                 .HasForeignKey(op => op.OrderId)
                 .OnDelete(DeleteBehavior.Cascade);
+        }
+
+        // New method for seeding roles and admin user
+        public static async Task SeedRolesAndAdminAsync(IServiceProvider serviceProvider)
+        {
+            using (var scope = serviceProvider.CreateScope())
+            {
+                var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+                var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+                var adminOptions = scope.ServiceProvider.GetRequiredService<IOptions<AdminCredentials>>().Value;
+
+                // Create roles if they don't exist
+                string[] roleNames = { "Admin", "User" };
+                
+                foreach (var roleName in roleNames)
+                {
+                    if (!await roleManager.RoleExistsAsync(roleName))
+                    {
+                        await roleManager.CreateAsync(new IdentityRole(roleName));
+                    }
+                }
+                
+                // Create default admin if it doesn't exist
+                if (await userManager.FindByEmailAsync(adminOptions.Email) == null)
+                {
+                    var admin = new IdentityUser
+                    {
+                        UserName = adminOptions.Email,
+                        Email = adminOptions.Email,
+                        EmailConfirmed = true
+                    };
+                    
+                    var result = await userManager.CreateAsync(admin, adminOptions.Password);
+                    if (result.Succeeded)
+                    {
+                        await userManager.AddToRoleAsync(admin, "Admin");
+                    }
+                }
+            }
         }
     }
 }

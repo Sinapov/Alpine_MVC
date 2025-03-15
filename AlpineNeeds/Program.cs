@@ -1,8 +1,12 @@
 using AlpineNeeds.Data;
+using AlpineNeeds.Options;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Add optional local configuration
+builder.Configuration.AddJsonFile("appsettings.Local.json", optional: true);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -10,8 +14,13 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
+// Modified: Add Identity with role support
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-.AddEntityFrameworkStores<ApplicationDbContext>();
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>();
+
+// Bind AdminCredentials section to options
+builder.Services.Configure<AdminCredentials>(builder.Configuration.GetSection("AdminCredentials"));
 
 var app = builder.Build();
 
@@ -24,9 +33,7 @@ if (!app.Environment.IsDevelopment())
 }
 else
 {
-
     app.UseMigrationsEndPoint();
-
 }
 
 app.UseHttpsRedirection();
@@ -34,6 +41,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
@@ -41,8 +49,10 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}")
     .WithStaticAssets();
 
-
 app.MapRazorPages()
    .WithStaticAssets();
+
+// Seed roles and admin user using the method from ApplicationDbContext
+await ApplicationDbContext.SeedRolesAndAdminAsync(app.Services);
 
 app.Run();

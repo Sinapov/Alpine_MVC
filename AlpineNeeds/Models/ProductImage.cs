@@ -9,11 +9,11 @@ namespace AlpineNeeds.Models
         public int Id { get; set; }
         
         [Required]
-        public string ImageUrl { get; set; }
+        public required string ImageUrl { get; set; }
         
         public int ProductId { get; set; }
         
         [ForeignKey("ProductId")]
-        public virtual Product Product { get; set; }
+        public required virtual Product Product { get; set; }
     }
 }

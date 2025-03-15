@@ -9,20 +9,20 @@ namespace AlpineNeeds.Models
         public int Id { get; set; }
         
         [Required]
-        public string Name { get; set; }
+        public required string Name { get; set; }
         
-        public string Description { get; set; }
+        public required string Description { get; set; }
         
         public int CategoryId { get; set; }
         
         [ForeignKey("CategoryId")]
-        public virtual Category Category { get; set; }
+        public required virtual Category Category { get; set; }
         
         [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
         
         // Attributes
-        public string Color { get; set; }
-        public string Size { get; set; }
+        public required string Color { get; set; }
+        public required string Size { get; set; }
     }
 }
