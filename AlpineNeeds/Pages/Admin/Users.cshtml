@@ -5,21 +5,9 @@
 }
 
 <div class="container">
-    @if (TempData["SuccessMessage"] != null)
-    {
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            @TempData["SuccessMessage"]
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    }
-
-    @if (TempData["ErrorMessage"] != null)
-    {
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            @TempData["ErrorMessage"]
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    }
+    <div class="mb-3">
+        <partial name="_Alerts" />
+    </div>
 
     <div class="table-responsive-wrapper">
         <table class="table table-striped">
@@ -196,7 +184,7 @@
     <script>
         $(function() {
             window.setTimeout(function() {
-                $(".alert").fadeTo(500, 0).slideUp(500, function() {
+                $(".alert, .validation-summary-errors").fadeTo(500, 0).slideUp(500, function() {
                     $(this).remove();
                 });
             }, 3000);

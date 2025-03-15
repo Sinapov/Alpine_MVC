@@ -1,19 +1,19 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using AlpineNeeds.Models;
+using AlpineNeeds.Pages.Shared;
 
 namespace AlpineNeeds.Pages.Admin;
 
 [Authorize(Roles = "Admin")]
-public class UsersModel : PageModel
+public class UsersModel : BasePageModel
 {
     private readonly UserManager<IdentityUser> _userManager;
     private readonly RoleManager<IdentityRole> _roleManager;
 
-    public PaginatedList<UserViewModel> Model { get; set; }
+    public PaginatedList<UserViewModel> Model { get; private set; } = null!;
     public string SortColumn { get; set; } = "username";
     public SortOrder SortOrder { get; set; } = SortOrder.Ascending;
     public int PageIndex { get; set; } = 1;
@@ -81,8 +81,8 @@ public class UsersModel : PageModel
             userViewModels.Add(new UserViewModel
             {
                 Id = user.Id,
-                Email = user.Email,
-                UserName = user.UserName,
+                Email = user.Email ?? "",
+                UserName = user.UserName ?? "",
                 Roles = roles.ToList(),
                 IsAdmin = roles.Contains("Admin"),
                 IsLockedOut = isLockedOut
@@ -112,11 +112,11 @@ public class UsersModel : PageModel
         var result = await _userManager.DeleteAsync(user);
         if (!result.Succeeded)
         {
-            TempData["Error"] = "Failed to delete user.";
+            AddPageError("Failed to delete user.");
             return RedirectToPage();
         }
 
-        TempData["Success"] = "User deleted successfully.";
+        AddPageSuccess("User deleted successfully.");
         return RedirectToPage();
     }
 
@@ -136,7 +136,7 @@ public class UsersModel : PageModel
             var result = await _userManager.RemoveFromRoleAsync(user, "Admin");
             if (!result.Succeeded)
             {
-                TempData["Error"] = "Failed to remove admin role.";
+                AddPageError("Failed to remove admin role.");
                 return RedirectToPage();
             }
 
@@ -146,7 +146,7 @@ public class UsersModel : PageModel
                 await _userManager.AddToRoleAsync(user, "User");
             }
 
-            TempData["Success"] = "Admin role removed successfully.";
+            AddPageSuccess("Admin role removed successfully.");
         }
         else
         {
@@ -154,11 +154,11 @@ public class UsersModel : PageModel
             var result = await _userManager.AddToRoleAsync(user, "Admin");
             if (!result.Succeeded)
             {
-                TempData["Error"] = "Failed to assign admin role.";
+                AddPageError("Failed to assign admin role.");
                 return RedirectToPage();
             }
 
-            TempData["Success"] = "Admin role assigned successfully.";
+            AddPageSuccess("Admin role assigned successfully.");
         }
 
         return RedirectToPage();
@@ -181,11 +181,11 @@ public class UsersModel : PageModel
             var result = await _userManager.SetLockoutEndDateAsync(user, null);
             if (!result.Succeeded)
             {
-                TempData["Error"] = "Failed to unlock user.";
+                AddPageError("Failed to unlock user.");
                 return RedirectToPage();
             }
 
-            TempData["Success"] = "User unlocked successfully.";
+            AddPageSuccess("User unlocked successfully.");
         }
         else
         {
@@ -193,11 +193,11 @@ public class UsersModel : PageModel
             var result = await _userManager.SetLockoutEndDateAsync(user, DateTimeOffset.Now.AddYears(1));
             if (!result.Succeeded)
             {
-                TempData["Error"] = "Failed to lock user.";
+                AddPageError("Failed to lock user.");
                 return RedirectToPage();
             }
 
-            TempData["Success"] = "User locked successfully.";
+            AddPageSuccess("User locked successfully.");
         }
 
         return RedirectToPage();

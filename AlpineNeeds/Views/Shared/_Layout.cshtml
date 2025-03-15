@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -24,9 +24,6 @@
                             <a class="nav-link" asp-page="/Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-page="/Category/Index">Category</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" asp-page="/Contacts">Контакти</a>
                         </li>
                         @if (User.IsInRole("Admin"))
@@ -37,6 +34,8 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" asp-page="/Admin/Users">User Management</a></li>
+                                    <li><a class="dropdown-item" asp-page="/Admin/Products">Product Management</a></li>
+                                    <li><a class="dropdown-item" asp-page="/Admin/Categories">Category Management</a></li>
                                 </ul>
                             </li>
                         }

@@ -1,0 +1,165 @@
+@page
+@model AlpineNeeds.Pages.Admin.CategoriesModel
+@{
+    ViewData["Title"] = "Categories Management";
+}
+
+<div class="container">
+    <div class="row mb-4">
+        <div class="col">
+            <h2>Categories Management</h2>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#categoryModal" onclick="resetForm()">
+                <i class="bi bi-plus-circle"></i> Add New Category
+            </button>
+        </div>
+    </div>
+
+    @if (!ModelState.IsValid)
+    {
+        <div class="row mb-3">
+            <div class="col">
+                <div class="alert alert-danger">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="row">
+        <div class="col">
+            <table class="table table-bordered table-striped table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th>Name</th>
+                        <th>Display Order</th>
+                        <th style="width: 150px;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var category in Model.Categories)
+                    {
+                        <tr>
+                            <td>
+                                <span style="padding-left: @(category.Level * 20)px">
+                                    @if (category.Level > 0)
+                                    {
+                                        <i class="bi bi-arrow-return-right text-muted"></i>
+                                    }
+                                    @category.Name
+                                </span>
+                            </td>
+                            <td>
+                                <div class="btn-group">
+                                    <form method="post" asp-page-handler="UpdateOrder" class="d-inline">
+                                        <input type="hidden" name="id" value="@category.Id" />
+                                        <input type="hidden" name="newOrder" value="@(category.DisplayOrder - 1)" />
+                                        <button type="submit" class="btn btn-sm btn-outline-secondary" 
+                                                @(category.DisplayOrder == 0 ? "disabled" : "")
+                                                title="Move Up">
+                                            <i class="bi bi-arrow-up"></i>
+                                        </button>
+                                    </form>
+                                    <span class="mx-2">@category.DisplayOrder</span>
+                                    <form method="post" asp-page-handler="UpdateOrder" class="d-inline">
+                                        <input type="hidden" name="id" value="@category.Id" />
+                                        <input type="hidden" name="newOrder" value="@(category.DisplayOrder + 1)" />
+                                        <button type="submit" class="btn btn-sm btn-outline-secondary"
+                                                title="Move Down">
+                                            <i class="bi bi-arrow-down"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-primary" 
+                                            onclick="editCategory(@category.Id, '@category.Name', @category.DisplayOrder, @(category.ParentCategoryId?.ToString() ?? "null"))"
+                                            title="Edit">
+                                        <i class="bi bi-pencil"></i>
+                                    </button>
+                                    <form method="post" asp-page-handler="Delete" class="d-inline" 
+                                          onsubmit="return confirm('Are you sure you want to delete this category? This will also delete all subcategories.')">
+                                        <input type="hidden" name="id" value="@category.Id" />
+                                        <button type="submit" class="btn btn-sm btn-danger"
+                                                title="Delete">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Category Modal -->
+<div class="modal fade" id="categoryModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post" id="categoryForm">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Add New Category</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" asp-for="Category.Id" id="categoryId" />
+                    <div class="mb-3">
+                        <label asp-for="Category.Name" class="form-label">Name</label>
+                        <input asp-for="Category.Name" class="form-control" id="categoryName" required />
+                        <span asp-validation-for="Category.Name" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Category.ParentCategoryId" class="form-label">Parent Category</label>
+                        <select asp-for="Category.ParentCategoryId" class="form-select" id="parentCategoryId">
+                            <option value="">None (Root Category)</option>
+                            @foreach (var cat in Model.Categories)
+                            {
+                                <option value="@cat.Id" disabled="@(cat.Id == Model.Category?.Id)">
+                                    @(new string('-', cat.Level)) @cat.Name
+                                </option>
+                            }
+                        </select>
+                        <span asp-validation-for="Category.ParentCategoryId" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function editCategory(id, name, displayOrder, parentCategoryId) {
+            document.getElementById('modalTitle').textContent = 'Edit Category';
+            document.getElementById('categoryId').value = id;
+            document.getElementById('categoryName').value = name;
+            document.getElementById('parentCategoryId').value = parentCategoryId || '';
+            
+            // Enable all options first
+            document.querySelectorAll('#parentCategoryId option').forEach(opt => opt.disabled = false);
+            
+            // Disable the current category option to prevent self-reference
+            const selfOption = document.querySelector(`#parentCategoryId option[value="${id}"]`);
+            if (selfOption) selfOption.disabled = true;
+            
+            new bootstrap.Modal(document.getElementById('categoryModal')).show();
+        }
+
+        function resetForm() {
+            document.getElementById('modalTitle').textContent = 'Add New Category';
+            document.getElementById('categoryForm').reset();
+            document.getElementById('categoryId').value = '';
+            
+            // Enable all options
+            document.querySelectorAll('#parentCategoryId option').forEach(opt => opt.disabled = false);
+        }
+    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

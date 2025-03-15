@@ -1,5 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
 
 namespace AlpineNeeds.Models
 {
@@ -11,18 +12,18 @@ namespace AlpineNeeds.Models
         [Required]
         public required string Name { get; set; }
         
-        public required string Description { get; set; }
+        public string? Description { get; set; }
         
         public int CategoryId { get; set; }
         
         [ForeignKey("CategoryId")]
-        public required virtual Category Category { get; set; }
+        public virtual Category Category { get; set; } = null!;
         
         [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
         
-        // Attributes
-        public required string Color { get; set; }
-        public required string Size { get; set; }
+        // Collections for Colors and Sizes
+        public List<string> Colors { get; set; } = new();
+        public List<string> Sizes { get; set; } = new();
     }
 }

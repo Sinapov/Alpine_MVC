@@ -1,0 +1,157 @@
+@page "{id?}"
+@model ProductEditModel
+@{
+    ViewData["Title"] = Model.IsNewProduct ? "Add Product" : "Edit Product";
+}
+
+<div class="container">
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            @TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>@(Model.IsNewProduct ? "Add Product" : "Edit Product")</h2>
+        <a asp-page="./Products" class="btn btn-secondary">
+            <i class="bi bi-arrow-left me-2"></i>Back to Products
+        </a>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <form method="post">
+                <input type="hidden" asp-for="Product.Id" />
+                <div class="mb-3">
+                    <label asp-for="Product.Name" class="form-label">Name</label>
+                    <input asp-for="Product.Name" class="form-control" required>
+                    <span asp-validation-for="Product.Name" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Product.Description" class="form-label">Description</label>
+                    <textarea asp-for="Product.Description" class="form-control"></textarea>
+                    <span asp-validation-for="Product.Description" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Product.CategoryId" class="form-label">Category</label>
+                    <select asp-for="Product.CategoryId" asp-items="@(new SelectList(Model.Categories, "Id", "Name"))" class="form-select" required>
+                    </select>
+                    <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Product.Price" class="form-label">Price</label>
+                    <input asp-for="Product.Price" class="form-control" type="number" step="0.01" required>
+                    <span asp-validation-for="Product.Price" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Colors</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="colorInput">
+                        <button type="button" class="btn btn-outline-secondary" onclick="addColor()">Add</button>
+                    </div>
+                    <div id="colorsList" class="mt-2"></div>
+                    <div id="colorsContainer"></div>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Sizes</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="sizeInput">
+                        <button type="button" class="btn btn-outline-secondary" onclick="addSize()">Add</button>
+                    </div>
+                    <div id="sizesList" class="mt-2"></div>
+                    <div id="sizesContainer"></div>
+                </div>
+                <div class="d-flex justify-content-end gap-2">
+                    <a asp-page="./Products" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        let colors = @Json.Serialize(Model.Product?.Colors ?? new List<string>());
+        let sizes = @Json.Serialize(Model.Product?.Sizes ?? new List<string>());
+
+        function updateColorsList() {
+            const colorsContainer = document.getElementById('colorsContainer');
+            colorsContainer.innerHTML = '';
+            colors.forEach((color, index) => {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'Product.Colors';
+                input.value = color;
+                colorsContainer.appendChild(input);
+            });
+
+            const colorsList = document.getElementById('colorsList');
+            colorsList.innerHTML = colors.map((color, index) => `
+                <span class="badge bg-primary me-2 mb-2">
+                    ${color}
+                    <button type="button" class="btn-close btn-close-white" 
+                            aria-label="Remove" onclick="removeColor(${index})"></button>
+                </span>
+            `).join('');
+        }
+
+        function updateSizesList() {
+            const sizesContainer = document.getElementById('sizesContainer');
+            sizesContainer.innerHTML = '';
+            sizes.forEach((size, index) => {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'Product.Sizes';
+                input.value = size;
+                sizesContainer.appendChild(input);
+            });
+
+            const sizesList = document.getElementById('sizesList');
+            sizesList.innerHTML = sizes.map((size, index) => `
+                <span class="badge bg-primary me-2 mb-2">
+                    ${size}
+                    <button type="button" class="btn-close btn-close-white" 
+                            aria-label="Remove" onclick="removeSize(${index})"></button>
+                </span>
+            `).join('');
+        }
+
+        function addColor() {
+            const colorInput = document.getElementById('colorInput');
+            const color = colorInput.value.trim();
+            if (color && !colors.includes(color)) {
+                colors.push(color);
+                colorInput.value = '';
+                updateColorsList();
+            }
+        }
+
+        function addSize() {
+            const sizeInput = document.getElementById('sizeInput');
+            const size = sizeInput.value.trim();
+            if (size && !sizes.includes(size)) {
+                sizes.push(size);
+                sizeInput.value = '';
+                updateSizesList();
+            }
+        }
+
+        function removeColor(index) {
+            colors.splice(index, 1);
+            updateColorsList();
+        }
+
+        function removeSize(index) {
+            sizes.splice(index, 1);
+            updateSizesList();
+        }
+
+        // Initialize lists
+        updateColorsList();
+        updateSizesList();
+    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
