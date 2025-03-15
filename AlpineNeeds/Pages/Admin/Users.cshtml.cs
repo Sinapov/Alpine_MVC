@@ -8,10 +8,10 @@ using AlpineNeeds.Pages.Shared;
 namespace AlpineNeeds.Pages.Admin;
 
 [Authorize(Roles = "Admin")]
-public class UsersModel : BasePageModel
+public class UsersModel(
+    UserManager<ApplicationUser> userManager,
+    RoleManager<IdentityRole> roleManager) : BasePageModel
 {
-    private readonly UserManager<IdentityUser> _userManager;
-    private readonly RoleManager<IdentityRole> _roleManager;
 
     public PaginatedList<UserViewModel> Model { get; private set; } = null!;
     public string SortColumn { get; set; } = "username";
@@ -21,14 +21,6 @@ public class UsersModel : BasePageModel
     public bool HasPreviousPage => Model?.HasPreviousPage ?? false;
     public bool HasNextPage => Model?.HasNextPage ?? false;
     public int TotalPages => Model?.TotalPages ?? 0;
-
-    public UsersModel(
-        UserManager<IdentityUser> userManager,
-        RoleManager<IdentityRole> roleManager)
-    {
-        _userManager = userManager;
-        _roleManager = roleManager;
-    }
 
     public async Task<IActionResult> OnGetAsync(string? sortColumn = "username", string? sortOrder = "asc", int? pageNumber = 1)
     {
@@ -41,7 +33,7 @@ public class UsersModel : BasePageModel
         PageIndex = pageNumber.Value;
 
         // Get users query
-        var usersQuery = _userManager.Users.AsQueryable();
+        var usersQuery = userManager.Users.AsQueryable();
 
         // Apply sorting
         switch (sortColumn.ToLower())
@@ -56,13 +48,23 @@ public class UsersModel : BasePageModel
                     ? usersQuery.OrderByDescending(u => u.Email)
                     : usersQuery.OrderBy(u => u.Email);
                 break;
+            case "firstname":
+                usersQuery = sortOrder.ToLower() == "desc" 
+                    ? usersQuery.OrderByDescending(u => u.FirstName)
+                    : usersQuery.OrderBy(u => u.FirstName);
+                break;
+            case "lastname":
+                usersQuery = sortOrder.ToLower() == "desc" 
+                    ? usersQuery.OrderByDescending(u => u.LastName)
+                    : usersQuery.OrderBy(u => u.LastName);
+                break;
             default:
                 usersQuery = usersQuery.OrderBy(u => u.UserName);
                 break;
         }
 
         // Get paginated results
-        var paginatedUsers = await PaginatedList<IdentityUser>.CreateAsync(
+        var paginatedUsers = await PaginatedList<ApplicationUser>.CreateAsync(
             usersQuery, 
             pageNumber.Value,
             pageSize,
@@ -74,7 +76,7 @@ public class UsersModel : BasePageModel
         var userViewModels = new List<UserViewModel>();
         foreach (var user in paginatedUsers.Items)
         {
-            var roles = await _userManager.GetRolesAsync(user);
+            var roles = await userManager.GetRolesAsync(user);
             var lockoutEnd = user.LockoutEnd;
             var isLockedOut = lockoutEnd != null && lockoutEnd > DateTimeOffset.Now;
 
@@ -83,6 +85,9 @@ public class UsersModel : BasePageModel
                 Id = user.Id,
                 Email = user.Email ?? "",
                 UserName = user.UserName ?? "",
+                FirstName = user.FirstName ?? "",
+                LastName = user.LastName ?? "",
+                FullName = user.FullName,
                 Roles = roles.ToList(),
                 IsAdmin = roles.Contains("Admin"),
                 IsLockedOut = isLockedOut
@@ -103,13 +108,13 @@ public class UsersModel : BasePageModel
 
     public async Task<IActionResult> OnPostDeleteUserAsync(string id)
     {
-        var user = await _userManager.FindByIdAsync(id);
+        var user = await userManager.FindByIdAsync(id);
         if (user == null)
         {
             return NotFound();
         }
 
-        var result = await _userManager.DeleteAsync(user);
+        var result = await userManager.DeleteAsync(user);
         if (!result.Succeeded)
         {
             AddPageError("Failed to delete user.");
@@ -122,18 +127,18 @@ public class UsersModel : BasePageModel
 
     public async Task<IActionResult> OnPostToggleAdminRoleAsync(string id)
     {
-        var user = await _userManager.FindByIdAsync(id);
+        var user = await userManager.FindByIdAsync(id);
         if (user == null)
         {
             return NotFound();
         }
 
-        var isAdmin = await _userManager.IsInRoleAsync(user, "Admin");
+        var isAdmin = await userManager.IsInRoleAsync(user, "Admin");
 
         if (isAdmin)
         {
             // Remove admin role
-            var result = await _userManager.RemoveFromRoleAsync(user, "Admin");
+            var result = await userManager.RemoveFromRoleAsync(user, "Admin");
             if (!result.Succeeded)
             {
                 AddPageError("Failed to remove admin role.");
@@ -141,9 +146,9 @@ public class UsersModel : BasePageModel
             }
 
             // Ensure user has User role
-            if (!await _userManager.IsInRoleAsync(user, "User"))
+            if (!await userManager.IsInRoleAsync(user, "User"))
             {
-                await _userManager.AddToRoleAsync(user, "User");
+                await userManager.AddToRoleAsync(user, "User");
             }
 
             AddPageSuccess("Admin role removed successfully.");
@@ -151,7 +156,7 @@ public class UsersModel : BasePageModel
         else
         {
             // Add admin role
-            var result = await _userManager.AddToRoleAsync(user, "Admin");
+            var result = await userManager.AddToRoleAsync(user, "Admin");
             if (!result.Succeeded)
             {
                 AddPageError("Failed to assign admin role.");
@@ -166,7 +171,7 @@ public class UsersModel : BasePageModel
 
     public async Task<IActionResult> OnPostToggleUserLockoutAsync(string id)
     {
-        var user = await _userManager.FindByIdAsync(id);
+        var user = await userManager.FindByIdAsync(id);
         if (user == null)
         {
             return NotFound();
@@ -178,7 +183,7 @@ public class UsersModel : BasePageModel
         if (isLockedOut)
         {
             // Unlock the user
-            var result = await _userManager.SetLockoutEndDateAsync(user, null);
+            var result = await userManager.SetLockoutEndDateAsync(user, null);
             if (!result.Succeeded)
             {
                 AddPageError("Failed to unlock user.");
@@ -190,7 +195,7 @@ public class UsersModel : BasePageModel
         else
         {
             // Lock the user for one year
-            var result = await _userManager.SetLockoutEndDateAsync(user, DateTimeOffset.Now.AddYears(1));
+            var result = await userManager.SetLockoutEndDateAsync(user, DateTimeOffset.Now.AddYears(1));
             if (!result.Succeeded)
             {
                 AddPageError("Failed to lock user.");
@@ -209,6 +214,9 @@ public class UserViewModel
     public required string Id { get; set; }
     public string? Email { get; set; }
     public string? UserName { get; set; }
+    public string? FirstName { get; set; }
+    public string? LastName { get; set; }
+    public string FullName { get; set; }
     public required List<string> Roles { get; set; }
     public bool IsAdmin { get; set; }
     public bool IsLockedOut { get; set; }

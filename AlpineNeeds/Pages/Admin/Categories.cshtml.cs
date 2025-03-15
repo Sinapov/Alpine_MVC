@@ -8,22 +8,15 @@ using Microsoft.EntityFrameworkCore;
 namespace AlpineNeeds.Pages.Admin;
 
 [Authorize(Roles = "Admin")]
-public class CategoriesModel : BasePageModel
+public class CategoriesModel(ApplicationDbContext context) : BasePageModel
 {
-    private readonly ApplicationDbContext _context;
-    public List<CategoryViewModel> Categories { get; set; }
+    public List<CategoryViewModel> Categories { get; set; } = new List<CategoryViewModel>();
     [BindProperty]
     public required Models.Category Category { get; set; }
 
-    public CategoriesModel(ApplicationDbContext context)
-    {
-        _context = context;
-        Categories = new List<CategoryViewModel>();
-    }
-
     public async Task OnGetAsync()
     {
-        var categories = await _context.Categories
+        var categories = await context.Categories
             .Include(c => c.ParentCategory)
             .OrderBy(c => c.ParentCategoryId)
             .ThenBy(c => c.DisplayOrder)
@@ -34,12 +27,12 @@ public class CategoriesModel : BasePageModel
 
     public async Task<IActionResult> OnPostUpdateOrderAsync(int id, int newOrder)
     {
-        var category = await _context.Categories.FindAsync(id);
+        var category = await context.Categories.FindAsync(id);
         if (category == null)
             return NotFound();
 
         category.DisplayOrder = newOrder;
-        await _context.SaveChangesAsync();
+        await context.SaveChangesAsync();
         AddPageSuccess("Category order updated successfully.");
         return RedirectToPage();
     }
@@ -61,7 +54,7 @@ public class CategoriesModel : BasePageModel
                     AddError("Circular dependency detected in category hierarchy", "Category.ParentCategoryId");
                     return Page();
                 }
-                var parent = await _context.Categories.FindAsync(parentId);
+                var parent = await context.Categories.FindAsync(parentId);
                 if (parent == null) break;
                 parentId = parent.ParentCategoryId;
             }
@@ -70,16 +63,16 @@ public class CategoriesModel : BasePageModel
         if (Category.Id == 0)
         {
             // Set display order to be last in the current level
-            var maxOrder = await _context.Categories
+            var maxOrder = await context.Categories
                 .Where(c => c.ParentCategoryId == Category.ParentCategoryId)
                 .MaxAsync(c => (int?)c.DisplayOrder) ?? -1;
             Category.DisplayOrder = maxOrder + 1;
-            await _context.Categories.AddAsync(Category);
+            await context.Categories.AddAsync(Category);
             AddPageSuccess("Category created successfully.");
         }
         else
         {
-            var existingCategory = await _context.Categories.FindAsync(Category.Id);
+            var existingCategory = await context.Categories.FindAsync(Category.Id);
             if (existingCategory == null)
                 return NotFound();
 
@@ -93,17 +86,17 @@ public class CategoriesModel : BasePageModel
 
             existingCategory.Name = Category.Name;
             existingCategory.ParentCategoryId = Category.ParentCategoryId;
-            _context.Categories.Update(existingCategory);
+            context.Categories.Update(existingCategory);
             AddPageSuccess("Category updated successfully.");
         }
 
-        await _context.SaveChangesAsync();
+        await context.SaveChangesAsync();
         return RedirectToPage();
     }
 
     public async Task<IActionResult> OnPostDeleteAsync(int id)
     {
-        var category = await _context.Categories
+        var category = await context.Categories
             .Include(c => c.ParentCategory)
             .FirstOrDefaultAsync(c => c.Id == id);
 
@@ -117,14 +110,14 @@ public class CategoriesModel : BasePageModel
         try
         {
             // Delete all descendants and the category itself
-            var categoriesToDelete = await _context.Categories
+            var categoriesToDelete = await context.Categories
                 .Where(c => descendantIds.Contains(c.Id) || c.Id == id)
                 .ToListAsync();
 
-            _context.Categories.RemoveRange(categoriesToDelete);
+            context.Categories.RemoveRange(categoriesToDelete);
 
             // Reorder remaining categories at the same level
-            var siblingCategories = await _context.Categories
+            var siblingCategories = await context.Categories
                 .Where(c => c.ParentCategoryId == category.ParentCategoryId && c.Id != id)
                 .OrderBy(c => c.DisplayOrder)
                 .ToListAsync();
@@ -134,7 +127,7 @@ public class CategoriesModel : BasePageModel
                 siblingCategories[i].DisplayOrder = i;
             }
 
-            await _context.SaveChangesAsync();
+            await context.SaveChangesAsync();
             AddPageSuccess($"Category '{category.Name}' and its descendants were deleted successfully.");
         }
         catch (Exception ex)
@@ -147,7 +140,7 @@ public class CategoriesModel : BasePageModel
 
     private async Task CollectDescendantIds(int categoryId, HashSet<int> descendantIds)
     {
-        var children = await _context.Categories
+        var children = await context.Categories
             .Where(c => c.ParentCategoryId == categoryId)
             .Select(c => c.Id)
             .ToListAsync();
@@ -183,7 +176,7 @@ public class CategoriesModel : BasePageModel
 
     private async Task<bool> HasDescendant(int categoryId, int potentialDescendantId)
     {
-        var descendants = await _context.Categories
+        var descendants = await context.Categories
             .Where(c => c.ParentCategoryId == categoryId)
             .ToListAsync();
 

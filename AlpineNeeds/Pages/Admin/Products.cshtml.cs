@@ -8,28 +8,18 @@ using Microsoft.EntityFrameworkCore;
 namespace AlpineNeeds.Pages.Admin;
 
 [Authorize(Roles = "Admin")]
-public class ProductsModel : BasePageModel
+public class ProductsModel(ApplicationDbContext context) : BasePageModel
 {
-    private readonly ApplicationDbContext _context;
     private readonly int _pageSize = 10;
 
-    public ProductsModel(ApplicationDbContext context)
-    {
-        _context = context;
-        Items = new List<Product>();
-        Categories = new List<Models.Category>();
-        SortColumn = "name";
-        SortOrder = SortOrder.Ascending;
-    }
-
-    public IList<Product> Items { get; set; }
-    public IList<Models.Category> Categories { get; set; }
+    public IList<Product> Items { get; set; } = new List<Product>();
+    public IList<Models.Category> Categories { get; set; } = new List<Models.Category>();
     public int PageIndex { get; set; }
     public int TotalPages { get; set; }
     public bool HasPreviousPage => PageIndex > 1;
     public bool HasNextPage => PageIndex < TotalPages;
-    public string SortColumn { get; set; }
-    public SortOrder SortOrder { get; set; }
+    public string SortColumn { get; set; } = "name";
+    public SortOrder SortOrder { get; set; } = SortOrder.Ascending;
 
     public async Task<IActionResult> OnGetAsync(int? pageNumber, string? sortColumn, string? sortOrder)
     {
@@ -39,7 +29,7 @@ public class ProductsModel : BasePageModel
         if (!string.IsNullOrEmpty(sortOrder))
             SortOrder = sortOrder.ToLower() == "desc" ? SortOrder.Descending : SortOrder.Ascending;
 
-        var query = _context.Products
+        var query = context.Products
             .Include(p => p.Category)
             .AsQueryable();
 
@@ -78,14 +68,14 @@ public class ProductsModel : BasePageModel
             .Take(_pageSize)
             .ToListAsync();
 
-        Categories = await _context.Categories.ToListAsync();
+        Categories = await context.Categories.ToListAsync();
 
         return Page();
     }
 
     public async Task<IActionResult> OnPostDeleteProductAsync(int id)
     {
-        var product = await _context.Products.FindAsync(id);
+        var product = await context.Products.FindAsync(id);
         if (product == null)
         {
             AddPageError("Product not found.");
@@ -94,8 +84,8 @@ public class ProductsModel : BasePageModel
 
         try
         {
-            _context.Products.Remove(product);
-            await _context.SaveChangesAsync();
+            context.Products.Remove(product);
+            await context.SaveChangesAsync();
             AddPageSuccess("Product deleted successfully.");
         }
         catch (Exception ex)

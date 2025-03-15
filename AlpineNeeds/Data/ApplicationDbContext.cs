@@ -10,13 +10,8 @@ using AlpineNeeds.Options;
 
 namespace AlpineNeeds.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext<ApplicationUser>(options)
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
-        {
-        }
-
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
@@ -73,7 +68,7 @@ namespace AlpineNeeds.Data
             using (var scope = serviceProvider.CreateScope())
             {
                 var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-                var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+                var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
                 var adminOptions = scope.ServiceProvider.GetRequiredService<IOptions<AdminCredentials>>().Value;
 
                 // Create roles if they don't exist
@@ -90,11 +85,13 @@ namespace AlpineNeeds.Data
                 // Create default admin if it doesn't exist
                 if (await userManager.FindByEmailAsync(adminOptions.Email) == null)
                 {
-                    var admin = new IdentityUser
+                    var admin = new ApplicationUser
                     {
                         UserName = adminOptions.Email,
                         Email = adminOptions.Email,
-                        EmailConfirmed = true
+                        EmailConfirmed = true,
+                        FirstName = "Admin",
+                        LastName = "User"
                     };
                     
                     var result = await userManager.CreateAsync(admin, adminOptions.Password);

@@ -8,22 +8,13 @@ namespace AlpineNeeds.Models
         Descending
     }
 
-    public class PaginatedList<T>
+    public class PaginatedList<T>(List<T> items, int count, int pageIndex, int pageSize, string sortColumn, SortOrder sortOrder)
     {
-        public List<T> Items { get; }
-        public int PageIndex { get; }
-        public int TotalPages { get; }
-        public string SortColumn { get; }
-        public SortOrder SortOrder { get; }
-
-        public PaginatedList(List<T> items, int count, int pageIndex, int pageSize, string sortColumn, SortOrder sortOrder)
-        {
-            PageIndex = pageIndex;
-            TotalPages = (int)Math.Ceiling(count / (double)pageSize);
-            SortColumn = sortColumn;
-            SortOrder = sortOrder;
-            Items = items;
-        }
+        public List<T> Items { get; } = items;
+        public int PageIndex { get; } = pageIndex;
+        public int TotalPages { get; } = (int)Math.Ceiling(count / (double)pageSize);
+        public string SortColumn { get; } = sortColumn;
+        public SortOrder SortOrder { get; } = sortOrder;
 
         public bool HasPreviousPage => PageIndex > 1;
         public bool HasNextPage => PageIndex < TotalPages;

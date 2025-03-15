@@ -34,6 +34,25 @@
                     </th>
                     <th>
                         <a asp-page="./Users" 
+                           asp-route-sortColumn="firstname"
+                           asp-route-sortOrder="@(Model.SortColumn == "firstname" && Model.SortOrder == SortOrder.Ascending ? "desc" : "asc")"
+                           asp-route-pageNumber="@Model.PageIndex"
+                           class="text-dark text-decoration-none">
+                            <div class="d-flex align-items-center">
+                                <span>Name</span>
+                                @if (Model.SortColumn == "firstname")
+                                {
+                                    <i class="bi @(Model.SortOrder == SortOrder.Ascending ? "bi-arrow-up" : "bi-arrow-down") ms-1"></i>
+                                }
+                                else
+                                {
+                                    <i class="bi bi-arrow-down-up ms-1"></i>
+                                }
+                            </div>
+                        </a>
+                    </th>
+                    <th>
+                        <a asp-page="./Users" 
                            asp-route-sortColumn="email"
                            asp-route-sortOrder="@(Model.SortColumn == "email" && Model.SortOrder == SortOrder.Ascending ? "desc" : "asc")"
                            asp-route-pageNumber="@Model.PageIndex"
@@ -60,6 +79,7 @@
                 {
                     <tr>
                         <td>@user.UserName</td>
+                        <td>@user.FullName</td>
                         <td>@user.Email</td>
                         <td>
                             <div class="d-flex gap-2 align-items-center">

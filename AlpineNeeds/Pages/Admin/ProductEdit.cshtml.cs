@@ -8,26 +8,21 @@ using Microsoft.EntityFrameworkCore;
 namespace AlpineNeeds.Pages.Admin;
 
 [Authorize(Roles = "Admin")]
-public class ProductEditModel : BasePageModel
+public class ProductEditModel(ApplicationDbContext context) : BasePageModel
 {
-    private readonly ApplicationDbContext _context;
-
-    public ProductEditModel(ApplicationDbContext context)
-    {
-        _context = context;
-        Categories = new List<Models.Category>();
-    }
 
     [BindProperty]
     public Product Product { get; set; } = null!;
-    
-    public List<Models.Category> Categories { get; set; }
-    
+
+
+    public List<Models.Category> Categories { get; set; } = new List<Models.Category>();
+
+
     public bool IsNewProduct => Product?.Id == 0;
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
-        Categories = await _context.Categories.ToListAsync();
+        Categories = await context.Categories.ToListAsync();
 
         if (!Categories.Any())
         {
@@ -37,7 +32,7 @@ public class ProductEditModel : BasePageModel
 
         if (id.HasValue)
         {
-            var product = await _context.Products
+            var product = await context.Products
                 .Include(p => p.Category)
                 .FirstOrDefaultAsync(p => p.Id == id);
 
@@ -69,7 +64,7 @@ public class ProductEditModel : BasePageModel
     {
         if (!ModelState.IsValid)
         {
-            Categories = await _context.Categories.ToListAsync();
+            Categories = await context.Categories.ToListAsync();
             return Page();
         }
 
@@ -79,16 +74,16 @@ public class ProductEditModel : BasePageModel
             Product.Sizes ??= new List<string>();
             
             // Ensure Category is loaded
-            Product.Category = await _context.Categories.FindAsync(Product.CategoryId) 
+            Product.Category = await context.Categories.FindAsync(Product.CategoryId) 
                 ?? throw new InvalidOperationException("Selected category not found");
 
             if (Product.Id == 0)
             {
-                _context.Products.Add(Product);
+                context.Products.Add(Product);
             }
             else
             {
-                var existingProduct = await _context.Products
+                var existingProduct = await context.Products
                     .Include(p => p.Category)
                     .FirstOrDefaultAsync(p => p.Id == Product.Id);
 
@@ -105,17 +100,17 @@ public class ProductEditModel : BasePageModel
                 existingProduct.Colors = Product.Colors;
                 existingProduct.Sizes = Product.Sizes;
 
-                _context.Products.Update(existingProduct);
+                context.Products.Update(existingProduct);
             }
 
-            await _context.SaveChangesAsync();
+            await context.SaveChangesAsync();
             AddPageSuccess($"Product {(Product.Id == 0 ? "created" : "updated")} successfully.");
             return RedirectToPage("./Products");
         }
         catch (Exception ex)
         {
             AddPageError($"Error {(Product.Id == 0 ? "creating" : "updating")} product: {ex.Message}");
-            Categories = await _context.Categories.ToListAsync();
+            Categories = await context.Categories.ToListAsync();
             return Page();
         }
     }
