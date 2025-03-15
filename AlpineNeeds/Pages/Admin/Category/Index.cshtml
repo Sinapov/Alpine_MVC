@@ -1,0 +1,88 @@
+﻿@page
+@model AlpineNeeds.Pages.Admin.Category.IndexModel
+@{
+    ViewData["Title"] = "Categories Management";
+}
+
+<div class="container">
+    <div class="row mb-4">
+        <div class="col">
+            <h2>Categories Management</h2>
+            <a asp-page="./Manage" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Add New Category
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <table class="table table-bordered table-striped table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th>Name</th>
+                        <th>Display Order</th>
+                        <th style="width: 150px;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var category in Model.Categories)
+                    {
+                        <tr>
+                            <td>
+                                <span style="padding-left: @(category.Level * 20)px">
+                                    @if (category.Level > 0)
+                                    {
+                                        <i class="bi bi-arrow-return-right text-muted"></i>
+                                    }
+                                    @category.Name
+                                </span>
+                            </td>
+                            <td>
+                                <div class="btn-group">
+                                    <form method="post" asp-page-handler="UpdateOrder" class="d-inline">
+                                        <input type="hidden" name="id" value="@category.Id" />
+                                        <input type="hidden" name="newOrder" value="@(category.DisplayOrder - 1)" />
+                                        <button type="submit" class="btn btn-sm btn-outline-secondary" 
+                                                @(category.DisplayOrder == 0 ? "disabled" : "")
+                                                title="Move Up">
+                                            <i class="bi bi-arrow-up"></i>
+                                        </button>
+                                    </form>
+                                    <span class="mx-2">@category.DisplayOrder</span>
+                                    <form method="post" asp-page-handler="UpdateOrder" class="d-inline">
+                                        <input type="hidden" name="id" value="@category.Id" />
+                                        <input type="hidden" name="newOrder" value="@(category.DisplayOrder + 1)" />
+                                        <button type="submit" class="btn btn-sm btn-outline-secondary"
+                                                title="Move Down">
+                                            <i class="bi bi-arrow-down"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="btn-group">
+                                    <a asp-page="./Manage" asp-route-id="@category.Id" class="btn btn-sm btn-primary" 
+                                       title="Edit">
+                                        <i class="bi bi-pencil"></i>
+                                    </a>
+                                    <form method="post" asp-page-handler="Delete" class="d-inline" 
+                                          onsubmit="return confirm('Are you sure you want to delete this category? This will also delete all subcategories.')">
+                                        <input type="hidden" name="id" value="@category.Id" />
+                                        <button type="submit" class="btn btn-sm btn-danger"
+                                                title="Delete">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

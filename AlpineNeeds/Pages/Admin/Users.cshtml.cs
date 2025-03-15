@@ -9,8 +9,7 @@ namespace AlpineNeeds.Pages.Admin;
 
 [Authorize(Roles = "Admin")]
 public class UsersModel(
-    UserManager<ApplicationUser> userManager,
-    RoleManager<IdentityRole> roleManager) : BasePageModel
+    UserManager<ApplicationUser> userManager) : BasePageModel
 {
 
     public PaginatedList<UserViewModel> Model { get; private set; } = null!;
