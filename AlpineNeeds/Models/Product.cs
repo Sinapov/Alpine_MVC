@@ -41,5 +41,22 @@ namespace AlpineNeeds.Models
         // Collection of product images
         [Display(Name = "Product Images")]
         public virtual ICollection<ProductImage> ProductImages { get; set; } = new List<ProductImage>();
+        
+        // Added properties for Products page requirements
+        [Required]
+        [Display(Name = "Stock Quantity")]
+        public int StockQuantity { get; set; } = 0;
+        
+        [Display(Name = "In Stock")]
+        public bool InStock => StockQuantity > 0;
+        
+        [StringLength(100)]
+        [Display(Name = "Brand")]
+        public string? Brand { get; set; }
+        
+        [Range(0, 5)]
+        [Display(Name = "Rating")]
+        [Column(TypeName = "decimal(3,1)")]
+        public decimal? Rating { get; set; }
     }
 }

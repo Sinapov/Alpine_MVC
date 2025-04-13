@@ -46,15 +46,16 @@
 
 **Key Components:**
 - **Filter Sidebar** (Left, collapsible on mobile)
-  - **Price Range Filter**:
-    - Dual-handle slider (using noUiSlider or similar)
-    - Min/max price inputs that update with slider
-    - "Apply" button to trigger filter
-  
+
   - **Category Filter**:
     - Checkboxes for each product category
     - Shows count of products in each category
     - Auto-submits on selection change
+
+  - **Price Range Filter**:
+    - Dual-handle slider (using noUiSlider or similar)
+    - Min/max price inputs that update with slider
+    - "Apply" button to trigger filter
   
   - **Stock Filter**:
     - Radio buttons: "All", "In Stock Only"
@@ -62,13 +63,12 @@
   
   - **Other Filters**:
     - Brand selection dropdown
-    - Rating filter (star selection)
     - "Reset All Filters" button
 
 - **Products Display** (Right)
   - **Search & Sort Controls**:
     - Search input field with "Search" button
-    - Sort dropdown (Price: Low-High, Price: High-Low, Newest, Best Rated)
+    - Sort dropdown (Price: Low-High, Price: High-Low, Newest)
   
   - **Products Grid**:
     - Responsive grid (4 products per row on desktop, 2 on tablet, 1 on mobile)
@@ -82,7 +82,7 @@
       - "View Details" link
   
   - **Pagination**:
-    - Show 12 products per page
+    - Show 24 products per page
     - Previous/Next buttons
     - Page number indicators
     - "Showing X-Y of Z products" text
