@@ -19,6 +19,9 @@ namespace AlpineNeeds.Pages.Products
         public PaginatedList<Product> Products { get; set; } = default!;
 
         public List<Category> Categories { get; set; } = new();
+        
+        // Hierarchical category structure
+        public List<CategoryViewModel> CategoryHierarchy { get; set; } = new();
 
         public List<string> Brands { get; set; } = new();
 
@@ -51,11 +54,25 @@ namespace AlpineNeeds.Pages.Products
         public decimal LowestPrice { get; set; }
         public decimal HighestPrice { get; set; }
         public int TotalProducts { get; set; }
+        
+        // Dictionary to store all category IDs under each parent category
+        private Dictionary<int, HashSet<int>> _categoryHierarchyMap = new();
 
         public async Task<IActionResult> OnGetAsync()
         {
-            // Get all categories for filter
-            Categories = await _context.Categories.ToListAsync();
+            // Get all categories for filter and include parent relationship
+            Categories = await _context.Categories
+                .Include(c => c.ParentCategory)
+                .OrderBy(c => c.ParentCategoryId)
+                .ThenBy(c => c.DisplayOrder)
+                .ThenBy(c => c.Name)
+                .ToListAsync();
+            
+            // Build category hierarchy
+            BuildCategoryHierarchy();
+            
+            // Build category relationship map for filtering
+            BuildCategoryHierarchyMap();
 
             // Get all distinct brands for filter
             Brands = await _context.Products
@@ -79,10 +96,28 @@ namespace AlpineNeeds.Pages.Products
                                          p.Brand != null && p.Brand.Contains(SearchTerm));
             }
 
-            // Apply category filter if provided
+            // Apply category filter if provided, including sub-categories
             if (CategoryIds != null && CategoryIds.Any())
             {
-                query = query.Where(p => CategoryIds.Contains(p.CategoryId));
+                // Create a set of all category IDs to include (selected categories and their children)
+                var categoriesToInclude = new HashSet<int>();
+                
+                foreach(var categoryId in CategoryIds)
+                {
+                    // Add the selected category itself
+                    categoriesToInclude.Add(categoryId);
+                    
+                    // Add all child categories if this category exists in our hierarchy map
+                    if (_categoryHierarchyMap.ContainsKey(categoryId))
+                    {
+                        foreach(var childId in _categoryHierarchyMap[categoryId])
+                        {
+                            categoriesToInclude.Add(childId);
+                        }
+                    }
+                }
+                
+                query = query.Where(p => categoriesToInclude.Contains(p.CategoryId));
             }
 
             // Apply brand filter if provided
@@ -153,6 +188,91 @@ namespace AlpineNeeds.Pages.Products
             return Page();
         }
 
+        // Build the hierarchical category structure for the view
+        private void BuildCategoryHierarchy()
+        {
+            // First, find all root categories (those without parent)
+            var rootCategories = Categories
+                .Where(c => c.ParentCategoryId == null)
+                .OrderBy(c => c.DisplayOrder)
+                .ThenBy(c => c.Name);
+
+            foreach (var rootCategory in rootCategories)
+            {
+                var categoryViewModel = new CategoryViewModel
+                {
+                    Category = rootCategory,
+                    Level = 0,
+                    Children = GetChildCategories(rootCategory.Id, 1)
+                };
+                
+                CategoryHierarchy.Add(categoryViewModel);
+            }
+        }
+
+        // Recursively build subcategories
+        private List<CategoryViewModel> GetChildCategories(int parentId, int level)
+        {
+            var children = Categories
+                .Where(c => c.ParentCategoryId == parentId)
+                .OrderBy(c => c.DisplayOrder)
+                .ThenBy(c => c.Name)
+                .ToList();
+                
+            var childViewModels = new List<CategoryViewModel>();
+            
+            foreach (var child in children)
+            {
+                var childViewModel = new CategoryViewModel
+                {
+                    Category = child,
+                    Level = level,
+                    Children = GetChildCategories(child.Id, level + 1)
+                };
+                
+                childViewModels.Add(childViewModel);
+            }
+            
+            return childViewModels;
+        }
+        
+        // Build a map of category IDs to all their descendant category IDs
+        private void BuildCategoryHierarchyMap()
+        {
+            // Initialize the map for each category
+            foreach (var category in Categories)
+            {
+                _categoryHierarchyMap[category.Id] = new HashSet<int>();
+            }
+            
+            // For each category, find all its descendants
+            foreach (var category in Categories)
+            {
+                if (category.ParentCategoryId.HasValue)
+                {
+                    // Add this category to its parent's descendants
+                    AddCategoryToAncestors(category.Id, category.ParentCategoryId.Value);
+                }
+            }
+        }
+        
+        // Recursively add a category to all its ancestors' descendant lists
+        private void AddCategoryToAncestors(int categoryId, int ancestorId)
+        {
+            if (_categoryHierarchyMap.ContainsKey(ancestorId))
+            {
+                // Add this category to its ancestor's descendants
+                _categoryHierarchyMap[ancestorId].Add(categoryId);
+                
+                // Find the ancestor's parent and continue recursively
+                var ancestor = Categories.FirstOrDefault(c => c.Id == ancestorId);
+                if (ancestor?.ParentCategoryId != null)
+                {
+                    AddCategoryToAncestors(categoryId, ancestor.ParentCategoryId.Value);
+                }
+            }
+        }
+
         public async Task<IActionResult> OnGetFilterAsync()
         {
             // This method is used for AJAX filtering
@@ -179,5 +299,14 @@ namespace AlpineNeeds.Pages.Products
             // Return JSON result for AJAX
             return new JsonResult(new { success = true, message = $"Added {product.Name} to cart" });
         }
+    }
+    
+    // View model for hierarchical category display
+    public class CategoryViewModel
+    {
+        public Category Category { get; set; } = default!;
+        public int Level { get; set; }
+        public List<CategoryViewModel> Children { get; set; } = new();
+        public bool HasChildren => Children.Any();
     }
 }

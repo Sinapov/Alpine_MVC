@@ -13,9 +13,8 @@
             transition: transform 0.3s, box-shadow 0.3s;
             height: 100%;
             display: flex;
-    using System.Globalization;
-#line default
-    }
+            flex-direction: column;
+        }
 
         .product-card:hover {
             transform: translateY(-5px);
@@ -95,6 +94,34 @@
             font-size: 0.9em;
         }
 
+        /* Nested Categories */
+        .nested-categories {
+            margin-top: 10px;
+        }
+
+        .category-item {
+            margin-bottom: 5px;
+        }
+
+        .category-toggle {
+            background: none;
+            border: none;
+            color: #6c757d;
+            cursor: pointer;
+        }
+
+        .category-toggle i {
+            transition: transform 0.2s;
+        }
+
+        .category-toggle.collapsed i {
+            transform: rotate(-90deg);
+        }
+        
+        .subcategories {
+            margin-top: 5px;
+        }
+
         /* Mobile Filter Toggle */
         .filter-toggle {
             display: none;
@@ -164,22 +191,8 @@
                         <!-- Category Filter -->
                         <div class="category-filter mb-4">
                             <h6 class="font-weight-bold">Categories</h6>
-                            <div>
-                                @foreach (var category in Model.Categories)
-                                {
-                                    var isChecked = Model.CategoryIds?.Contains(category.Id) ?? false;
-                                    var count = Model.Products.Items.Count(p => p.CategoryId == category.Id);
-
-                                    <div class="form-check">
-                                        <input class="form-check-input filter-checkbox" type="checkbox"
-                                               id="category-@category.Id" name="CategoryIds" value="@category.Id"
-                                               @(isChecked ? "checked" : "") data-filter="category">
-                                        <label class="form-check-label" for="category-@category.Id">
-                                            @category.Name
-                                            <span class="category-count">(@count)</span>
-                                        </label>
-                                    </div>
-                                }
+                            <div class="nested-categories">
+                                @await Html.PartialAsync("_CategoryHierarchyPartial", Model.CategoryHierarchy)
                             </div>
                         </div>
 
@@ -433,6 +446,76 @@
                 });
             }
             
+            // Category toggle (collapse/expand)
+            $(document).on('click', '.category-toggle', function() {
+                $(this).toggleClass('collapsed');
+                $(this).closest('.category-item').find('> .subcategories').slideToggle(200);
+            });
+            
+            // Handle category checkboxes
+            $(document).on('change', '.category-checkbox', function() {
+                const isChecked = $(this).prop('checked');
+                const categoryId = $(this).data('category-id');
+                const hasChildren = $(this).data('has-children') === 'true';
+                
+                // If a parent is checked, check all children
+                if (isChecked && hasChildren) {
+                    $(this).closest('.category-item').find('.subcategories .category-checkbox').prop('checked', true);
+                }
+                
+                // If a parent is unchecked, uncheck all children
+                if (!isChecked && hasChildren) {
+                    $(this).closest('.category-item').find('.subcategories .category-checkbox').prop('checked', false);
+                }
+                
+                // If a child is checked, check all parent categories
+                if (isChecked) {
+                    checkParentCategories($(this));
+                }
+                
+                // If all siblings are unchecked, uncheck the parent
+                if (!isChecked) {
+                    uncheckParentIfAllSiblingsUnchecked($(this));
+                }
+                
+                // Submit form to apply filters
+                submitForm();
+            });
+            
+            // Function to check all parent categories
+            function checkParentCategories($checkbox) {
+                const parentId = $checkbox.data('parent-id');
+                if (parentId) {
+                    const $parentCheckbox = $('input[data-category-id="' + parentId + '"]');
+                    if ($parentCheckbox.length && !$parentCheckbox.prop('checked')) {
+                        $parentCheckbox.prop('checked', true);
+                        checkParentCategories($parentCheckbox);
+                    }
+                }
+            }
+            
+            // Function to uncheck parent if all siblings are unchecked
+            function uncheckParentIfAllSiblingsUnchecked($checkbox) {
+                const parentId = $checkbox.data('parent-id');
+                if (parentId) {
+                    const $parentCheckbox = $('input[data-category-id="' + parentId + '"]');
+                    const $siblingCheckboxes = $('input[data-parent-id="' + parentId + '"]');
+                    const allSiblingsUnchecked = $siblingCheckboxes.toArray().every(cb => !$(cb).prop('checked'));
+                    
+                    if (allSiblingsUnchecked && $parentCheckbox.prop('checked')) {
+                        $parentCheckbox.prop('checked', false);
+                        uncheckParentIfAllSiblingsUnchecked($parentCheckbox);
+                    }
+                }
+            }
+            
+            // Ensure all subcategories are initially visible for checked parent categories
+            $('.category-checkbox:checked').each(function() {
+                $(this).closest('.category-item').parents('.subcategories').show();
+                $(this).closest('.category-item').find('> .subcategories').show();
+                $(this).closest('.category-item').parents('.category-item').find('> div > .category-toggle').removeClass('collapsed');
+            });
+            
             // Toggle filter sidebar on mobile
             $('#toggleFilter').click(function() {
                 $('#filterContent').toggleClass('show');
@@ -451,7 +534,7 @@
             });
             
             // Auto-submit form when checkboxes, radio buttons, or dropdown change
-            $('.filter-checkbox, .filter-radio, #brandFilter').change(function() {
+            $('.filter-radio, #brandFilter').change(function() {
                 submitForm();
             });
             
