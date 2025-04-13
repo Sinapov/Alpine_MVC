@@ -23,7 +23,8 @@ namespace AlpineNeeds.Pages.Products
         // Hierarchical category structure
         public List<CategoryViewModel> CategoryHierarchy { get; set; } = new();
 
-        public List<string> Brands { get; set; } = new();
+        // Available brands for display in UI
+        public List<string> AvailableBrands { get; set; } = new();
 
         [BindProperty(SupportsGet = true)]
         public string? SearchTerm { get; set; }
@@ -33,6 +34,9 @@ namespace AlpineNeeds.Pages.Products
 
         [BindProperty(SupportsGet = true)]
         public string? Brand { get; set; }
+
+        [BindProperty(SupportsGet = true)]
+        public List<string>? Brands { get; set; }
 
         [BindProperty(SupportsGet = true)]
         [Range(0, int.MaxValue)]
@@ -75,7 +79,7 @@ namespace AlpineNeeds.Pages.Products
             BuildCategoryHierarchyMap();
 
             // Get all distinct brands for filter
-            Brands = await _context.Products
+            AvailableBrands = await _context.Products
                 .Where(p => p.Brand != null)
                 .Select(p => p.Brand!)
                 .Distinct()
@@ -121,7 +125,12 @@ namespace AlpineNeeds.Pages.Products
             }
 
             // Apply brand filter if provided
-            if (!string.IsNullOrEmpty(Brand) && Brand != "All")
+            if (Brands != null && Brands.Any() && !Brands.Contains("All"))
+            {
+                query = query.Where(p => Brands.Contains(p.Brand));
+            }
+            // Maintain backward compatibility with single brand parameter
+            else if (!string.IsNullOrEmpty(Brand) && Brand != "All")
             {
                 query = query.Where(p => p.Brand == Brand);
             }

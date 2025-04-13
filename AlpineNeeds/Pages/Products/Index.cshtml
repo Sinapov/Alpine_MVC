@@ -203,14 +203,14 @@
                             <div class="price-inputs mt-2">
                                 <div class="input-group input-group-sm">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text">$</span>
+                                        <span class="input-group-text">лв</span>
                                     </div>
                                     <input type="number" class="form-control" id="minPrice" name="MinPrice" value="@Model.MinPrice?.ToString(CultureInfo.InvariantCulture)">
                                 </div>
                                 <div class="mx-2">-</div>
                                 <div class="input-group input-group-sm">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text">$</span>
+                                        <span class="input-group-text">лв</span>
                                     </div>
                                     <input type="number" class="form-control" id="maxPrice" name="MaxPrice" value="@Model.MaxPrice?.ToString(CultureInfo.InvariantCulture)">
                                 </div>
@@ -242,13 +242,31 @@
                         <!-- Brand Filter -->
                         <div class="brand-filter mb-4">
                             <h6 class="font-weight-bold">Brand</h6>
-                            <select class="form-control form-control-sm" name="Brand" id="brandFilter" data-filter="brand">
-                                <option value="All">All Brands</option>
-                                @foreach (var brand in Model.Brands)
+                            <div class="brand-list">
+                                <div class="form-check">
+                                    <input class="form-check-input brand-checkbox" type="checkbox" name="Brands" 
+                                           id="brandAll" value="All" 
+                                           @(string.IsNullOrEmpty(Model.Brand) || Model.Brand == "All" ? "checked" : "") 
+                                           data-filter="brand" data-is-all="true">
+                                    <label class="form-check-label" for="brandAll">
+                                        All Brands
+                                    </label>
+                                </div>
+                                @foreach (var brand in Model.AvailableBrands)
                                 {
-                                    <option value="@brand" selected="@(Model.Brand == brand)">@brand</option>
+                                    if (!string.IsNullOrEmpty(brand))
+                                    {
+                                        <div class="form-check">
+                                            <input class="form-check-input brand-checkbox" type="checkbox" 
+                                                   name="Brands" id="brand-@brand.GetHashCode()" value="@brand" 
+                                                   @(Model.Brand == brand || (Model.Brands != null && Model.Brands.Contains(brand)) ? "checked" : "") data-filter="brand">
+                                            <label class="form-check-label" for="brand-@brand.GetHashCode()">
+                                                @brand
+                                            </label>
+                                        </div>
+                                    }
                                 }
-                            </select>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -514,6 +532,28 @@
                 $(this).closest('.category-item').parents('.subcategories').show();
                 $(this).closest('.category-item').find('> .subcategories').show();
                 $(this).closest('.category-item').parents('.category-item').find('> div > .category-toggle').removeClass('collapsed');
+            });
+            
+            // Handle brand checkboxes
+            $(document).on('change', '.brand-checkbox', function() {
+                const isChecked = $(this).prop('checked');
+                const isAll = $(this).data('is-all') === true;
+                
+                if (isAll && isChecked) {
+                    // If "All Brands" is checked, uncheck all other brand checkboxes
+                    $('.brand-checkbox:not(#brandAll)').prop('checked', false);
+                } else if (!isAll && isChecked) {
+                    // If any other brand is checked, uncheck "All Brands"
+                    $('#brandAll').prop('checked', false);
+                }
+                
+                // If no brands are checked, check "All Brands" by default
+                if ($('.brand-checkbox:checked').length === 0) {
+                    $('#brandAll').prop('checked', true);
+                }
+                
+                // Submit form to apply filters
+                submitForm();
             });
             
             // Toggle filter sidebar on mobile

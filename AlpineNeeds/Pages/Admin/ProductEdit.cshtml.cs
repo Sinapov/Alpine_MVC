@@ -62,7 +62,10 @@ public class ProductEditModel(ApplicationDbContext context, IWebHostEnvironment 
                 Colors = new List<string>(),
                 Sizes = new List<string>(),
                 Category = Categories.First(),
-                CategoryId = Categories.First().Id
+                CategoryId = Categories.First().Id,
+                StockQuantity = 0, // Initialize new property
+                Brand = string.Empty, // Initialize new property
+                // Rating is nullable, so no need to initialize
             };
         }
 
@@ -110,6 +113,11 @@ public class ProductEditModel(ApplicationDbContext context, IWebHostEnvironment 
                 existingProduct.Price = Product.Price;
                 existingProduct.Colors = Product.Colors;
                 existingProduct.Sizes = Product.Sizes;
+                
+                // Update the new properties
+                existingProduct.StockQuantity = Product.StockQuantity;
+                existingProduct.Brand = Product.Brand;
+                existingProduct.Rating = Product.Rating;
 
                 // Handle image deletions
                 if (ImageIdsToDelete.Count > 0)
