@@ -2,9 +2,402 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home Page";
+    ViewData["Description"] = "Alpine Needs - Your premier destination for high-quality outdoor gear and equipment. Shop camping, hiking and climbing equipment.";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@section Styles {
+    <style>
+        /* Hero Section Styles */
+        .hero-section {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+        }
+        
+        .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 15px;
+        }
+        
+        .hero-heading {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Introduction Section Styles */
+        .introduction-section {
+            padding: 5rem 0;
+        }
+        
+        .store-image {
+            max-height: 350px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        
+        /* Featured Products Section Styles */
+        .featured-products {
+            background-color: #f8f9fa;
+            padding: 5rem 0;
+        }
+        
+        .carousel-control-prev-icon, .carousel-control-next-icon {
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 50%;
+            padding: 10px;
+        }
+        
+        /* Categories Preview Styles */
+        .categories-preview {
+            padding: 5rem 0;
+        }
+        
+        .category-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            transition: transform 0.3s;
+            margin-bottom: 30px;
+            height: 200px;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .category-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+        
+        .category-card:hover .category-image {
+            transform: scale(1.05);
+        }
+        
+        .category-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .category-name {
+            font-weight: 600;
+            font-size: 1.25rem;
+            margin: 0;
+        }
+        
+        /* Testimonials Section Styles */
+        .testimonials-section {
+            background-color: #f8f9fa;
+            padding: 5rem 0;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            height: 100%;
+        }
+        
+        .testimonial-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+        
+        .testimonial-quote {
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .testimonial-quote:before {
+            content: """;
+            font-size: 3rem;
+            color: #e9ecef;
+            position: absolute;
+            left: -15px;
+            top: -15px;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+        }
+        
+        .star-rating {
+            color: #ffc107;
+            margin-bottom: 15px;
+        }
+        
+        /* Responsive adjustments */
+        @@media (max-width: 768px) {
+            .hero-heading {
+                font-size: 2rem;
+            }
+        }
+    </style>
+}
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <img src="/images/hero-background.jpg" alt="Mountain landscape" class="hero-image">
+    <div class="hero-overlay">
+        <h1 class="hero-heading">Adventure Awaits at Alpine Needs</h1>
+        <a href="/Products" class="btn btn-primary btn-lg">Shop Now</a>
+    </div>
+</section>
+
+<!-- Introduction Section -->
+<section class="introduction-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <h2>Our Story</h2>
+                <p class="lead">
+                    Founded by outdoor enthusiasts, Alpine Needs began with a simple mission: to provide quality gear for every adventure.
+                </p>
+                <p>
+                    With over two decades of experience exploring mountains, forests, and trails, our team knows what it takes to make reliable equipment that withstands the elements.
+                    We've tested every product in our collection, often in the harshest conditions, to ensure they meet our high standards.
+                </p>
+                <p>
+                    Whether you're a seasoned mountaineer or planning your first camping trip, we're here to help you find the perfect gear for your next expedition.
+                </p>
+                <div class="mt-4">
+                    <h3>Our Mission</h3>
+                    <p>
+                        <strong>At Alpine Needs, we are committed to providing exceptional outdoor equipment while promoting environmental stewardship and responsible adventure.</strong>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <img src="/images/store.jpg" alt="Alpine Needs Store" class="img-fluid store-image">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Products Section -->
+<section class="featured-products">
+    <div class="container">
+        <h2 class="text-center mb-5">Featured Products</h2>
+        
+        @if (Model.FeaturedProducts.Any())
+        {
+            <div id="featuredProductsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+                <div class="carousel-inner">
+                    @{
+                        // Group products into sets of 3 for each carousel slide
+                        var productGroups = Model.FeaturedProducts
+                            .Select((product, index) => new { Product = product, Index = index })
+                            .GroupBy(x => x.Index / 3)
+                            .Select(group => group.Select(x => x.Product).ToList())
+                            .ToList();
+                    }
+                    
+                    @for (int i = 0; i < productGroups.Count; i++)
+                    {
+                        <div class="carousel-item @(i == 0 ? "active" : "")">
+                            <div class="row">
+                                @foreach (var product in productGroups[i])
+                                {
+                                    <div class="col-md-4 mb-4">
+                                        <partial name="_ProductCardPartial" model="product" />
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
+                </div>
+                
+                <button class="carousel-control-prev" type="button" data-bs-target="#featuredProductsCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#featuredProductsCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        }
+        else
+        {
+            <p class="text-center">No featured products available at the moment.</p>
+        }
+    </div>
+</section>
+
+<!-- Categories Preview -->
+<section class="categories-preview">
+    <div class="container">
+        <h2 class="text-center mb-5">Explore Categories</h2>
+        
+        <div class="row">
+            @foreach (var category in Model.Categories)
+            {
+                <div class="col-md-4 col-sm-6">
+                    <a href="/Products?CategoryIds=@category.Id" class="text-decoration-none">
+                        <div class="category-card">
+                            <img src="/images/categories/@(category.Name.ToLower()).jpg" 
+                                 alt="@category.Name" 
+                                 class="category-image"
+                                 onerror="this.src='/images/categories/placeholder.webp'">
+                            <div class="category-overlay">
+                                <h3 class="category-name">@category.Name</h3>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials-section">
+    <div class="container">
+        <h2 class="text-center mb-5">What Our Customers Say</h2>
+        
+        <div class="row">
+            <!-- Testimonial 1 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="testimonial-card">
+                    <div class="star-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-quote">
+                        The quality of the hiking gear I purchased exceeded my expectations. I took it on a week-long trek through the mountains and it performed flawlessly.
+                    </p>
+                    <div class="d-flex align-items-center">
+                        <img src="/images/testimonials/user1.jpg" alt="Customer" class="testimonial-avatar"
+                             onerror="this.src='/images/testimonials/placeholder.webp'">
+                        <div>
+                            <p class="testimonial-author mb-0">Michael Johnson</p>
+                            <p class="text-muted small">Hiking Enthusiast</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Testimonial 2 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="testimonial-card">
+                    <div class="star-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <p class="testimonial-quote">
+                        The customer service at Alpine Needs is outstanding. They helped me pick the perfect tent for my family camping trip, and even gave us tips on the best local spots.
+                    </p>
+                    <div class="d-flex align-items-center">
+                        <img src="/images/testimonials/user2.jpg" alt="Customer" class="testimonial-avatar"
+                             onerror="this.src='/images/testimonials/placeholder.webp'">
+                        <div>
+                            <p class="testimonial-author mb-0">Sarah Williams</p>
+                            <p class="text-muted small">Family Camper</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Testimonial 3 -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="testimonial-card">
+                    <div class="star-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-quote">
+                        I've been a rock climber for over 15 years and Alpine Needs has the best selection of climbing gear I've found. Their products have never let me down, even in challenging conditions.
+                    </p>
+                    <div class="d-flex align-items-center">
+                        <img src="/images/testimonials/user3.jpg" alt="Customer" class="testimonial-avatar"
+                             onerror="this.src='/images/testimonials/placeholder.webp'">
+                        <div>
+                            <p class="testimonial-author mb-0">Daniel Torres</p>
+                            <p class="text-muted small">Professional Climber</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Initialize featured products carousel
+            var carousel = new bootstrap.Carousel(document.querySelector('#featuredProductsCarousel'), {
+                interval: 5000,
+                wrap: true
+            });
+            
+            // Add to cart functionality
+            $(document).on('click', '.add-to-cart-btn', function() {
+                const productId = $(this).data('product-id');
+                const quantity = 1; // Default quantity
+                
+                $.ajax({
+                    url: '/Products/Index?handler=AddToCart',
+                    type: 'POST',
+                    data: {
+                        productId: productId,
+                        quantity: quantity
+                    },
+                    headers: {
+                        RequestVerificationToken: $('input:hidden[name="__RequestVerificationToken"]').val()
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            // Show success toast or message
+                            alert(response.message);
+                        }
+                    },
+                    error: function() {
+                        alert('Error adding product to cart');
+                    }
+                });
+            });
+        });
+    </script>
+}

@@ -52,5 +52,8 @@ namespace AlpineNeeds.Models
         [StringLength(100)]
         [Display(Name = "Brand")]
         public string? Brand { get; set; }
+
+        [Display(Name = "Featured Product")]
+        public bool IsFeatured { get; set; } = false;
     }
 }

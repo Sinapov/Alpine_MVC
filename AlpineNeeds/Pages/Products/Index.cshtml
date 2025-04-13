@@ -298,53 +298,7 @@
                     @foreach (var product in Model.Products.Items)
                     {
                         <div class="col mb-4">
-                            <div class="card product-card h-100">
-                                <div class="product-img-container">
-                                    @{ 
-                                        var imgSrc = product.ProductImages?.FirstOrDefault()?.ImageUrl 
-                                            ?? "/images/products/placeholder.jpg";
-                                    }
-                                    <img src="@imgSrc" class="product-img" alt="@product.Name">
-                                </div>
-                                <div class="card-body d-flex flex-column">
-                                    <h5 class="card-title product-title">@product.Name</h5>
-                                    <p class="card-text mb-1">$@product.Price.ToString("F2")</p>
-                                    
-                                    @if (product.InStock)
-                                    {
-                                        <p class="card-text mb-2 in-stock">
-                                            <i class="fas fa-check-circle"></i> In Stock
-                                        </p>
-                                    }
-                                    else
-                                    {
-                                        <p class="card-text mb-2 out-of-stock">
-                                            <i class="fas fa-times-circle"></i> Out of Stock
-                                        </p>
-                                    }
-                                    
-                                    <div class="mt-auto">
-                                        <div class="d-grid gap-2">
-                                            <a href="/Products/Details?id=@product.Id" class="btn btn-outline-primary btn-sm">
-                                                View Details
-                                            </a>
-                                            <button type="button" 
-                                                class="btn btn-primary btn-sm add-to-cart-btn" 
-                                                data-product-id="@product.Id" 
-                                                @(!product.InStock ? "disabled" : "")>
-                                                @if (product.InStock)
-                                                {
-                                                    <span><i class="fas fa-cart-plus"></i> Add to Cart</span>
-                                                }
-                                                else
-                                                {
-                                                    <span>Out of Stock</span>
-                                                }
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <partial name="_ProductCardPartial" model="product" />
                         </div>
                     }
                 </div>
@@ -587,7 +541,7 @@
                 }
             });
             
-            // Add to cart button
+            // Add to cart functionality
             $(document).on('click', '.add-to-cart-btn', function() {
                 const productId = $(this).data('product-id');
                 const quantity = 1; // Default quantity

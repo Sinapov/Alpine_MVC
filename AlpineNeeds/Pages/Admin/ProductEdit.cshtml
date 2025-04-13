@@ -89,6 +89,12 @@
                     <span asp-validation-for="Product.Brand"
                         class="text-danger"></span>
                 </div>
+
+                <div class="mb-3 form-check">
+                    <input asp-for="Product.IsFeatured" class="form-check-input" type="checkbox">
+                    <label asp-for="Product.IsFeatured" class="form-check-label">Featured Product</label>
+                    <div class="form-text">Featured products will be displayed on the home page carousel</div>
+                </div>
                 
                 <!-- End New Properties -->
                 
