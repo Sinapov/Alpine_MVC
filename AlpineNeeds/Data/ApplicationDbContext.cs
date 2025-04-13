@@ -83,7 +83,7 @@ namespace AlpineNeeds.Data
                 }
                 
                 // Create default admin if it doesn't exist
-                if (await userManager.FindByEmailAsync(adminOptions.Email) == null)
+                if (adminOptions.Email != null && await userManager.FindByEmailAsync(adminOptions.Email) == null)
                 {
                     var admin = new ApplicationUser
                     {
@@ -94,10 +94,13 @@ namespace AlpineNeeds.Data
                         LastName = "User"
                     };
                     
-                    var result = await userManager.CreateAsync(admin, adminOptions.Password);
-                    if (result.Succeeded)
+                    if (adminOptions.Password != null)
                     {
-                        await userManager.AddToRoleAsync(admin, "Admin");
+                        var result = await userManager.CreateAsync(admin, adminOptions.Password);
+                        if (result.Succeeded)
+                        {
+                            await userManager.AddToRoleAsync(admin, "Admin");
+                        }
                     }
                 }
             }

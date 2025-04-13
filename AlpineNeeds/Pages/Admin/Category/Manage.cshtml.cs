@@ -15,7 +15,7 @@ public class ManageModel(ApplicationDbContext context) : BasePageModel
     [BindProperty]
     public Models.Category? Category { get; set; }
     
-    public SelectList ParentCategoryItems { get; set; }
+    public SelectList ParentCategoryItems { get; set; } = new SelectList(Array.Empty<SelectListItem>());
 
     public async Task<IActionResult> OnGetAsync(int? id)
     {
@@ -40,7 +40,14 @@ public class ManageModel(ApplicationDbContext context) : BasePageModel
     {
         if (!ModelState.IsValid)
         {
-            await LoadParentCategoryItems(Category.Id);
+            await LoadParentCategoryItems(Category?.Id);
+            return Page();
+        }
+
+        if (Category == null)
+        {
+            ModelState.AddModelError(string.Empty, "Category information is missing.");
+            await LoadParentCategoryItems(null);
             return Page();
         }
 

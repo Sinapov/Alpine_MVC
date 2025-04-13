@@ -38,6 +38,68 @@
                 "/consoleloggerparameters:NoSummary;ForceNoAlign"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Database: Update",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "ef",
+                "database",
+                "update",
+                "--project",
+                "${workspaceFolder}/AlpineNeeds/AlpineNeeds.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Database: Add Migration",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "ef",
+                "migrations",
+                "add",
+                "${input:migrationName}",
+                "--project",
+                "${workspaceFolder}/AlpineNeeds/AlpineNeeds.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Database: Remove Migration",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "ef",
+                "migrations",
+                "remove",
+                "--project",
+                "${workspaceFolder}/AlpineNeeds/AlpineNeeds.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Database: Drop",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "ef",
+                "database",
+                "drop",
+                "--force",
+                "--project",
+                "${workspaceFolder}/AlpineNeeds/AlpineNeeds.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        }
+    ],
+    "inputs": [
+        {
+            "id": "migrationName",
+            "description": "Name of the migration",
+            "default": "NewMigration",
+            "type": "promptString"
         }
     ]
 }
