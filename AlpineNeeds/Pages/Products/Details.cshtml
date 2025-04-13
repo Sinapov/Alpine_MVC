@@ -208,81 +208,12 @@
             }
 
             <!-- Purchase Section -->
-            <form id="addToCartForm"
-                class="mb-4">
-                <input type="hidden"
-                    id="productId"
-                    value="@Model.Product.Id">
+            <partial name="_DetailedAddToCartPartial" model="Model.Product" />
 
-                <div class="mb-3">
-                    @if (Model.Product.Colors.Any())
-                    {
-                        <div class="mb-3">
-                            <label for="colorSelect"
-                                class="form-label">Color</label>
-                            <select id="colorSelect"
-                                class="form-select">
-                                @foreach (var color in Model.Product.Colors)
-                                {
-                                    <option value="@color">@color</option>
-                                }
-                            </select>
-                        </div>
-                    }
-
-                    @if (Model.Product.Sizes.Any())
-                    {
-                        <div class="mb-3">
-                            <label for="sizeSelect"
-                                class="form-label">Size</label>
-                            <select id="sizeSelect"
-                                class="form-select">
-                                @foreach (var size in Model.Product.Sizes)
-                                {
-                                    <option value="@size">@size</option>
-                                }
-                            </select>
-                        </div>
-                    }
-                </div>
-
-                <div class="mb-3">
-                    <label for="quantityInput"
-                        class="form-label">Quantity</label>
-                    <div class="quantity-selector">
-                        <button type="button"
-                            class="quantity-btn"
-                            onclick="decreaseQuantity()">-</button>
-                        <input type="number"
-                            id="quantityInput"
-                            class="form-control quantity-input"
-                            value="1"
-                            min="1"
-                            max="@Model.Product.StockQuantity">
-                        <button type="button"
-                            class="quantity-btn"
-                            onclick="increaseQuantity()">+</button>
-                    </div>
-                </div>
-
-                <div class="d-grid gap-2 d-md-block">
-                    <button type="button"
-                        id="addToCartBtn"
-                        class="btn btn-primary btn-lg px-4"
-                        @(!Model.Product.InStock
-                                                ?
-                                                "disabled"
-                                                :
-                                                "")>
-                        <i class="bi bi-cart-plus"></i> Add to Cart
-                    </button>
-                </div>
-
-                    @if (Model.Product.Brand != null)
-                    {
-                        <p class="mt-3 mb-0">Brand: @Model.Product.Brand</p>
-                    }
-            </form>
+            @if (Model.Product.Brand != null)
+            {
+                <p class="mt-3 mb-0">Brand: @Model.Product.Brand</p>
+            }
         </div>
     </div>
 

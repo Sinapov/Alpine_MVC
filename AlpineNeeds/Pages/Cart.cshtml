@@ -1,0 +1,214 @@
+﻿@page
+@model AlpineNeeds.Pages.CartModel
+@{
+    ViewData["Title"] = "Shopping Cart";
+}
+
+<div class="container">
+    <h1>Shopping Cart</h1>
+
+    @if (Model.CartItems.Count == 0)
+    {
+        <div class="alert alert-info">
+            Your shopping cart is empty. 
+            <a asp-page="/Index">Continue shopping</a>
+        </div>
+    }
+    else
+    {
+        <div class="row g-4">
+            <!-- Cart Items Section -->
+            <div class="col-lg-8">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h4 class="mb-0">Cart Items</h4>
+                    <span class="text-muted">@Model.CartItems.Count item(s)</span>
+                </div>
+
+                <!-- Product Cards -->
+                <div class="d-flex flex-column gap-3">
+                    @foreach (var item in Model.CartItems)
+                    {
+                        <div class="product-card p-3 shadow-sm border rounded">
+                            <div class="row align-items-center">
+                                <div class="col-md-2">
+                                    @if (!string.IsNullOrEmpty(item.ImageUrl))
+                                    {
+                                        <img src="@item.ImageUrl" alt="@item.ProductName" class="img-fluid" style="max-height: 80px;" />
+                                    }
+                                    else
+                                    {
+                                        <img src="~/images/products/placeholder.webp" alt="No Image" class="img-fluid" style="max-height: 80px;" />
+                                    }
+                                </div>
+                                <div class="col-md-4">
+                                    <h6 class="mb-1">@item.ProductName</h6>
+                                    <p class="text-muted mb-0">
+                                        @if (!string.IsNullOrEmpty(item.Color))
+                                        {
+                                            <span class="badge bg-secondary me-1">Color: @item.Color</span>
+                                        }
+                                        @if (!string.IsNullOrEmpty(item.Size))
+                                        {
+                                            <span class="badge bg-info">Size: @item.Size</span>
+                                        }
+                                    </p>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <button class="btn btn-sm btn-outline-secondary btn-quantity-minus" 
+                                                data-productid="@item.ProductId" 
+                                                data-color="@item.Color" 
+                                                data-size="@item.Size">-</button>
+                                        <input type="number" 
+                                               class="form-control form-control-sm text-center item-quantity" 
+                                               style="max-width: 60px;"
+                                               value="@item.Quantity" 
+                                               min="1" 
+                                               max="100" 
+                                               data-productid="@item.ProductId" 
+                                               data-color="@item.Color" 
+                                               data-size="@item.Size">
+                                        <button class="btn btn-sm btn-outline-secondary btn-quantity-plus" 
+                                                data-productid="@item.ProductId" 
+                                                data-color="@item.Color" 
+                                                data-size="@item.Size">+</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="d-flex flex-column">
+                                        <span class="fw-bold">@item.Price.ToString("C")</span>
+                                        <small class="text-muted">Subtotal: @item.Subtotal.ToString("C")</small>
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <form method="post" asp-page-handler="RemoveItem">
+                                        <input type="hidden" name="productId" value="@item.ProductId" />
+                                        <input type="hidden" name="color" value="@item.Color" />
+                                        <input type="hidden" name="size" value="@item.Size" />
+                                        <button type="submit" class="btn btn-sm text-danger border-0">
+                                            <i class="bi bi-trash"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                
+                <div class="d-flex justify-content-start mt-4">
+                    <a asp-page="/Index" class="btn btn-outline-primary">
+                        <i class="bi bi-arrow-left"></i> Continue Shopping
+                    </a>
+                </div>
+            </div>
+
+            <!-- Summary Section -->
+            <div class="col-lg-4">
+                <div class="summary-card p-4 shadow-sm border rounded">
+                    <h5 class="mb-4">Order Summary</h5>
+                    
+                    <div class="d-flex justify-content-between mb-3">
+                        <span class="text-muted">Subtotal:</span>
+                        <span>@Model.CartTotal.ToString("C")</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <span class="text-muted">Shipping:</span>
+                        <span>@Model.ShippingCost.ToString("C")</span>
+                    </div>
+                    <hr />
+                    <div class="d-flex justify-content-between mb-4 fw-bold">
+                        <span>Total:</span>
+                        <span>@((Model.CartTotal + Model.ShippingCost).ToString("C"))</span>
+                    </div>
+
+                    <a asp-page="/Checkout" class="btn btn-success w-100">
+                        <i class="bi bi-credit-card"></i> Proceed to Checkout
+                    </a>
+                    
+                    <div class="d-flex justify-content-center gap-2 mt-3">
+                        <i class="bi bi-shield-check text-success"></i>
+                        <small class="text-muted">Secure checkout</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        $(function() {
+            // Update quantity via buttons
+            $('.btn-quantity-minus, .btn-quantity-plus').on('click', function() {
+                const $button = $(this);
+                const $input = $button.parent().find('.item-quantity');
+                const productId = $input.data('productid');
+                const color = $input.data('color') || '';
+                const size = $input.data('size') || '';
+                let quantity = parseInt($input.val());
+                
+                if ($button.hasClass('btn-quantity-minus')) {
+                    quantity = Math.max(1, quantity - 1);
+                } else {
+                    quantity += 1;
+                }
+                
+                $input.val(quantity);
+                
+                $.ajax({
+                    url: '?handler=UpdateQuantity',
+                    type: 'POST',
+                    data: {
+                        productId: productId,
+                        quantity: quantity,
+                        color: color,
+                        size: size
+                    },
+                    headers: {
+                        'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            // Reload the page to reflect updated totals
+                            location.reload();
+                        }
+                    }
+                });
+            });
+            
+            // Update quantity on input change
+            $('.item-quantity').on('change', function() {
+                const $input = $(this);
+                const productId = $input.data('productid');
+                const color = $input.data('color') || '';
+                const size = $input.data('size') || '';
+                const quantity = parseInt($input.val());
+                
+                if (quantity < 1) {
+                    $input.val(1);
+                    return;
+                }
+                
+                $.ajax({
+                    url: '?handler=UpdateQuantity',
+                    type: 'POST',
+                    data: {
+                        productId: productId,
+                        quantity: quantity,
+                        color: color,
+                        size: size
+                    },
+                    headers: {
+                        'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            // Reload the page to reflect updated totals
+                            location.reload();
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+}

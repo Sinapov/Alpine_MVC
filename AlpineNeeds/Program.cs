@@ -3,6 +3,7 @@ using AlpineNeeds.Options;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using AlpineNeeds.Models;
+using AlpineNeeds.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,10 +16,26 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-// Add Identity with role support
+// Add Identity with role support and custom SignInManager for cart merging
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddCartMergeOnLogin(); // Add custom SignInManager
+
+// Add HttpContextAccessor, required for the CartService
+builder.Services.AddHttpContextAccessor();
+
+// Add Session services (required for guest cart functionality)
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromDays(1);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
+// Register CartService
+builder.Services.AddScoped<ICartService, CartService>();
 
 // Bind AdminCredentials section to options
 builder.Services.Configure<AdminCredentials>(builder.Configuration.GetSection("AdminCredentials"));
@@ -41,6 +58,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+// Enable Session middleware
+app.UseSession();
 
 app.UseAuthentication();
 app.UseAuthorization();

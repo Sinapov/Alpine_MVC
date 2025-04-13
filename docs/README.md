@@ -276,8 +276,6 @@
 
 - **Cart Summary**
   - Subtotal
-  - Estimated shipping cost
-  - Tax (if applicable)
   - Total price
   - "Continue Shopping" button
   - "Proceed to Checkout" button (disabled if cart empty)
@@ -328,38 +326,7 @@
 - Save information in session during checkout process
 - Add input masking for phone and ZIP fields
 
-#### 2.2.2 Checkout Payment (`/Checkout/Payment.cshtml`)
-
-**Purpose:** To collect payment information.
-
-**Key Components:**
-- **Payment Methods**
-  - Credit/Debit card form
-    - Card number input (with card type detection)
-    - Expiration date (month/year)
-    - CVV code with info tooltip
-    - Name on card
-  - PayPal option
-  - Other payment methods (optional)
-
-- **Billing Summary**
-  - Order items summary
-  - All costs breakdown
-  - Final total
-  - "Return to Information" button
-  - "Place Order" button
-
-- **Terms & Conditions**
-  - Checkbox to accept terms
-  - Links to privacy policy and return policy
-
-**Implementation Notes:**
-- Integrate with payment gateway API
-- Implement PCI-compliant card handling
-- Add order confirmation before final submission
-- Display loading indicator during payment processing
-
-#### 2.2.3 Order Confirmation (`/Checkout/Confirmation.cshtml`)
+#### 2.2.2 Order Confirmation (`/Checkout/Confirmation.cshtml`)
 
 **Purpose:** To confirm successful order placement.
 
@@ -372,13 +339,11 @@
 - **Order Details**
   - Items purchased
   - Shipping address
-  - Payment method (masked)
   - Order total
 
 - **Next Steps Section**
-  - "Create Account" prompt (for guest checkout)
   - "Continue Shopping" button
-  - "View Order Details" button (for registered users)
+  - "View Order Details" button
   - Email confirmation notice
 
 **Implementation Notes:**

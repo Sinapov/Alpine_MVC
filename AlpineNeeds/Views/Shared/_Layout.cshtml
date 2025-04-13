@@ -41,7 +41,12 @@
                             </li>
                         }
                     </ul>
-                    <partial name="_LoginPartial" />
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            @await Component.InvokeAsync("CartSummary")
+                        </li>
+                        <partial name="_LoginPartial" />
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -61,9 +66,38 @@
         </div>
     </footer>
 
+    @if (TempData["CartMessage"] != null)
+    {
+        <div class="modal fade" id="cartSuccessModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header bg-success text-white">
+                        <h5 class="modal-title">Success</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>@TempData["CartMessage"]</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a asp-page="/Cart" class="btn btn-primary">View Cart</a>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Continue Shopping</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                var cartModal = new bootstrap.Modal(document.getElementById('cartSuccessModal'));
+                cartModal.show();
+            });
+        </script>
+    }
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/cart.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
 </body>

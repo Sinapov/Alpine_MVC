@@ -30,19 +30,16 @@
                 <a href="/Products/Details?id=@Model.Id" class="btn btn-outline-primary btn-sm">
                     View Details
                 </a>
-                <button type="button" 
-                    class="btn btn-primary btn-sm add-to-cart-btn" 
-                    data-product-id="@Model.Id" 
-                    @(!Model.InStock ? "disabled" : "")>
-                    @if (Model.InStock)
-                    {
-                        <span><i class="fas fa-cart-plus"></i> Add to Cart</span>
-                    }
-                    else
-                    {
+                @if (Model.InStock)
+                {
+                    <partial name="_AddToCartPartial" model="@Model.Id" />
+                }
+                else
+                {
+                    <button type="button" class="btn btn-primary btn-sm" disabled>
                         <span>Out of Stock</span>
-                    }
-                </button>
+                    </button>
+                }
             </div>
         </div>
     </div>

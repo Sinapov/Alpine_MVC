@@ -33,9 +33,7 @@
                 "watch",
                 "run",
                 "--project",
-                "${workspaceFolder}/AlpineNeeds/AlpineNeeds.csproj",
-                "/property:GenerateFullPaths=true",
-                "/consoleloggerparameters:NoSummary;ForceNoAlign"
+                "${workspaceFolder}/AlpineNeeds/AlpineNeeds.csproj"
             ],
             "problemMatcher": "$msCompile"
         },
