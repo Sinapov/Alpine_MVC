@@ -65,7 +65,6 @@ public class ProductEditModel(ApplicationDbContext context, IWebHostEnvironment 
                 CategoryId = Categories.First().Id,
                 StockQuantity = 0, // Initialize new property
                 Brand = string.Empty, // Initialize new property
-                // Rating is nullable, so no need to initialize
             };
         }
 
@@ -117,7 +116,6 @@ public class ProductEditModel(ApplicationDbContext context, IWebHostEnvironment 
                 // Update the new properties
                 existingProduct.StockQuantity = Product.StockQuantity;
                 existingProduct.Brand = Product.Brand;
-                existingProduct.Rating = Product.Rating;
 
                 // Handle image deletions
                 if (ImageIdsToDelete.Count > 0)

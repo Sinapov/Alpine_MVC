@@ -127,11 +127,6 @@
             display: none;
         }
 
-        /* Star rating */
-        .rating {
-            color: #ffc107;
-        }
-
         /* Responsive design */
         @@media (max-width: 991px) {
             .filter-sidebar {
@@ -326,28 +321,6 @@
                                         <p class="card-text mb-2 out-of-stock">
                                             <i class="fas fa-times-circle"></i> Out of Stock
                                         </p>
-                                    }
-                                    
-                                    @if (product.Rating.HasValue)
-                                    {
-                                        <div class="mb-2 rating">
-                                            @for (var i = 1; i <= 5; i++)
-                                            {
-                                                if (i <= Math.Floor((double)product.Rating.Value))
-                                                {
-                                                    <i class="fas fa-star"></i>
-                                                }
-                                                else if (i - 0.5 <= (double)product.Rating.Value)
-                                                {
-                                                    <i class="fas fa-star-half-alt"></i>
-                                                }
-                                                else
-                                                {
-                                                    <i class="far fa-star"></i>
-                                                }
-                                            }
-                                            <span class="ms-1 text-muted">(@product.Rating)</span>
-                                        </div>
                                     }
                                     
                                     <div class="mt-auto">
