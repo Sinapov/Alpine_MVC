@@ -1,11 +1,11 @@
 ﻿@model int
 
 <form asp-page="/Cart" asp-page-handler="AddToCart" method="post" class="add-to-cart-form">
-    <input type="hidden" name="productId" value="@Model" />
+    <input type="hidden" name="productId" value="@Model" id="productId-@Model" />
     <input type="hidden" name="quantity" value="1" />
     @Html.AntiForgeryToken()
     
-    <button type="submit" class="btn btn-primary">
+    <button type="button" class="btn btn-primary add-to-cart-btn" data-product-id="@Model">
         <i class="bi bi-cart-plus"></i> Add to Cart
     </button>
 </form>

@@ -289,25 +289,6 @@ namespace AlpineNeeds.Pages.Products
             return await OnGetAsync();
         }
 
-        public async Task<IActionResult> OnPostAddToCartAsync(int productId, int quantity = 1)
-        {
-            // Get the product
-            var product = await _context.Products.FindAsync(productId);
-
-            if (product == null)
-            {
-                return NotFound();
-            }
-
-            // TODO: Implement add to cart logic here
-            // This would typically involve:
-            // 1. Getting the current user
-            // 2. Finding or creating their cart
-            // 3. Adding the product to the cart or increasing quantity
-
-            // Return JSON result for AJAX
-            return new JsonResult(new { success = true, message = $"Added {product.Name} to cart" });
-        }
     }
     
     // View model for hierarchical category display

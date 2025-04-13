@@ -81,6 +81,7 @@ public class ProductEditModel(ApplicationDbContext context, IWebHostEnvironment 
 
         try
         {
+            // Ensure Colors and Sizes are at least empty lists, not null
             Product.Colors ??= new List<string>();
             Product.Sizes ??= new List<string>();
             
@@ -116,6 +117,7 @@ public class ProductEditModel(ApplicationDbContext context, IWebHostEnvironment 
                 // Update the new properties
                 existingProduct.StockQuantity = Product.StockQuantity;
                 existingProduct.Brand = Product.Brand;
+                existingProduct.IsFeatured = Product.IsFeatured;
 
                 // Handle image deletions
                 if (ImageIdsToDelete.Count > 0)

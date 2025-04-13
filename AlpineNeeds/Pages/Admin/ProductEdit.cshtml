@@ -99,7 +99,7 @@
                 <!-- End New Properties -->
                 
                 <div class="mb-3">
-                    <label class="form-label">Colors</label>
+                    <label class="form-label">Colors (Optional)</label>
                     <div class="input-group">
                         <input type="text"
                             class="form-control"
@@ -111,11 +111,10 @@
                     <div id="colorsList"
                         class="mt-2"></div>
                     <div id="colorsContainer"></div>
-                    <div id="colorsError"
-                        class="text-danger"></div>
+                    <div class="form-text">Add product color options if applicable (e.g., Red, Blue, Black)</div>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Sizes</label>
+                    <label class="form-label">Sizes (Optional)</label>
                     <div class="input-group">
                         <input type="text"
                             class="form-control"
@@ -127,8 +126,7 @@
                     <div id="sizesList"
                         class="mt-2"></div>
                     <div id="sizesContainer"></div>
-                    <div id="sizesError"
-                        class="text-danger"></div>
+                    <div class="form-text">Add product size options if applicable (e.g., S, M, L, XL)</div>
                 </div>
 
                 <!-- Image Upload Section -->
@@ -271,37 +269,6 @@
             updateSizesList();
         }
 
-        function validateCollections() {
-            const colorsError = document.getElementById('colorsError');
-            const sizesError = document.getElementById('sizesError');
-            
-            // Reset error messages
-            colorsError.textContent = '';
-            sizesError.textContent = '';
-            
-            let isValid = true;
-            
-            // Validate colors
-            if (colors.length === 0) {
-                colorsError.textContent = 'At least one color must be specified';
-                isValid = false;
-            } else if (colors.length > 10) {
-                colorsError.textContent = 'Cannot have more than 10 colors';
-                isValid = false;
-            }
-            
-            // Validate sizes
-            if (sizes.length === 0) {
-                sizesError.textContent = 'At least one size must be specified';
-                isValid = false;
-            } else if (sizes.length > 10) {
-                sizesError.textContent = 'Cannot have more than 10 sizes';
-                isValid = false;
-            }
-            
-            return isValid;
-        }
-
         // Image management functions
         function initializeImageManagement() {
             // Initialize Sortable for drag-and-drop reordering
@@ -376,18 +343,10 @@
             });
         }
 
-        document.getElementById('productForm').addEventListener('submit', function(event) {
-            if (!validateCollections()) {
-                event.preventDefault();
-                event.stopPropagation();
-            }
-        });
-
         // Initialize components on page load
         document.addEventListener('DOMContentLoaded', function() {
             updateColorsList();
             updateSizesList();
-            validateCollections();
             initializeImageManagement();
         });
     </script>

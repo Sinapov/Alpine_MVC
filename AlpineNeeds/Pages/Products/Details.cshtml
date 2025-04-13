@@ -297,14 +297,14 @@
                                 <th scope="row">Category</th>
                                 <td>@(Model.Product.Category?.Name ?? "Uncategorized")</td>
                             </tr>
-                            @if (Model.Product.Colors.Any())
+                            @if (Model.Product.Colors != null && Model.Product.Colors.Any())
                             {
                                 <tr>
                                     <th scope="row">Available Colors</th>
                                     <td>@string.Join(", ", Model.Product.Colors)</td>
                                 </tr>
                             }
-                            @if (Model.Product.Sizes.Any())
+                            @if (Model.Product.Sizes != null && Model.Product.Sizes.Any())
                             {
                                 <tr>
                                     <th scope="row">Available Sizes</th>
@@ -529,30 +529,58 @@
             const colorSelect = document.getElementById('colorSelect');
             const sizeSelect = document.getElementById('sizeSelect');
 
+            // Check if color selection is required but not selected
+            if (colorSelect && colorSelect.required && !colorSelect.value) {
+                alert('Please select a color');
+                return;
+            }
+
+            // Check if size selection is required but not selected
+            if (sizeSelect && sizeSelect.required && !sizeSelect.value) {
+                alert('Please select a size');
+                return;
+            }
+
+            // Get color and size values if they exist
             const color = colorSelect ? colorSelect.value : null;
             const size = sizeSelect ? sizeSelect.value : null;
 
+            // Build form data
+            const formData = new FormData();
+            formData.append('productId', productId);
+            formData.append('quantity', quantity);
+            if (color) formData.append('color', color);
+            if (size) formData.append('size', size);
+
+            // Get anti-forgery token
+            const token = document.querySelector('input[name="__RequestVerificationToken"]').value;
+
             // Add to cart using AJAX
-            fetch('/Products/Details?handler=AddToCart', {
+            fetch('/Cart?handler=AddToCart', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                    'RequestVerificationToken': token
                 },
-                body: `productId=${productId}&quantity=${quantity}`
+                body: formData
             })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert(data.message);
-                        // Update cart count or show confirmation message
-                    }
-                })
-                .catch(error => {
-                    console.error('Error adding product to cart:', error);
-                    alert('There was an error adding this product to your cart.');
-                });
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.success) {
+                    // Redirect to the same page to show the confirmation modal
+                    window.location.reload();
+                } else {
+                    alert(data.message || 'There was an error adding this product to your cart.');
+                }
+            })
+            .catch(error => {
+                console.error('Error adding product to cart:', error);
+                alert('There was an error adding this product to your cart.');
+            });
         });
-
- </script> 
+    </script> 
 }

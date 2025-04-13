@@ -541,32 +541,7 @@
                 }
             });
             
-            // Add to cart functionality
-            $(document).on('click', '.add-to-cart-btn', function() {
-                const productId = $(this).data('product-id');
-                const quantity = 1; // Default quantity
-                
-                $.ajax({
-                    url: '/Products/Index?handler=AddToCart',
-                    type: 'POST',
-                    data: {
-                        productId: productId,
-                        quantity: quantity
-                    },
-                    headers: {
-                        RequestVerificationToken: $('input:hidden[name="__RequestVerificationToken"]').val()
-                    },
-                    success: function(response) {
-                        if (response.success) {
-                            // Show success toast or message
-                            alert(response.message);
-                        }
-                    },
-                    error: function() {
-                        alert('Error adding product to cart');
-                    }
-                });
-            });
+         
             
             // Function to submit filter form with AJAX
             function submitForm() {
