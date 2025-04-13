@@ -3,7 +3,6 @@ using AlpineNeeds.Options;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using AlpineNeeds.Models;
-using AlpineNeeds.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -37,5 +37,9 @@ namespace AlpineNeeds.Models
 
         [Display(Name = "Available Sizes")]
         public List<string> Sizes { get; set; } = new();
+        
+        // Collection of product images
+        [Display(Name = "Product Images")]
+        public virtual ICollection<ProductImage> ProductImages { get; set; } = new List<ProductImage>();
     }
 }

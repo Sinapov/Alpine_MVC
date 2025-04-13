@@ -45,7 +45,7 @@ namespace AlpineNeeds.Data
 
             modelBuilder.Entity<ProductImage>()
                 .HasOne(pi => pi.Product)
-                .WithMany()
+                .WithMany(p => p.ProductImages)
                 .HasForeignKey(pi => pi.ProductId)
                 .OnDelete(DeleteBehavior.Cascade);
 
