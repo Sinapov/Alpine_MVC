@@ -1,6 +1,6 @@
 ﻿/**
  * Alpine Needs Product Options Modal
- * 
+ *
  * This script handles the modal dialog for selecting product options (color, size)
  * when adding products to cart from the products listing page.
  */
@@ -8,10 +8,10 @@
 // Store product data fetched from server
 const productData = {};
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Create modal element if it doesn't exist
     createProductOptionsModal();
-    
+
     // Initialize event listeners
     initializeEventListeners();
 });
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function createProductOptionsModal() {
     // Check if modal already exists
     if (document.getElementById('productOptionsModal')) return;
-    
+
     // Create modal HTML
     const modalHtml = `
         <div class="modal fade" id="productOptionsModal" tabindex="-1" aria-labelledby="productOptionsModalLabel" aria-hidden="true">
@@ -65,14 +65,14 @@ function createProductOptionsModal() {
             </div>
         </div>
     `;
-    
+
     // Insert modal into body
     document.body.insertAdjacentHTML('beforeend', modalHtml);
 }
 
 function initializeEventListeners() {
     // Listen for add to cart button clicks across the page
-    document.addEventListener('click', function(event) {
+    document.addEventListener('click', function (event) {
         const addToCartBtn = event.target.closest('.add-to-cart-btn');
         if (addToCartBtn) {
             const productId = addToCartBtn.dataset.productId;
@@ -82,7 +82,7 @@ function initializeEventListeners() {
             }
         }
     });
-    
+
     // Initialize event listeners for the modal
     const modal = document.getElementById('productOptionsModal');
     if (modal) {
@@ -90,25 +90,25 @@ function initializeEventListeners() {
         const decreaseBtn = modal.querySelector('.modal-quantity-decrease');
         const increaseBtn = modal.querySelector('.modal-quantity-increase');
         const quantityInput = modal.querySelector('#modalQuantity');
-        
-        decreaseBtn.addEventListener('click', function() {
+
+        decreaseBtn.addEventListener('click', function () {
             const currentValue = parseInt(quantityInput.value);
             if (currentValue > 1) {
                 quantityInput.value = currentValue - 1;
             }
         });
-        
-        increaseBtn.addEventListener('click', function() {
+
+        increaseBtn.addEventListener('click', function () {
             const currentValue = parseInt(quantityInput.value);
             const maxStock = parseInt(quantityInput.getAttribute('max') || 100);
             if (currentValue < maxStock) {
                 quantityInput.value = currentValue + 1;
             }
         });
-        
+
         // Add to cart button in modal
         const modalAddToCartBtn = modal.querySelector('#modalAddToCartBtn');
-        modalAddToCartBtn.addEventListener('click', function() {
+        modalAddToCartBtn.addEventListener('click', function () {
             submitAddToCartFromModal();
         });
     }
@@ -128,25 +128,27 @@ function handleAddToCartClick(productId) {
         }
     } else {
         // Fetch product data
-        fetchProductData(productId).then(product => {
-            if (product) {
-                // Store product data for future use
-                productData[productId] = product;
-                
-                // Check if the product has color or size options
-                if ((product.colors && product.colors.length > 0) || (product.sizes && product.sizes.length > 0)) {
-                    // Show modal only for products with color or size options
-                    showProductOptionsModal(productId, product);
-                } else {
-                    // Directly add to cart for products without options
-                    directAddToCart(productId);
+        fetchProductData(productId)
+            .then((product) => {
+                if (product) {
+                    // Store product data for future use
+                    productData[productId] = product;
+
+                    // Check if the product has color or size options
+                    if ((product.colors && product.colors.length > 0) || (product.sizes && product.sizes.length > 0)) {
+                        // Show modal only for products with color or size options
+                        showProductOptionsModal(productId, product);
+                    } else {
+                        // Directly add to cart for products without options
+                        directAddToCart(productId);
+                    }
                 }
-            }
-        }).catch(error => {
-            console.error('Error fetching product data:', error);
-            // Fall back to direct form submission if fetch fails
-            directAddToCart(productId);
-        });
+            })
+            .catch((error) => {
+                console.error('Error fetching product data:', error);
+                // Fall back to direct form submission if fetch fails
+                directAddToCart(productId);
+            });
     }
 }
 
@@ -159,7 +161,7 @@ function directAddToCart(productId) {
         if (quantityInput) {
             quantityInput.value = 1;
         }
-        
+
         // Submit the form
         form.submit();
     }
@@ -167,8 +169,8 @@ function directAddToCart(productId) {
 
 function fetchProductData(productId) {
     return fetch(`/api/products/${productId}`)
-        .then(response => response.json())
-        .then(data => {
+        .then((response) => response.json())
+        .then((data) => {
             return data;
         });
 }
@@ -176,31 +178,31 @@ function fetchProductData(productId) {
 function showProductOptionsModal(productId, product) {
     const modal = document.getElementById('productOptionsModal');
     if (!modal) return;
-    
+
     // Update modal title
     modal.querySelector('.modal-title').textContent = `Add ${product.name} to Cart`;
-    
+
     // Set product ID
     modal.querySelector('#modalProductId').value = productId;
-    
+
     // Handle color options
     const colorOptions = modal.querySelector('#colorOptions');
     const colorSelect = modal.querySelector('#modalColorSelect');
-    
+
     // Clear previous options
     while (colorSelect.options.length > 1) {
         colorSelect.remove(1);
     }
-    
+
     if (product.colors && product.colors.length > 0) {
         // Add color options
-        product.colors.forEach(color => {
+        product.colors.forEach((color) => {
             const option = document.createElement('option');
             option.value = color;
             option.textContent = color;
             colorSelect.appendChild(option);
         });
-        
+
         // Show color selection
         colorOptions.style.display = 'block';
         colorSelect.setAttribute('required', 'required');
@@ -209,25 +211,25 @@ function showProductOptionsModal(productId, product) {
         colorOptions.style.display = 'none';
         colorSelect.removeAttribute('required');
     }
-    
+
     // Handle size options
     const sizeOptions = modal.querySelector('#sizeOptions');
     const sizeSelect = modal.querySelector('#modalSizeSelect');
-    
+
     // Clear previous options
     while (sizeSelect.options.length > 1) {
         sizeSelect.remove(1);
     }
-    
+
     if (product.sizes && product.sizes.length > 0) {
         // Add size options
-        product.sizes.forEach(size => {
+        product.sizes.forEach((size) => {
             const option = document.createElement('option');
             option.value = size;
             option.textContent = size;
             sizeSelect.appendChild(option);
         });
-        
+
         // Show size selection
         sizeOptions.style.display = 'block';
         sizeSelect.setAttribute('required', 'required');
@@ -236,12 +238,12 @@ function showProductOptionsModal(productId, product) {
         sizeOptions.style.display = 'none';
         sizeSelect.removeAttribute('required');
     }
-    
+
     // Set quantity max based on stock
     const quantityInput = modal.querySelector('#modalQuantity');
     quantityInput.max = product.stockQuantity;
     quantityInput.value = 1;
-    
+
     // Show modal
     const modalInstance = new bootstrap.Modal(modal);
     modalInstance.show();
@@ -250,27 +252,26 @@ function showProductOptionsModal(productId, product) {
 function submitAddToCartFromModal() {
     const modal = document.getElementById('productOptionsModal');
     if (!modal) return;
-    
+
     const productId = modal.querySelector('#modalProductId').value;
     const quantity = modal.querySelector('#modalQuantity').value;
-    
+
     const colorSelect = modal.querySelector('#modalColorSelect');
     const color = colorSelect.style.display !== 'none' && colorSelect.value ? colorSelect.value : null;
-    
+
     const sizeSelect = modal.querySelector('#modalSizeSelect');
     const size = sizeSelect.style.display !== 'none' && sizeSelect.value ? sizeSelect.value : null;
-    
+
     // Validate required fields
-    if ((colorSelect.hasAttribute('required') && !colorSelect.value) || 
-        (sizeSelect.hasAttribute('required') && !sizeSelect.value)) {
+    if ((colorSelect.hasAttribute('required') && !colorSelect.value) || (sizeSelect.hasAttribute('required') && !sizeSelect.value)) {
         alert('Please select all required options');
         return;
     }
-    
+
     // Find the original form
     const form = document.querySelector(`form.add-to-cart-form input[id="productId-${productId}"]`).closest('form');
     if (!form) return;
-    
+
     // Add values to the form
     let colorInput = form.querySelector('input[name="color"]');
     if (!colorInput && color) {
@@ -282,7 +283,7 @@ function submitAddToCartFromModal() {
     if (colorInput && color) {
         colorInput.value = color;
     }
-    
+
     let sizeInput = form.querySelector('input[name="size"]');
     if (!sizeInput && size) {
         sizeInput = document.createElement('input');
@@ -293,16 +294,16 @@ function submitAddToCartFromModal() {
     if (sizeInput && size) {
         sizeInput.value = size;
     }
-    
+
     // Update quantity
     const quantityInput = form.querySelector('input[name="quantity"]');
     if (quantityInput) {
         quantityInput.value = quantity;
     }
-    
+
     // Submit the form
     form.submit();
-    
+
     // Hide the modal
     const modalInstance = bootstrap.Modal.getInstance(modal);
     modalInstance.hide();
