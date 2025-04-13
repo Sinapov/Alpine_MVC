@@ -1,0 +1,554 @@
+﻿@page
+@model AlpineNeeds.Pages.Products.DetailsModel
+@{
+    ViewData["Title"] = Model.Product.Name;
+}
+
+@section Styles {
+    <style>
+        /* Product Gallery Styles */
+        .product-main-img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: zoom-in;
+        }
+
+        .thumbnail-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .thumbnail {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 4px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .thumbnail.active {
+            border-color: #0d6efd;
+        }
+
+        /* Quantity Selector */
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            max-width: 140px;
+            margin-bottom: 20px;
+        }
+
+        .quantity-btn {
+            width: 32px;
+            height: 38px;
+            background: #f8f9fa;
+            border: 1px solid #ced4da;
+            font-size: 16px;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .quantity-input {
+            text-align: center;
+            border-left: 0;
+            border-right: 0;
+            border-radius: 0;
+        }
+
+        /* Product Info */
+        .product-title {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .in-stock {
+            color: #28a745;
+        }
+
+        .out-of-stock {
+            color: #dc3545;
+        }
+
+        /* Product Tabs */
+        .nav-tabs .nav-link {
+            color: #495057;
+        }
+
+        .nav-tabs .nav-link.active {
+            font-weight: 600;
+        }
+
+        /* Related Products Section */
+        .related-products {
+            margin-top: 60px;
+        }
+
+        .related-products-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 20px;
+            padding: 10px 0;
+            scroll-behavior: smooth;
+        }
+
+        .related-product-card {
+            min-width: 220px;
+            max-width: 220px;
+        }
+
+        /* Zoom Image Modal */
+        .modal-img {
+            max-height: 80vh;
+            max-width: 100%;
+            object-fit: contain;
+        }
+
+        /* Responsive Adjustments */
+        @@media (max-width: 767px) {
+            .product-main-img {
+                height: 300px;
+            }
+            
+            .product-title {
+                font-size: 1.5rem;
+                margin-top: 20px;
+            }
+        }
+    </style>
+}
+
+<div class="container py-5">
+    <!-- Hidden anti-forgery token for AJAX requests -->
+    @Html.AntiForgeryToken()
+    
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/Products">Products</a></li>
+            @if (Model.Product.Category != null)
+            {
+                <li class="breadcrumb-item"><a href="/Products?CategoryIds=@Model.Product.CategoryId">@Model.Product.Category.Name</a></li>
+            }
+            <li class="breadcrumb-item active" aria-current="page">@Model.Product.Name</li>
+        </ol>
+    </nav>
+
+    <div class="row">
+        <!-- Product Gallery (Left Side) -->
+        <div class="col-md-6 mb-4">
+            @{
+                var mainImage = Model.Product.ProductImages?.FirstOrDefault()?.ImageUrl 
+                    ?? "/images/products/placeholder.webp";
+            }
+            <img src="@mainImage" id="mainImage" class="product-main-img" alt="@Model.Product.Name">
+            
+            @if (Model.Product.ProductImages != null && Model.Product.ProductImages.Count > 1)
+            {
+                <div class="thumbnail-container">
+                    @foreach (var image in Model.Product.ProductImages)
+                    {
+                        <img src="@image.ImageUrl" 
+                             class="thumbnail @(image == Model.Product.ProductImages.First() ? "active" : "")" 
+                             alt="@Model.Product.Name" 
+                             onclick="changeMainImage('@image.ImageUrl', this)">
+                    }
+                </div>
+            }
+        </div>
+
+        <!-- Product Info (Right Side) -->
+        <div class="col-md-6">
+            <h1 class="product-title">@Model.Product.Name</h1>
+            
+            @if (Model.Product.Category != null)
+            {
+                <p class="text-muted">Category: <a href="/Products?CategoryIds=@Model.Product.CategoryId">@Model.Product.Category.Name</a></p>
+            }
+
+            <p class="product-price">@Model.Product.Price.ToString("C")</p>
+            
+            @if (Model.Product.InStock)
+            {
+                <p class="in-stock mb-3">
+                    <i class="bi bi-check-circle-fill"></i> In Stock (@Model.Product.StockQuantity available)
+                </p>
+            }
+            else
+            {
+                <p class="out-of-stock mb-3">
+                    <i class="bi bi-x-circle-fill"></i> Out of Stock
+                </p>
+            }
+
+            @if (!string.IsNullOrEmpty(Model.Product.Description))
+            {
+                <div class="short-description mb-4">
+                    @Model.Product.Description
+                </div>
+            }
+
+            <!-- Purchase Section -->
+            <form id="addToCartForm" class="mb-4">
+                <input type="hidden" id="productId" value="@Model.Product.Id">
+                
+                <div class="mb-3">
+                    @if (Model.Product.Colors.Any())
+                    {
+                        <div class="mb-3">
+                            <label for="colorSelect" class="form-label">Color</label>
+                            <select id="colorSelect" class="form-select">
+                                @foreach (var color in Model.Product.Colors)
+                                {
+                                    <option value="@color">@color</option>
+                                }
+                            </select>
+                        </div>
+                    }
+
+                    @if (Model.Product.Sizes.Any())
+                    {
+                        <div class="mb-3">
+                            <label for="sizeSelect" class="form-label">Size</label>
+                            <select id="sizeSelect" class="form-select">
+                                @foreach (var size in Model.Product.Sizes)
+                                {
+                                    <option value="@size">@size</option>
+                                }
+                            </select>
+                        </div>
+                    }
+                </div>
+
+                <div class="mb-3">
+                    <label for="quantityInput" class="form-label">Quantity</label>
+                    <div class="quantity-selector">
+                        <button type="button" class="quantity-btn" onclick="decreaseQuantity()">-</button>
+                        <input type="number" id="quantityInput" class="form-control quantity-input" value="1" min="1" max="@Model.Product.StockQuantity">
+                        <button type="button" class="quantity-btn" onclick="increaseQuantity()">+</button>
+                    </div>
+                </div>
+
+                <div class="d-grid gap-2 d-md-block">
+                    <button type="button" id="addToCartBtn" class="btn btn-primary btn-lg px-4" 
+                            @(!Model.Product.InStock ? "disabled" : "")>
+                        <i class="bi bi-cart-plus"></i> Add to Cart
+                    </button>
+                    <button type="button" id="addToWishlistBtn" class="btn btn-outline-secondary btn-lg px-4">
+                        <i class="bi bi-heart"></i> Add to Wishlist
+                    </button>
+                </div>
+
+                @if (Model.Product.Brand != null)
+                {
+                    <p class="mt-3 mb-0">Brand: @Model.Product.Brand</p>
+                }
+            </form>
+        </div>
+    </div>
+
+    <!-- Product Details Tabs -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <ul class="nav nav-tabs" id="productTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description-content" 
+                            type="button" role="tab" aria-controls="description-content" aria-selected="true">
+                        Description
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="specifications-tab" data-bs-toggle="tab" data-bs-target="#specifications-content" 
+                            type="button" role="tab" aria-controls="specifications-content" aria-selected="false">
+                        Specifications
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="shipping-tab" data-bs-toggle="tab" data-bs-target="#shipping-content" 
+                            type="button" role="tab" aria-controls="shipping-content" aria-selected="false">
+                        Shipping
+                    </button>
+                </li>
+            </ul>
+
+            <div class="tab-content p-4 border border-top-0 rounded-bottom" id="productTabsContent">
+                <div class="tab-pane fade show active" id="description-content" role="tabpanel" aria-labelledby="description-tab">
+                    @if (!string.IsNullOrEmpty(Model.Product.Description))
+                    {
+                        <p>@Model.Product.Description</p>
+                    }
+                    else
+                    {
+                        <p>No detailed description available for this product.</p>
+                    }
+                </div>
+
+                <div class="tab-pane fade" id="specifications-content" role="tabpanel" aria-labelledby="specifications-tab">
+                    <table class="table table-striped">
+                        <tbody>
+                            @if (!string.IsNullOrEmpty(Model.Product.Brand))
+                            {
+                                <tr>
+                                    <th scope="row">Brand</th>
+                                    <td>@Model.Product.Brand</td>
+                                </tr>
+                            }
+                            <tr>
+                                <th scope="row">Category</th>
+                                <td>@(Model.Product.Category?.Name ?? "Uncategorized")</td>
+                            </tr>
+                            @if (Model.Product.Colors.Any())
+                            {
+                                <tr>
+                                    <th scope="row">Available Colors</th>
+                                    <td>@string.Join(", ", Model.Product.Colors)</td>
+                                </tr>
+                            }
+                            @if (Model.Product.Sizes.Any())
+                            {
+                                <tr>
+                                    <th scope="row">Available Sizes</th>
+                                    <td>@string.Join(", ", Model.Product.Sizes)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="tab-pane fade" id="shipping-content" role="tabpanel" aria-labelledby="shipping-tab">
+                    <h5>Shipping Information</h5>
+                    <p>We offer free standard shipping on all orders over $50. Orders typically ship within 1-2 business days.</p>
+                    
+                    <h6>Shipping Options:</h6>
+                    <ul>
+                        <li><strong>Standard Shipping:</strong> 5-7 business days - Free on orders over $50 ($4.99 otherwise)</li>
+                        <li><strong>Express Shipping:</strong> 2-3 business days - $9.99</li>
+                        <li><strong>Overnight Shipping:</strong> Next business day - $14.99</li>
+                    </ul>
+                    
+                    <p>For international shipping rates and options, please contact our customer service.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Related Products -->
+    @if (Model.RelatedProducts.Any())
+    {
+        <div class="related-products">
+            <h2 class="mb-4">Related Products</h2>
+            <div class="related-products-container">
+                @foreach (var relatedProduct in Model.RelatedProducts)
+                {
+                    <div class="related-product-card">
+                        <partial name="_ProductCardPartial" model="relatedProduct" />
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>
+
+<!-- Image Zoom Modal -->
+<div class="modal fade" id="imageZoomModal" tabindex="-1" aria-labelledby="imageZoomModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="imageZoomModalLabel">@Model.Product.Name</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center position-relative">
+                <img src="" id="zoomImage" class="modal-img" alt="@Model.Product.Name">
+                
+                @if (Model.Product.ProductImages != null && Model.Product.ProductImages.Count > 1)
+                {
+                    <button type="button" class="btn btn-dark position-absolute top-50 start-0 translate-middle-y" 
+                            id="prevImageBtn" style="opacity: 0.7;">
+                        <i class="bi bi-chevron-left"></i>
+                    </button>
+                    <button type="button" class="btn btn-dark position-absolute top-50 end-0 translate-middle-y" 
+                            id="nextImageBtn" style="opacity: 0.7;">
+                        <i class="bi bi-chevron-right"></i>
+                    </button>
+                }
+            </div>
+            <div class="modal-footer justify-content-center">
+                <span id="imageCounter" class="text-muted"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Image gallery functionality
+        function changeMainImage(imageUrl, thumbnailElement) {
+            // Update main image
+            document.getElementById('mainImage').src = imageUrl;
+            
+            // Update active thumbnail
+            document.querySelectorAll('.thumbnail').forEach(thumb => {
+                thumb.classList.remove('active');
+            });
+            thumbnailElement.classList.add('active');
+        }
+        
+        // Quantity selector
+        function decreaseQuantity() {
+            const input = document.getElementById('quantityInput');
+            const currentValue = parseInt(input.value);
+            if (currentValue > 1) {
+                input.value = currentValue - 1;
+            }
+        }
+        
+        function increaseQuantity() {
+            const input = document.getElementById('quantityInput');
+            const currentValue = parseInt(input.value);
+            const max = parseInt(input.max);
+            if (currentValue < max) {
+                input.value = currentValue + 1;
+            }
+        }
+        
+        // Variables for image zoom navigation
+        let currentImageIndex = 0;
+        const productImages = [];
+        
+        // Image zoom functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Collect all product images into an array for navigation
+            document.querySelectorAll('.thumbnail').forEach(thumb => {
+                productImages.push(thumb.src);
+            });
+            
+            // If no thumbnails, just use the main image
+            if (productImages.length === 0 && document.getElementById('mainImage')) {
+                productImages.push(document.getElementById('mainImage').src);
+            }
+            
+            document.getElementById('mainImage').addEventListener('click', function() {
+                const modal = new bootstrap.Modal(document.getElementById('imageZoomModal'));
+                
+                // Find the current image index
+                const currentSrc = this.src;
+                currentImageIndex = productImages.indexOf(currentSrc);
+                if (currentImageIndex === -1) currentImageIndex = 0;
+                
+                // Update zoom image and counter
+                document.getElementById('zoomImage').src = currentSrc;
+                updateImageCounter();
+                
+                modal.show();
+            });
+            
+            // Previous button in zoom modal
+            const prevImageBtn = document.getElementById('prevImageBtn');
+            if (prevImageBtn) {
+                prevImageBtn.addEventListener('click', function() {
+                    navigateZoomImage(-1);
+                });
+            }
+            
+            // Next button in zoom modal
+            const nextImageBtn = document.getElementById('nextImageBtn');
+            if (nextImageBtn) {
+                nextImageBtn.addEventListener('click', function() {
+                    navigateZoomImage(1);
+                });
+            }
+            
+            // Keyboard navigation for zoom modal
+            document.getElementById('imageZoomModal').addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowLeft') {
+                    navigateZoomImage(-1);
+                } else if (e.key === 'ArrowRight') {
+                    navigateZoomImage(1);
+                }
+            });
+        });
+        
+        // Navigate to previous or next image in zoom modal
+        function navigateZoomImage(direction) {
+            if (productImages.length <= 1) return;
+            
+            // Calculate new index with wraparound
+            currentImageIndex = (currentImageIndex + direction + productImages.length) % productImages.length;
+            
+            // Update modal image
+            document.getElementById('zoomImage').src = productImages[currentImageIndex];
+            
+            // Update the thumbnail highlight in the main view
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            if (thumbnails.length > 0) {
+                thumbnails.forEach(thumb => thumb.classList.remove('active'));
+                thumbnails[currentImageIndex].classList.add('active');
+                
+                // Also update the main product image
+                document.getElementById('mainImage').src = productImages[currentImageIndex];
+            }
+            
+            // Update counter
+            updateImageCounter();
+        }
+        
+        // Update the image counter in the zoom modal
+        function updateImageCounter() {
+            const counter = document.getElementById('imageCounter');
+            if (counter && productImages.length > 0) {
+                counter.textContent = `Image ${currentImageIndex + 1} of ${productImages.length}`;
+            }
+        }
+        
+        // Add to cart functionality
+        document.getElementById('addToCartBtn').addEventListener('click', function() {
+            const productId = document.getElementById('productId').value;
+            const quantity = document.getElementById('quantityInput').value;
+            const colorSelect = document.getElementById('colorSelect');
+            const sizeSelect = document.getElementById('sizeSelect');
+            
+            const color = colorSelect ? colorSelect.value : null;
+            const size = sizeSelect ? sizeSelect.value : null;
+            
+            // Add to cart using AJAX
+            fetch('/Products/Details?handler=AddToCart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+                },
+                body: `productId=${productId}&quantity=${quantity}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(data.message);
+                    // Update cart count or show confirmation message
+                }
+            })
+            .catch(error => {
+                console.error('Error adding product to cart:', error);
+                alert('There was an error adding this product to your cart.');
+            });
+        });
+        
+        // Add to wishlist functionality (placeholder)
+        document.getElementById('addToWishlistBtn').addEventListener('click', function() {
+            // Currently just a placeholder
+            alert('Wishlist functionality will be implemented in a future update.');
+        });
+    </script>
+}

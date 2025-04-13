@@ -101,15 +101,14 @@
 - **Product Image Gallery**
   - Large main image
   - Thumbnails of additional images below (clickable)
-  - Lightbox zoom functionality on image click
+  - Zoom functionality on image click
 
 - **Product Information**
   - Product name (large font)
   - SKU/Product code
   - Price (with original price if on sale)
-  - Average rating with star display
   - Stock status indicator
-  - Short description (2-3 sentences)
+  - Short description (2-3 sentences) (with possibility to expand collapse)
 
 - **Purchase Section**
   - Quantity selector (number input with +/- buttons)
@@ -119,7 +118,6 @@
 - **Detailed Information Tabs**
   - **Description Tab**: Comprehensive HTML-formatted description
   - **Specifications Tab**: Technical details in table format
-  - **Reviews Tab**: Customer reviews with ratings
   - **Shipping Tab**: Delivery information
 
 - **Related Products Section**
@@ -129,7 +127,6 @@
 **Implementation Notes:**
 - Use `OnGetAsync(int id)` method to retrieve product by ID
 - Implement image gallery using lightweight JavaScript library
-- Add inventory check in server-side code before allowing add to cart
 - Load related products based on category matching algorithm
 
 ### 1.4 Contact Page (`/Contact.cshtml`)
