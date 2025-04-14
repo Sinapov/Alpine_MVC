@@ -1,0 +1,55 @@
+@page
+@model AlpineNeeds.Pages.Checkout.PaymentModel
+@{
+    ViewData["Title"] = "Payment";
+}
+
+<div class="container my-5">
+    <h2>Payment</h2>
+    <form method="post" asp-antiforgery="true" autocomplete="off">
+        <div class="mb-3">
+            <label for="cardNumber" class="form-label">Card Number</label>
+            <input type="text" class="form-control" id="cardNumber" name="cardNumber" maxlength="19" placeholder="1234 5678 9012 3456" required />
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="expiry" class="form-label">Expiry</label>
+                <input type="text" class="form-control" id="expiry" name="expiry" maxlength="5" placeholder="MM/YY" required />
+            </div>
+            <div class="col-md-6">
+                <label for="cvc" class="form-label">CVC</label>
+                <input type="text" class="form-control" id="cvc" name="cvc" maxlength="4" placeholder="123" required />
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success">Pay & Place Order</button>
+    </form>
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger mt-3">
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <div>@error.ErrorMessage</div>
+            }
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(function () {
+            // Improved input masking for card fields (allow up to 16 digits + 3 spaces)
+            $('#cardNumber').on('input', function () {
+                let digits = this.value.replace(/\D/g, '').substr(0, 16);
+                let formatted = digits.replace(/(.{4})/g, '$1 ').trim();
+                this.value = formatted;
+            });
+            $('#expiry').on('input', function () {
+                this.value = this.value.replace(/[^\d\/]/g, '').replace(/(\d{2})(\d{1,2})/, '$1/$2').substr(0, 5);
+            });
+            $('#cvc').on('input', function () {
+                this.value = this.value.replace(/[^\d]/g, '').substr(0, 4);
+            });
+        });
+    </script>
+}

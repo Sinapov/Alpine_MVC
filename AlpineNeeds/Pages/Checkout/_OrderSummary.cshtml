@@ -1,0 +1,37 @@
+@model AlpineNeeds.Models.OrderSummaryViewModel
+<div class="card">
+    <div class="card-header">
+        <strong>Order Summary</strong>
+    </div>
+    <div class="card-body">
+        <ul class="list-group mb-3">
+            <!-- TODO: Loop through cart items -->
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                    <h6 class="my-0">Subtotal</h6>
+                </div>
+                <span>@Model.Subtotal.ToString("C")</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                    <h6 class="my-0">Shipping</h6>
+                </div>
+                <span>@Model.Shipping.ToString("C")</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                    <h6 class="my-0">Tax</h6>
+                </div>
+                <span>@Model.Tax.ToString("C")</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+                <span>Total (USD)</span>
+                <strong>@Model.Total.ToString("C")</strong>
+            </li>
+        </ul>
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary">Continue to Payment</button>
+            <a asp-page="/Cart/Index" class="btn btn-link">Return to Cart</a>
+        </div>
+    </div>
+</div>

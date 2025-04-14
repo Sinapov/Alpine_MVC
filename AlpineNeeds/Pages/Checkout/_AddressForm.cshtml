@@ -1,0 +1,62 @@
+@model AlpineNeeds.Models.CheckoutAddressViewModel
+@{
+    string prefix = ViewData["prefix"] as string ?? string.Empty;
+    string nameFor(string field) => string.IsNullOrEmpty(prefix) ? field : $"{prefix}.{field}";
+    string idFor(string field) => nameFor(field).Replace('.', '_');
+}
+<div class="mb-3">
+    <label asp-for="FullName" class="form-label"></label>
+    <input asp-for="FullName" class="form-control" name="@nameFor("FullName")" id="@idFor("FullName")" />
+    <span asp-validation-for="FullName" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="AddressLine1" class="form-label"></label>
+    <input asp-for="AddressLine1" class="form-control" name="@nameFor("AddressLine1")" id="@idFor("AddressLine1")" />
+    <span asp-validation-for="AddressLine1" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="AddressLine2" class="form-label"></label>
+    <input asp-for="AddressLine2" class="form-control" name="@nameFor("AddressLine2")" id="@idFor("AddressLine2")" />
+    <span asp-validation-for="AddressLine2" class="text-danger"></span>
+</div>
+<div class="row">
+    <div class="col-md-6 mb-3">
+        <label asp-for="City" class="form-label"></label>
+        <input asp-for="City" class="form-control" name="@nameFor("City")" id="@idFor("City")" />
+        <span asp-validation-for="City" class="text-danger"></span>
+    </div>
+    <div class="col-md-6 mb-3">
+        <label asp-for="State" class="form-label"></label>
+        <input asp-for="State" class="form-control" name="@nameFor("State")" id="@idFor("State")" />
+        <span asp-validation-for="State" class="text-danger"></span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 mb-3">
+        <label asp-for="ZipCode" class="form-label"></label>
+        <input asp-for="ZipCode" class="form-control" name="@nameFor("ZipCode")" id="@idFor("ZipCode")" />
+        <span asp-validation-for="ZipCode" class="text-danger"></span>
+    </div>
+    <div class="col-md-6 mb-3">
+        <label asp-for="Country" class="form-label"></label>
+        <input asp-for="Country" class="form-control" name="@nameFor("Country")" id="@idFor("Country")" />
+        <span asp-validation-for="Country" class="text-danger"></span>
+    </div>
+</div>
+<div class="mb-3">
+    <label asp-for="PhoneNumber" class="form-label"></label>
+    <input asp-for="PhoneNumber" class="form-control" name="@nameFor("PhoneNumber")" id="@idFor("PhoneNumber")" />
+    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+</div>
+<div class="mb-3">
+    <label asp-for="AddressType" class="form-label"></label>
+    <select asp-for="AddressType" class="form-select" name="@nameFor("AddressType")" id="@idFor("AddressType")">
+        <option value="Home">Home</option>
+        <option value="Work">Work</option>
+    </select>
+    <span asp-validation-for="AddressType" class="text-danger"></span>
+</div>
+<div class="form-check mb-3">
+    <input asp-for="SaveForFuture" class="form-check-input" name="@nameFor("SaveForFuture")" id="@idFor("SaveForFuture")" />
+    <label asp-for="SaveForFuture" class="form-check-label"></label>
+</div>

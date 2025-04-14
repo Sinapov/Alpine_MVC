@@ -1,0 +1,78 @@
+@page
+@model AlpineNeeds.Pages.Checkout.InformationModel
+@{
+    ViewData["Title"] = "Checkout Information";
+}
+
+<div class="container my-5">
+    <h2>Checkout - Shipping & Billing Information</h2>
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            <ul>
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <li>@error.ErrorMessage</li>
+            }
+            </ul>
+        </div>
+    }
+    <form method="post" asp-antiforgery="true" autocomplete="off">
+        <div class="row">
+            <div class="col-md-7">
+                <h4>Shipping Address</h4>
+                @await Html.PartialAsync("_AddressForm", Model.ShippingAddress, new ViewDataDictionary(ViewData) { { "prefix", "ShippingAddress" } })
+                <hr />
+                <h4>Billing Address</h4>
+                <div class="form-check mb-2">
+                    <input class="form-check-input" type="checkbox" id="SameAsShipping" name="SameAsShipping" value="true" @(Model.SameAsShipping ? "checked" : "") />
+                    <label class="form-check-label" for="SameAsShipping">Same as shipping address</label>
+                </div>
+                <div id="billingAddressSection" @(Model.SameAsShipping ? "style='display:none;'" : "")>
+                    @await Html.PartialAsync("_AddressForm", Model.BillingAddress, new ViewDataDictionary(ViewData) { { "prefix", "BillingAddress" } })
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Continue to Payment</button>
+                <a asp-page="/Cart/Index" class="btn btn-link mt-3">Return to Cart</a>
+            </div>
+            <div class="col-md-5">
+                @await Html.PartialAsync("_OrderSummary", Model.OrderSummary)
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(function () {
+            function copyShippingToBilling() {
+                if ($('#SameAsShipping').is(':checked')) {
+                    // Copy values from shipping to billing by id
+                    const fields = [
+                        'FullName', 'AddressLine1', 'AddressLine2', 'City', 'State', 'ZipCode', 'Country', 'PhoneNumber', 'AddressType', 'SaveForFuture'
+                    ];
+                    fields.forEach(function(field) {
+                        var shippingVal = $("#ShippingAddress_" + field).val();
+                        var $billing = $("#BillingAddress_" + field);
+                        if ($billing.length && shippingVal !== undefined) {
+                            $billing.val(shippingVal).trigger('change');
+                        }
+                    });
+                    $('#billingAddressSection').hide();
+                } else {
+                    $('#billingAddressSection').show();
+                }
+            }
+            $('#SameAsShipping').change(copyShippingToBilling);
+            // Initial state
+            copyShippingToBilling();
+            // Input masking for phone and ZIP fields
+            $(document).on('input', 'input[name$="PhoneNumber"]', function () {
+                this.value = this.value.replace(/[^\d\+\-\s\(\)]/g, '');
+            });
+            $(document).on('input', 'input[name$="ZipCode"]', function () {
+                this.value = this.value.replace(/[^\w\-\s]/g, '');
+            });
+        });
+    </script>
+}
