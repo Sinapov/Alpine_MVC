@@ -1,0 +1,9 @@
+@model AlpineNeeds.Models.Order
+@if (Model != null)
+{
+    <a class="dropdown-item" href="/Account/Orders/Details/@Model.Id">My Orders</a>
+}
+else
+{
+    <a class="dropdown-item" href="/Account/Orders">My Orders</a>
+}

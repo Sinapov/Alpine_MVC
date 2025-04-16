@@ -51,8 +51,8 @@
                                     <li><span class="dropdown-item-text">Hello @User.Identity?.Name!</span></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">My Account</a></li>
-                                    <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Orders">My Orders</a></li>
-                                    
+                                    <li>@await Component.InvokeAsync("LatestOrderLink")</li>
+
                                     @if (User.IsInRole("Admin"))
                                     {
                                         <li><hr class="dropdown-divider"></li>
