@@ -36,6 +36,10 @@ builder.Services.AddSession(options =>
 
 // Register CartService
 builder.Services.AddScoped<ICartService, CartService>();
+// Register Checkout session service
+builder.Services.AddScoped<ICheckoutSessionService, CheckoutSessionService>();
+// Register OrderService
+builder.Services.AddScoped<IOrderService, OrderService>();
 
 // Bind AdminCredentials section to options
 builder.Services.Configure<AdminCredentials>(builder.Configuration.GetSection("AdminCredentials"));
