@@ -45,3 +45,12 @@
         - Canceled
             - Customer Canceled
             - Out of Stock
+
+
+
+# TODO
+ - [] Seed products
+ - [] Checkout
+ - [] User Order
+ - [] Admin manage orders
+ - [] Add shipping cost and shipping time 

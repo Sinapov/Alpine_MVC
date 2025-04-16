@@ -13,7 +13,7 @@ namespace AlpineNeeds.Models
         [Display(Name = "Product Name")]
         public required string Name { get; set; }
 
-        [StringLength(500, ErrorMessage = "Description cannot exceed 500 characters")]
+        [StringLength(10_000, ErrorMessage = "Description cannot exceed 10 000 characters")]
         [Display(Name = "Product Description")]
         public string? Description { get; set; }
 

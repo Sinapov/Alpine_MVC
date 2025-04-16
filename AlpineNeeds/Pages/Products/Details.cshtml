@@ -139,10 +139,14 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
             <li class="breadcrumb-item"><a href="/Products">Products</a></li>
-            @if (Model.Product.Category != null)
+            @if (Model.CategoryPath.Any())
             {
-                <li class="breadcrumb-item"><a
-                        href="/Products?CategoryIds=@Model.Product.CategoryId">@Model.Product.Category.Name</a></li>
+                foreach (var category in Model.CategoryPath)
+                {
+                    <li class="breadcrumb-item">
+                        <a href="/Products?CategoryIds=@category.Id">@category.Name</a>
+                    </li>
+                }
             }
             <li class="breadcrumb-item active"
                 aria-current="page">@Model.Product.Name</li>
@@ -179,10 +183,21 @@
         <div class="col-md-6">
             <h1 class="product-title">@Model.Product.Name</h1>
 
-            @if (Model.Product.Category != null)
+            @if (Model.CategoryPath.Any())
             {
-                <p class="text-muted">Category: <a
-                        href="/Products?CategoryIds=@Model.Product.CategoryId">@Model.Product.Category.Name</a></p>
+                <p class="text-muted">
+                    Category: 
+                    @for (int i = 0; i < Model.CategoryPath.Count; i++)
+                    {
+                        var category = Model.CategoryPath[i];
+                        <a href="/Products?CategoryIds=@category.Id">@category.Name</a>
+                        
+                        @if (i < Model.CategoryPath.Count - 1)
+                        {
+                            <span> > </span>
+                        }
+                    }
+                </p>
             }
 
             <p class="product-price">@Model.Product.Price.ToString("C")</p>
@@ -295,7 +310,16 @@
                             }
                             <tr>
                                 <th scope="row">Category</th>
-                                <td>@(Model.Product.Category?.Name ?? "Uncategorized")</td>
+                                <td>
+                                    @if (Model.CategoryPath.Any())
+                                    {
+                                        <span>@string.Join(" > ", Model.CategoryPath.Select(c => c.Name))</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Uncategorized</span>
+                                    }
+                                </td>
                             </tr>
                             @if (Model.Product.Colors != null && Model.Product.Colors.Any())
                             {

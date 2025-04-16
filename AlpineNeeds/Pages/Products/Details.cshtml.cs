@@ -17,6 +17,7 @@ namespace AlpineNeeds.Pages.Products
 
         public Product Product { get; set; } = default!;
         public List<Product> RelatedProducts { get; set; } = new List<Product>();
+        public List<Category> CategoryPath { get; set; } = new List<Category>();
         public int Quantity { get; set; } = 1;
 
         public async Task<IActionResult> OnGetAsync(int id)
@@ -34,6 +35,14 @@ namespace AlpineNeeds.Pages.Products
 
             Product = product;
 
+            // Build the category hierarchy path
+            if (Product.Category != null)
+            {
+                await BuildCategoryPathAsync(Product.Category.Id);
+                // Reverse to show from root to leaf
+                CategoryPath.Reverse();
+            }
+
             // Get related products (same category, excluding current product)
             RelatedProducts = await _context.Products
                 .Include(p => p.ProductImages)
@@ -43,6 +52,21 @@ namespace AlpineNeeds.Pages.Products
                 .ToListAsync();
 
             return Page();
+        }
+
+        private async Task BuildCategoryPathAsync(int categoryId)
+        {
+            var category = await _context.Categories.FindAsync(categoryId);
+            
+            if (category == null)
+                return;
+                
+            CategoryPath.Add(category);
+            
+            if (category.ParentCategoryId.HasValue)
+            {
+                await BuildCategoryPathAsync(category.ParentCategoryId.Value);
+            }
         }
     }
 }
