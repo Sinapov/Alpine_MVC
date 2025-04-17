@@ -74,7 +74,7 @@ namespace AlpineNeeds.Pages.Checkout
             await _checkoutSessionService.SaveShippingAddressAsync(ShippingAddress);
             if (!SameAsShipping)
             {
-                await _checkoutSessionService.SaveBillingAddressAsync(BillingAddress);
+                await _checkoutSessionService.SaveBillingAddressAsync(BillingAddress!);
             }
             else
             {
