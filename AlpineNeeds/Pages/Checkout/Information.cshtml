@@ -32,7 +32,7 @@
                     @await Html.PartialAsync("_AddressForm", Model.BillingAddress, new ViewDataDictionary(ViewData) { { "prefix", "BillingAddress" } })
                 </div>
                 <button type="submit" class="btn btn-primary mt-3">Continue to Payment</button>
-                <a asp-page="/Cart/Index" class="btn btn-link mt-3">Return to Cart</a>
+                <a asp-page="/Cart" class="btn btn-link mt-3">Return to Cart</a>
             </div>
             <div class="col-md-5">
                 @await Html.PartialAsync("_OrderSummary", Model.OrderSummary)

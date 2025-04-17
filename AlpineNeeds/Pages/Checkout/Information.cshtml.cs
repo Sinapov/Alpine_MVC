@@ -2,11 +2,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using AlpineNeeds.Models;
 using AlpineNeeds.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace AlpineNeeds.Pages.Checkout
 {
+    [Authorize]
     public class InformationModel : PageModel
     {
         private readonly ICheckoutSessionService _checkoutSessionService;
@@ -16,7 +18,7 @@ namespace AlpineNeeds.Pages.Checkout
         public CheckoutAddressViewModel ShippingAddress { get; set; } = new();
 
         [BindProperty]
-        public CheckoutAddressViewModel BillingAddress { get; set; } = new();
+        public CheckoutAddressViewModel? BillingAddress { get; set; } = new();
 
         [BindProperty]
         public bool SameAsShipping { get; set; } = true;

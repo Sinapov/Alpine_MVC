@@ -2,11 +2,13 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using AlpineNeeds.Models;
 using AlpineNeeds.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace AlpineNeeds.Pages.Checkout
 {
+    [Authorize]
     public class PaymentModel : PageModel
     {
         private readonly IOrderService _orderService;

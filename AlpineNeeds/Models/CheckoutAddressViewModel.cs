@@ -18,9 +18,8 @@ namespace AlpineNeeds.Models
         [Required]
         public string City { get; set; } = string.Empty;
 
-        [Required]
         [Display(Name = "State/Province")]
-        public string State { get; set; } = string.Empty;
+        public string? State { get; set; } = string.Empty;
 
         [Required]
         [Display(Name = "ZIP/Postal Code")]
