@@ -127,7 +127,7 @@ namespace AlpineNeeds.Pages.Products
             // Apply brand filter if provided
             if (Brands != null && Brands.Any() && !Brands.Contains("All"))
             {
-                query = query.Where(p => Brands.Contains(p.Brand));
+                query = query.Where(p => !string.IsNullOrWhiteSpace(p.Brand) && Brands.Contains(p.Brand));
             }
             // Maintain backward compatibility with single brand parameter
             else if (!string.IsNullOrEmpty(Brand) && Brand != "All")

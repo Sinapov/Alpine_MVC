@@ -190,7 +190,7 @@
 </div>
 
 @section Scripts {
-    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+    <script src="~/lib/sortablejs/Sortable.min.js"></script>
     <script>
         let colors = @Json.Serialize(Model.Product?.Colors ?? new List<string>());
         let sizes = @Json.Serialize(Model.Product?.Sizes ?? new List<string>());
@@ -367,7 +367,5 @@
         }
     </style>
 
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    <partial name="_ValidationScriptsPartial" />
 }

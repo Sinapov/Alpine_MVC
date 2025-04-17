@@ -260,7 +260,7 @@ namespace AlpineNeeds.Services
                 {
                     ProductId = ci.ProductId,
                     ProductName = ci.Product.Name,
-                    ImageUrl = ci.Product.ProductImages.FirstOrDefault().ImageUrl,
+                    ImageUrl = ci.Product.ProductImages.Select(s => s.ImageUrl).FirstOrDefault(),
                     Price = ci.Product.Price,
                     Quantity = ci.Quantity,
                     Color = ci.Color,

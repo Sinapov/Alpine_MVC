@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace AlpineNeeds.Pages;
 
-public class PrivacyModel(ILogger<PrivacyModel> logger) : PageModel
+public class PrivacyModel() : PageModel
 {
     public void OnGet()
     {

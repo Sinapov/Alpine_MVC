@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "bootstrap-icons": "^1.11.3",
+    "nouislider": "^15.8.1",
+    "sortablejs": "^1.15.6"
+  }
+}
