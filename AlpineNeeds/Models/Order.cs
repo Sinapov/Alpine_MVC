@@ -21,6 +21,18 @@ namespace AlpineNeeds.Models
         
         public DateTime OrderDate { get; set; }
         
+        // Shipping Address
+        public int? ShippingAddressId { get; set; }
+        
+        [ForeignKey("ShippingAddressId")]
+        public virtual Address? ShippingAddress { get; set; }
+        
+        // Billing Address
+        public int? BillingAddressId { get; set; }
+        
+        [ForeignKey("BillingAddressId")]
+        public virtual Address? BillingAddress { get; set; }
+        
         public virtual ICollection<OrderProduct> OrderProducts { get; set; } = new List<OrderProduct>();
     }
     

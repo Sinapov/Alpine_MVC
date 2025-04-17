@@ -45,11 +45,11 @@ public class DetailsModel : BasePageModel
         UserOrders = await _context.Orders
             .Where(o => o.UserId == userId)
             .OrderByDescending(o => o.OrderDate)
-            .ToListAsync();
-
-        // Retrieve the order with all related data
+            .ToListAsync();        // Retrieve the order with all related data
         Order = await _context.Orders
             .Include(o => o.User)
+            .Include(o => o.ShippingAddress)
+            .Include(o => o.BillingAddress)
             .Include(o => o.OrderProducts)
                 .ThenInclude(op => op.Product)
                     .ThenInclude(p => p.ProductImages)
@@ -73,7 +73,7 @@ public class DetailsModel : BasePageModel
 
         // Set additional order information
         ShippingDate = Order.Status >= OrderStatus.Preparing ? Order.OrderDate.AddDays(1) : null;
-        
+
         // Calculate order totals
         SubTotal = Order.OrderProducts.Sum(op => op.Price * op.Quantity);
         Tax = Math.Round(SubTotal * 0.2m, 2); // Example: 20% tax

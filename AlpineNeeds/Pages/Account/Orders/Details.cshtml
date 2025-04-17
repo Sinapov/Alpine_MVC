@@ -128,7 +128,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- Shipping Information -->
             <div class="col-md-4 mb-4">
                 <div class="card h-100">
@@ -137,11 +136,23 @@
                     </div>
                     <div class="card-body">
                         <address>
-                            <strong>@(Model.Order.User?.FirstName) @(Model.Order.User?.LastName)</strong><br>
-                            123 Mountain View Rd<br>
-                            Boulder, CO 80301<br>
-                            United States<br>
-                            <abbr title="Phone">P:</abbr> (555) 123-4567
+                            @if (Model.Order.ShippingAddress != null)
+                            {
+                                <strong>@Model.Order.ShippingAddress.FullName</strong><br>
+                                <span>@Model.Order.ShippingAddress.AddressLine1</span><br>
+                                @if (!string.IsNullOrEmpty(Model.Order.ShippingAddress.AddressLine2))
+                                {
+                                    <span>@Model.Order.ShippingAddress.AddressLine2</span><br>
+                                }
+                                <span>@Model.Order.ShippingAddress.City, @Model.Order.ShippingAddress.State @Model.Order.ShippingAddress.ZipCode</span><br>
+                                <span>@Model.Order.ShippingAddress.Country</span><br>
+                                <abbr title="Phone">Phone:</abbr> @Model.Order.ShippingAddress.PhoneNumber
+                            }
+                            else
+                            {
+                                <strong>@(Model.Order.User?.FirstName) @(Model.Order.User?.LastName)</strong><br>
+                                <strong>Shipping address not available</strong>
+                            }
                         </address>
                     </div>
                 </div>
