@@ -50,7 +50,8 @@
 
 # TODO
  - [] Seed products
- - [] Checkout
- - [] User Order
- - [] Admin manage orders
+ - [x] Checkout
+ - [x] User Order
+ - [x] Admin manage orders
  - [] Add shipping cost and shipping time 
+ - [] Localize

@@ -80,4 +80,7 @@ app.MapRazorPages()
 // Seed roles and admin user using the method from ApplicationDbContext
 await ApplicationDbContext.SeedRolesAndAdminAsync(app.Services);
 
+// Seed products and their images
+await ApplicationDbContext.SeedProductsAsync(app.Services);
+
 app.Run();

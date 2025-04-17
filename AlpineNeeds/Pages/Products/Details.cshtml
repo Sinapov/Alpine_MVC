@@ -583,6 +583,7 @@
             fetch('/Cart?handler=AddToCart', {
                 method: 'POST',
                 headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
                     'RequestVerificationToken': token
                 },
                 body: formData
