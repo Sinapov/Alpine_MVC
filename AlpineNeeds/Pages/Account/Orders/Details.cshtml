@@ -74,7 +74,7 @@
                             <a href="/Account/Orders/Details/@order.Id" class="list-group-item list-group-item-action @(order.Id == Model.Order.Id ? "active" : "")">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <span>Order #@order.Id</span>
-                                    <span class="badge bg-secondary">@order.Status</span>
+                                    <span class="badge @GetStatusBadgeClass(order.Status)">@order.Status</span>
                                 </div>
                                 <small class="text-muted">@order.OrderDate.ToString("MMM dd, yyyy")</small>
                             </a>
