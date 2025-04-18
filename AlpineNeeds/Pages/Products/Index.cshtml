@@ -60,25 +60,61 @@
             padding: 15px;
             background-color: #f8f9fa;
             border-radius: 5px;
-        }
-
-        /* Price Range Slider */
+        }        /* Price Range Slider */
         .price-slider {
-            margin: 15px 0;
+            margin: 20px 0;
+            height: 10px;
         }
 
         .noUi-connect {
             background: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
         }
-
-        .price-inputs {
+        
+        .noUi-handle {
+            border-radius: 50%;
+            background-color: #ffffff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            border: 2px solid #007bff;
+            width: 20px !important;
+            height: 20px !important;
+            right: -10px !important;
+        }
+        
+        .noUi-handle:before,
+        .noUi-handle:after {
+            display: none;
+        }        .price-inputs {
             display: flex;
             justify-content: space-between;
-            margin-top: 10px;
+            align-items: center;
+            margin-top: 15px;
+        }        .price-inputs input {
+            font-size: 1.2rem;
+            text-align: center;
+            font-weight: 600;
+            color: #000;
         }
-
-        .price-inputs input {
-            width: 45%;
+        
+        .price-input-simple {
+            height: 45px;
+            padding: 10px;
+            font-size: 18px !important;
+            width: 100%;
+        }
+        
+        .price-badge {
+            font-size: 1.1rem;
+            padding: 8px 12px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .price-updated {
+            background-color: #28a745 !important;
+            color: white !important;
+            transform: scale(1.05);
         }
 
         /* Category Filter */
@@ -189,28 +225,24 @@
                             <div class="nested-categories">
                                 @await Html.PartialAsync("_CategoryHierarchyPartial", Model.CategoryHierarchy)
                             </div>
-                        </div>
-
-                        <!-- Price Range Filter -->
+                        </div>                        <!-- Price Range Filter -->
                         <div class="price-filter mb-4">
                             <h6 class="font-weight-bold">Price Range</h6>
                             <div class="price-slider" id="price-slider"></div>
-                            <div class="price-inputs mt-2">
-                                <div class="input-group input-group-sm">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">лв</span>
+                            <div class="price-inputs mt-3">
+                                <div class="d-flex justify-content-between">
+                                    <div style="width: 45%;">
+                                        <input type="number" class="form-control price-input-simple" id="minPrice" name="MinPrice" value="@Model.MinPrice?.ToString(CultureInfo.InvariantCulture)">
                                     </div>
-                                    <input type="number" class="form-control" id="minPrice" name="MinPrice" value="@Model.MinPrice?.ToString(CultureInfo.InvariantCulture)">
-                                </div>
-                                <div class="mx-2">-</div>
-                                <div class="input-group input-group-sm">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">лв</span>
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <span class="fs-5 fw-bold">-</span>
                                     </div>
-                                    <input type="number" class="form-control" id="maxPrice" name="MaxPrice" value="@Model.MaxPrice?.ToString(CultureInfo.InvariantCulture)">
+                                    <div style="width: 45%;">
+                                        <input type="number" class="form-control price-input-simple" id="maxPrice" name="MaxPrice" value="@Model.MaxPrice?.ToString(CultureInfo.InvariantCulture)">
+                                    </div>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-sm btn-primary mt-2 w-100" id="applyPriceFilter">
+                            <button type="button" class="btn btn-sm btn-primary mt-3 w-100" id="applyPriceFilter">
                                 Apply Filter
                             </button>
                         </div>
@@ -369,9 +401,7 @@
                             return Math.round(value);
                         }
                     }
-                });
-                
-                // Update input fields when slider changes
+                });                // Update input fields when slider changes
                 priceSlider.noUiSlider.on('update', function(values, handle) {
                     const value = values[handle];
                     if (handle === 0) {
