@@ -1,5 +1,6 @@
 ﻿@page
 @using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
 @model IndexModel
 @inject IViewLocalizer Localizer
 @{
@@ -12,7 +13,7 @@
         /* Hero Section Styles */
         .hero-section {
             position: relative;
-            height: 500px;
+            height: 600px;
             overflow: hidden;
         }
         
@@ -28,7 +29,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.4);
+            background: linear-gradient(135deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 100%);
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -37,102 +38,294 @@
             color: white;
             padding: 0 15px;
         }
-        
-        .hero-heading {
-            font-size: 3rem;
-            font-weight: 700;
+          .hero-heading {
+            font-size: 3.5rem;
+            font-weight: 800;
             margin-bottom: 1.5rem;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: fadeInDown 1s ease-out;
+            will-change: transform, opacity;
+        }
+          .hero-subheading {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            max-width: 700px;
+            animation: fadeInUp 1s ease-out 0.3s;
+            animation-fill-mode: both;
+            will-change: transform, opacity;
+        }
+          .hero-button {
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background-color: #e64a19;
+            border: none;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(230, 74, 25, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            animation: fadeInUp 1s ease-out 0.6s;
+            animation-fill-mode: both;
+            will-change: transform, opacity;
+        }
+        
+        .hero-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(230, 74, 25, 0.6);
+            background-color: #f05722;
         }
         
         /* Introduction Section Styles */
         .introduction-section {
-            padding: 5rem 0;
+            padding: 6rem 0;
+            background-color: #fff;
+        }
+        
+        .intro-heading {
+            position: relative;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .intro-heading:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background-color: #e64a19;
+        }
+        
+        .intro-text {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 2rem;
+            line-height: 1.8;
         }
         
         .store-image {
-            max-height: 350px;
+            max-height: 400px;
+            width: 100%;
             object-fit: cover;
-            border-radius: 8px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.5s ease;
+        }
+        
+        .store-image:hover {
+            transform: scale(1.02);
         }
         
         /* Featured Products Section Styles */
         .featured-products {
-            background-color: #f8f9fa;
-            padding: 5rem 0;
+            background-color: #f9f9f9;
+            padding: 6rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .featured-products:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('/images/pattern-bg.png');
+            opacity: 0.03;
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 3rem;
+            font-weight: 800;
+            color: #333;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: #e64a19;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         }
         
         .carousel-control-prev-icon, .carousel-control-next-icon {
-            background-color: rgba(0, 0, 0, 0.3);
+            background-color: #e64a19;
             border-radius: 50%;
-            padding: 10px;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
         
-        /* Categories Preview Styles */
-        .categories-preview {
+        /* CTA Section Styles */
+        .cta-section {
+            background: linear-gradient(135deg, #1e5799 0%, #207cca 100%);
             padding: 5rem 0;
-        }
-        
-        .category-card {
-            position: relative;
-            overflow: hidden;
-            border-radius: 8px;
-            transition: transform 0.3s;
-            margin-bottom: 30px;
-            height: 200px;
-        }
-        
-        .category-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .category-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s;
-        }
-        
-        .category-card:hover .category-image {
-            transform: scale(1.05);
-        }
-        
-        .category-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
             color: white;
-            padding: 20px;
             text-align: center;
         }
         
-        .category-name {
-            font-weight: 600;
-            font-size: 1.25rem;
-            margin: 0;
+        .cta-heading {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
         }
         
+        .cta-text {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
         
-        /* Responsive adjustments */
-        @@media (max-width: 768px) {
+        .cta-button {
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background-color: white;
+            color: #1e5799;
+            border: none;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
+            background-color: #f8f8f8;
+        }
+          /* Animation Keyframes */
+        @@keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @@keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+          /* Responsive adjustments */
+        @@media (max-width: 992px) {
+            .hero-section {
+                height: 500px;
+            }
+            
             .hero-heading {
+                font-size: 2.8rem;
+            }
+            
+            .cta-heading {
+                font-size: 2.2rem;
+            }
+        }
+        
+        @@media (max-width: 768px) {
+            .hero-section {
+                height: 450px;
+            }
+            
+            .hero-heading {
+                font-size: 2.2rem;
+            }
+            
+            .hero-subheading {
+                font-size: 1.2rem;
+            }
+            
+            .store-image {
+                margin-top: 3rem;
+            }
+            
+            .cta-heading {
                 font-size: 2rem;
             }
         }
     </style>
 }
 
+<!-- Hero Section -->
+<section class="hero-section">
+    <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b" class="hero-image" alt="@Localizer["Mountain landscape with hiking trail"]" />
+    <div class="hero-overlay">
+        <h1 class="hero-heading">@Localizer["Explore the Outdoors"]</h1>
+        <p class="hero-subheading">@Localizer["Alpine Needs provides premium quality outdoor gear for adventurers, climbers, and nature enthusiasts."]</p>
+        <a asp-page="/Products/Index" class="btn btn-light hero-button">@Localizer["Shop Now"]</a>
+    </div>
+</section>
+
+<!-- Introduction Section -->
+<section class="introduction-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h2 class="intro-heading">@Localizer["Welcome to Alpine Needs"]</h2>
+                <p class="intro-text">
+                    @Localizer["Since 2010, Alpine Needs has been a trusted provider of high-quality outdoor equipment. Our mission is to equip adventurers with reliable gear that enhances their outdoor experiences while promoting sustainable exploration of nature."]
+                </p>
+                <p class="intro-text">
+                    @Localizer["We carefully select each product in our inventory, ensuring durability, performance, and value for our customers. From camping essentials to specialized climbing gear, we have everything you need for your next adventure."]
+                </p>
+                <a asp-page="/Contacts" class="btn btn-outline-dark">@Localizer["Learn More About Us"]</a>
+            </div>
+            <div class="col-lg-6">
+                <img src="https://images.unsplash.com/photo-1544298903-35e6f3532d66" class="store-image" alt="@Localizer["Alpine Needs store interior"]" />
+            </div>
+        </div>
+    </div>
+</section>
 
 <!-- Featured Products Section -->
 <section class="featured-products">
     <div class="container">
-        <h2 class="text-center mb-5">@Localizer["Featured Products"]</h2>
+        <h2 class="text-center section-title">@Localizer["Featured Products"]</h2>
         
         @if (Model.FeaturedProducts.Any())
         {
             <div id="featuredProductsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+                <!-- Indicators -->
+                <div class="carousel-indicators">
+                    @for (int i = 0; i < Math.Ceiling(Model.FeaturedProducts.Count / 3.0); i++)
+                    {
+                        <button type="button" data-bs-target="#featuredProductsCarousel" data-bs-slide-to="@i" class="@(i == 0 ? "active" : "")"
+                                aria-current="@(i == 0 ? "true" : "false")" aria-label="@Localizer[$"Slide {i+1}"]"></button>
+                    }
+                </div>
+                
                 <div class="carousel-inner">
                     @{
                         // Group products into sets of 3 for each carousel slide
@@ -150,7 +343,9 @@
                                 @foreach (var product in productGroups[i])
                                 {
                                     <div class="col-md-4 mb-4">
-                                        <partial name="_ProductCardPartial" model="product" />
+                                        <div class="product-card">
+                                            <partial name="_ProductCardPartial" model="product" />
+                                        </div>
                                     </div>
                                 }
                             </div>
@@ -167,12 +362,15 @@
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>
+            
+            <div class="text-center mt-5">
+                <a asp-page="/Products/Index" class="btn btn-outline-dark">@Localizer["View All Products"]</a>
+            </div>
         }
         else
         {
             <p class="text-center">@Localizer["No featured products available at the moment."]</p>
-        }
-    </div>
+        }    </div>
 </section>
 
 @section Scripts {
@@ -182,6 +380,16 @@
             var carousel = new bootstrap.Carousel(document.querySelector('#featuredProductsCarousel'), {
                 interval: 5000,
                 wrap: true
+            });
+            
+            // Add smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
             });
         });
     </script>

@@ -17,5 +17,8 @@ namespace AlpineNeeds.Models
     
     [ForeignKey("ParentCategoryId")]
     public virtual Category? ParentCategory { get; set; }
+    
+    // Added ImageUrl property for category images
+    public string? ImageUrl { get; set; }
   }
 }

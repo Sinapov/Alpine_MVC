@@ -501,6 +501,37 @@ msgstr "Моля, въведете вашето име."
 msgid "Please enter your last name."
 msgstr "Моля, въведете вашата фамилия."
 
+msgid "Explore the Outdoors"
+msgstr "Изследвайте природата"
+
+msgid "Alpine Needs provides premium quality outdoor gear for adventurers, climbers, and nature enthusiasts."
+msgstr "Alpine Needs предлага висококачествено оборудване за открито за авантюристи, катерачи и любители на природата."
+
+msgid "Welcome to Alpine Needs"
+msgstr "Добре дошли в Alpine Needs"
+
+msgid "Since 2010, Alpine Needs has been a trusted provider of high-quality outdoor equipment. Our mission is to equip adventurers with reliable gear that enhances their outdoor experiences while promoting sustainable exploration of nature."
+msgstr "От 2010 г. Alpine Needs е доверен доставчик на висококачествено оборудване за открито. Нашата мисия е да оборудваме авантюристите с надеждно оборудване, което подобрява преживяванията им на открито, като същевременно насърчава устойчивото изследване на природата."
+
+msgid "We carefully select each product in our inventory, ensuring durability, performance, and value for our customers. From camping essentials to specialized climbing gear, we have everything you need for your next adventure."
+msgstr "Внимателно подбираме всеки продукт в нашия инвентар, осигурявайки издръжливост, производителност и стойност за нашите клиенти. От основните принадлежности за къмпинг до специализирано оборудване за катерене, ние имаме всичко необходимо за вашето следващо приключение."
+
+msgid "Learn More About Us"
+msgstr "Научете повече за нас"
+
+msgid "Alpine Needs store interior"
+msgstr "Интериор на магазина Alpine Needs"
+
+msgid "Mountain landscape with hiking trail"
+msgstr "Планински пейзаж с туристическа пътека"
+
+msgid "View All Products"
+msgstr "Разгледайте всички продукти"
+
+msgid "Slide {0}"
+msgstr "Слайд {0}"
+msgstr "Моля, въведете вашата фамилия."
+
 msgid "Please enter your phone number."
 msgstr "Моля, въведете вашия телефонен номер."
 
