@@ -6,11 +6,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.Extensions.Localization;
 
 namespace AlpineNeeds.Pages.Admin.Category;
 
 [Authorize(Roles = "Admin")]
-public class ManageModel(ApplicationDbContext context) : BasePageModel
+public class ManageModel(ApplicationDbContext context, IStringLocalizer<ManageModel> localizer) : BasePageModel
 {
     [BindProperty]
     public Models.Category? Category { get; set; }
@@ -46,26 +47,24 @@ public class ManageModel(ApplicationDbContext context) : BasePageModel
 
         if (Category == null)
         {
-            ModelState.AddModelError(string.Empty, "Category information is missing.");
+            ModelState.AddModelError(string.Empty, localizer["Category information is missing."]);
             await LoadParentCategoryItems(null);
             return Page();
         }
 
         if (Category.ParentCategoryId.HasValue)
         {
-            // Check if parent category exists
             var parentExists = await context.Categories.AnyAsync(c => c.Id == Category.ParentCategoryId);
             if (!parentExists)
             {
-                ModelState.AddModelError("Category.ParentCategoryId", "Selected parent category does not exist.");
+                ModelState.AddModelError("Category.ParentCategoryId", localizer["Selected parent category does not exist."]);
                 await LoadParentCategoryItems(Category.Id);
                 return Page();
             }
             
-            // Check for circular dependency if editing
             if (Category.Id != 0 && await HasDescendant(Category.Id, Category.ParentCategoryId.Value))
             {
-                ModelState.AddModelError("Category.ParentCategoryId", "Cannot make a category a child of its own descendant.");
+                ModelState.AddModelError("Category.ParentCategoryId", localizer["Cannot make a category a child of its own descendant."]);
                 await LoadParentCategoryItems(Category.Id);
                 return Page();
             }
@@ -73,7 +72,6 @@ public class ManageModel(ApplicationDbContext context) : BasePageModel
 
         if (Category.Id == 0)
         {
-            // New category
             var maxOrder = await context.Categories
                 .Where(c => c.ParentCategoryId == Category.ParentCategoryId)
                 .MaxAsync(c => (int?)c.DisplayOrder) ?? -1;
@@ -81,11 +79,10 @@ public class ManageModel(ApplicationDbContext context) : BasePageModel
             
             await context.Categories.AddAsync(Category);
             await context.SaveChangesAsync();
-            AddPageSuccess("Category created successfully.");
+            AddPageSuccess(localizer["Category created successfully."]);
         }
         else
         {
-            // Existing category
             var existingCategory = await context.Categories.FindAsync(Category.Id);
             if (existingCategory == null)
             {
@@ -98,7 +95,7 @@ public class ManageModel(ApplicationDbContext context) : BasePageModel
             try
             {
                 await context.SaveChangesAsync();
-                AddPageSuccess("Category updated successfully.");
+                AddPageSuccess(localizer["Category updated successfully."]);
             }
             catch (DbUpdateConcurrencyException)
             {

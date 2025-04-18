@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNetCore.Builder
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Http.Features
+@using Microsoft.Extensions.Options
+
+@inject IOptions<RequestLocalizationOptions> LocalizationOptions
+
+@{
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
+    var cultureItems = LocalizationOptions.Value.SupportedUICultures
+        .Select(c => new SelectListItem { Value = c.Name, Text = c.DisplayName })
+        .ToList();
+    var currentCulture = requestCulture?.RequestCulture.UICulture.Name ?? "en-US";
+}
+
+<div class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuButton" 
+            data-bs-toggle="dropdown" aria-expanded="false">
+        @currentCulture.Split('-')[0].ToUpperInvariant()
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        @foreach (var culture in LocalizationOptions.Value.SupportedUICultures)
+        {
+            <li>
+                <form id="selectLanguage_@culture.Name" asp-controller="Home" 
+                      asp-action="SetLanguage" method="post" class="mb-0">
+                    <input type="hidden" name="culture" value="@culture.Name" />
+                    <input type="hidden" name="returnUrl" value="@Context.Request.Path" />
+                    <button type="submit" class="dropdown-item">
+                        @culture.DisplayName
+                    </button>
+                </form>
+            </li>
+        }
+    </ul>
+</div>

@@ -1,9 +1,10 @@
 @model AlpineNeeds.Models.Order
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer
 @if (Model != null)
 {
-    <a class="dropdown-item" href="/Account/Orders/Details/@Model.Id">My Orders</a>
+    <a class="dropdown-item" href="/Account/Orders/Details/@Model.Id">@Localizer["My Orders"]</a>
 }
 else
 {
-    <a class="dropdown-item" href="/Account/Orders">My Orders</a>
+    <a class="dropdown-item" href="/Account/Orders">@Localizer["My Orders"]</a>
 }

@@ -1,27 +1,28 @@
 @page
 @model AlpineNeeds.Pages.Checkout.PaymentModel
+@inject IViewLocalizer Localizer
 @{
-    ViewData["Title"] = "Payment";
+    ViewData["Title"] = Localizer["Payment"];
 }
 
 <div class="container my-5">
-    <h2>Payment</h2>
+    <h2>@Localizer["Payment"]</h2>
     <form method="post" asp-antiforgery="true" autocomplete="off">
         <div class="mb-3">
-            <label for="cardNumber" class="form-label">Card Number</label>
-            <input type="text" class="form-control" id="cardNumber" name="cardNumber" maxlength="19" placeholder="1234 5678 9012 3456" required />
+            <label for="cardNumber" class="form-label">@Localizer["Card Number"]</label>
+            <input type="text" class="form-control" id="cardNumber" name="cardNumber" maxlength="19" placeholder="@Localizer["1234 5678 9012 3456"]" required />
         </div>
         <div class="row mb-3">
             <div class="col-md-6">
-                <label for="expiry" class="form-label">Expiry</label>
-                <input type="text" class="form-control" id="expiry" name="expiry" maxlength="5" placeholder="MM/YY" required />
+                <label for="expiry" class="form-label">@Localizer["Expiry"]</label>
+                <input type="text" class="form-control" id="expiry" name="expiry" maxlength="5" placeholder="@Localizer["MM/YY"]" required />
             </div>
             <div class="col-md-6">
-                <label for="cvc" class="form-label">CVC</label>
-                <input type="text" class="form-control" id="cvc" name="cvc" maxlength="4" placeholder="123" required />
+                <label for="cvc" class="form-label">@Localizer["CVC"]</label>
+                <input type="text" class="form-control" id="cvc" name="cvc" maxlength="4" placeholder="@Localizer["123"]" required />
             </div>
         </div>
-        <button type="submit" class="btn btn-success">Pay & Place Order</button>
+        <button type="submit" class="btn btn-success">@Localizer["Pay & Place Order"]</button>
     </form>
     @if (!ViewData.ModelState.IsValid)
     {

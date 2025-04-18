@@ -1,7 +1,8 @@
 @page "{id?}"
 @model ProductEditModel
+@inject IViewLocalizer Localizer
 @{
-    ViewData["Title"] = Model.IsNewProduct ? "Add Product" : "Edit Product";
+    ViewData["Title"] = Model.IsNewProduct ? Localizer["Add Product"] : Localizer["Edit Product"];
 }
 
 <div class="container">
@@ -11,10 +12,10 @@
     </div>
 
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>@(Model.IsNewProduct ? "Add Product" : "Edit Product")</h2>
+        <h2>@(Model.IsNewProduct ? Localizer["Add Product"] : Localizer["Edit Product"])</h2>
         <a asp-page="./Products"
             class="btn btn-secondary">
-            <i class="bi bi-arrow-left me-2"></i>Back to Products
+            <i class="bi bi-arrow-left me-2"></i>@Localizer["Back to Products"]
         </a>
     </div>
 
@@ -25,7 +26,7 @@
                     asp-for="Product.Id" />
                 <div class="mb-3">
                     <label asp-for="Product.Name"
-                        class="form-label"></label>
+                        class="form-label">@Localizer["Name"]</label>
                     <input asp-for="Product.Name"
                         class="form-control"
                         minlength="2"
@@ -36,7 +37,7 @@
                 </div>
                 <div class="mb-3">
                     <label asp-for="Product.Description"
-                        class="form-label"></label>
+                        class="form-label">@Localizer["Description"]</label>
                     <textarea asp-for="Product.Description"
                         class="form-control"
                         maxlength="10000"></textarea>
@@ -45,19 +46,19 @@
                 </div>
                 <div class="mb-3">
                     <label asp-for="Product.CategoryId"
-                        class="form-label"></label>
+                        class="form-label">@Localizer["Category"]</label>
                     <select asp-for="Product.CategoryId"
                         asp-items="@(new SelectList(Model.Categories, "Id", "Name"))"
                         class="form-select"
                         required>
-                        <option value="">Select a category</option>
+                        <option value="">@Localizer["Select a category"]</option>
                     </select>
                     <span asp-validation-for="Product.CategoryId"
                         class="text-danger"></span>
                 </div>
                 <div class="mb-3">
                     <label asp-for="Product.Price"
-                        class="form-label"></label>
+                        class="form-label">@Localizer["Price"]</label>
                     <input asp-for="Product.Price"
                         class="form-control"
                         type="number"
@@ -71,7 +72,7 @@
                 
                 <!-- New Properties -->
                 <div class="mb-3">
-                    <label asp-for="Product.StockQuantity" class="form-label">Stock Quantity</label>
+                    <label asp-for="Product.StockQuantity" class="form-label">@Localizer["Stock Quantity"]</label>
                     <input asp-for="Product.StockQuantity"
                         class="form-control"
                         type="number"
@@ -82,7 +83,7 @@
                 </div>
                 
                 <div class="mb-3">
-                    <label asp-for="Product.Brand" class="form-label">Brand</label>
+                    <label asp-for="Product.Brand" class="form-label">@Localizer["Brand"]</label>
                     <input asp-for="Product.Brand"
                         class="form-control"
                         maxlength="100">
@@ -92,46 +93,46 @@
 
                 <div class="mb-3 form-check">
                     <input asp-for="Product.IsFeatured" class="form-check-input" type="checkbox">
-                    <label asp-for="Product.IsFeatured" class="form-check-label">Featured Product</label>
-                    <div class="form-text">Featured products will be displayed on the home page carousel</div>
+                    <label asp-for="Product.IsFeatured" class="form-check-label">@Localizer["Featured Product"]</label>
+                    <div class="form-text">@Localizer["Featured products will be displayed on the home page carousel"]</div>
                 </div>
                 
                 <!-- End New Properties -->
                 
                 <div class="mb-3">
-                    <label class="form-label">Colors (Optional)</label>
+                    <label class="form-label">@Localizer["Colors (Optional)"]</label>
                     <div class="input-group">
                         <input type="text"
                             class="form-control"
                             id="colorInput">
                         <button type="button"
                             class="btn btn-outline-secondary"
-                            onclick="addColor()">Add</button>
+                            onclick="addColor()">@Localizer["Add"]</button>
                     </div>
                     <div id="colorsList"
                         class="mt-2"></div>
                     <div id="colorsContainer"></div>
-                    <div class="form-text">Add product color options if applicable (e.g., Red, Blue, Black)</div>
+                    <div class="form-text">@Localizer["Add product color options if applicable (e.g., Red, Blue, Black)"]</div>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Sizes (Optional)</label>
+                    <label class="form-label">@Localizer["Sizes (Optional)"]</label>
                     <div class="input-group">
                         <input type="text"
                             class="form-control"
                             id="sizeInput">
                         <button type="button"
                             class="btn btn-outline-secondary"
-                            onclick="addSize()">Add</button>
+                            onclick="addSize()">@Localizer["Add"]</button>
                     </div>
                     <div id="sizesList"
                         class="mt-2"></div>
                     <div id="sizesContainer"></div>
-                    <div class="form-text">Add product size options if applicable (e.g., S, M, L, XL)</div>
+                    <div class="form-text">@Localizer["Add product size options if applicable (e.g., S, M, L, XL)"]</div>
                 </div>
 
                 <!-- Image Upload Section -->
                 <div class="mb-3">
-                    <label class="form-label">Product Images</label>
+                    <label class="form-label">@Localizer["Product Images"]</label>
                     <div class="input-group">
                         <input type="file" 
                                class="form-control" 
@@ -139,17 +140,17 @@
                                id="productImageInput" 
                                accept="image/*" 
                                multiple>
-                        <label class="input-group-text" for="productImageInput">Upload</label>
+                        <label class="input-group-text" for="productImageInput">@Localizer["Upload"]</label>
                     </div>
-                    <div class="form-text">Upload multiple product images (max 10 files, 5MB each)</div>
+                    <div class="form-text">@Localizer["Upload multiple product images (max 10 files, 5MB each)"]</div>
                 </div>
 
                 <!-- Existing Images Display and Management -->
                 @if (Model.Product?.ProductImages?.Any() == true)
                 {
                     <div class="mb-4">
-                        <h5>Manage Existing Images</h5>
-                        <p class="text-muted small">Drag images to reorder them. First image will be the main product image.</p>
+                        <h5>@Localizer["Manage Existing Images"]</h5>
+                        <p class="text-muted small">@Localizer["Drag images to reorder them. First image will be the main product image."]</p>
                         
                         <div id="imageGallery" class="d-flex flex-wrap gap-3">
                             @foreach (var image in Model.Product.ProductImages)
@@ -159,14 +160,14 @@
                                         <img src="@image.ImageUrl" class="card-img-top" style="height: 150px; object-fit: cover;">
                                         <div class="position-absolute top-0 end-0 p-2">
                                             <button type="button" class="btn btn-sm btn-danger image-delete-btn"
-                                                    data-id="@image.Id" title="Delete Image">
+                                                    data-id="@image.Id" title="@Localizer["Delete Image"]">
                                                 <i class="bi bi-trash"></i>
                                             </button>
                                         </div>
                                     </div>
                                     <div class="card-footer text-center bg-light">
-                                        <i class="bi bi-arrows-move" title="Drag to reorder"></i>
-                                        <span class="ms-2 small text-muted">ID: @image.Id</span>
+                                        <i class="bi bi-arrows-move" title="@Localizer["Drag to reorder"]"></i>
+                                        <span class="ms-2 small text-muted">@Localizer["ID:"] @image.Id</span>
                                     </div>
                                 </div>
                             }
@@ -180,9 +181,9 @@
 
                 <div class="d-flex justify-content-end gap-2 mt-4">
                     <a asp-page="./Products"
-                        class="btn btn-secondary">Cancel</a>
+                        class="btn btn-secondary">@Localizer["Cancel"]</a>
                     <button type="submit"
-                        class="btn btn-primary">Save</button>
+                        class="btn btn-primary">@Localizer["Save"]</button>
                 </div>
             </form>
         </div>

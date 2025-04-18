@@ -5,13 +5,15 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 
 namespace AlpineNeeds.Pages.Admin.Orders
 {
     [Authorize(Roles = "Admin")]
-    public class DetailsModel(ApplicationDbContext context) : BasePageModel
+    public class DetailsModel(ApplicationDbContext context, IStringLocalizer<DetailsModel> localizer) : BasePageModel
     {
         private readonly ApplicationDbContext _context = context;
+        private readonly IStringLocalizer<DetailsModel> _localizer = localizer;
 
         [BindProperty]
         public required Order Order { get; set; }
@@ -99,7 +101,7 @@ namespace AlpineNeeds.Pages.Admin.Orders
             // Check if status transition is valid
             if (!IsValidStatusTransition(order.Status, NewStatus))
             {
-                TempData["ErrorMessage"] = "Invalid status transition.";
+                TempData["ErrorMessage"] = _localizer["Invalid status transition."];
                 return RedirectToPage(new { id = order.Id });
             }
             
@@ -112,7 +114,7 @@ namespace AlpineNeeds.Pages.Admin.Orders
             
             await _context.SaveChangesAsync();
             
-            this.AddPageSuccess($"Order status updated to {NewStatus}.");
+            this.AddPageSuccess(_localizer["Order status updated to {0}.", NewStatus]);
             return RedirectToPage(new { id = order.Id });
         }
         
@@ -128,7 +130,7 @@ namespace AlpineNeeds.Pages.Admin.Orders
             // Check if order can be canceled
             if (!CanCancelOrder)
             {
-                TempData["ErrorMessage"] = "This order cannot be canceled due to its current status.";
+                TempData["ErrorMessage"] = _localizer["This order cannot be canceled due to its current status."];
                 return RedirectToPage(new { id = order.Id });
             }
             
@@ -151,7 +153,7 @@ namespace AlpineNeeds.Pages.Admin.Orders
             
             await _context.SaveChangesAsync();
             
-            this.AddPageSuccess($"Order #{Order.Id} has been canceled successfully.");
+            this.AddPageSuccess(_localizer["Order #{0} has been canceled successfully.", Order.Id]);
             return RedirectToPage(new { id = order.Id });
         }
         
@@ -171,7 +173,7 @@ namespace AlpineNeeds.Pages.Admin.Orders
                 
                 if (order.User == null)
                 {
-                    TempData["ErrorMessage"] = "User not found for this order.";
+                    TempData["ErrorMessage"] = _localizer["User not found for this order."];
                     return RedirectToPage(new { id = order.Id });
                 }
             }
@@ -179,7 +181,7 @@ namespace AlpineNeeds.Pages.Admin.Orders
             // Send email logic
             // await _emailService.SendCustomEmailToUser(order.User.Email, subject, message);
             
-            this.AddPageSuccess($"Email sent to {order.User.Email}.");
+            this.AddPageSuccess(_localizer["Email sent to {0}.", order.User.Email]);
             return RedirectToPage(new { id = order.Id });
         }
         

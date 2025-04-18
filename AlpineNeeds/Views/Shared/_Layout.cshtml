@@ -1,3 +1,5 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,23 +25,25 @@
                     <!-- Left side navigation items -->
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" asp-page="/Index"><i class="bi bi-house"></i> Home</a>
+                            <a class="nav-link" asp-page="/Index"><i class="bi bi-house"></i> @Localizer["Home"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-page="/Products/Index"><i class="bi bi-shop"></i> Products</a>
+                            <a class="nav-link" asp-page="/Products/Index"><i class="bi bi-shop"></i> @Localizer["Products"]</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-page="/Contacts"><i class="bi bi-envelope"></i> Contacts</a>
+                            <a class="nav-link" asp-page="/Contacts"><i class="bi bi-envelope"></i> @Localizer["Contacts"]</a>
                         </li>
                     </ul>
                     
                     <!-- Right side navigation items -->
                     <ul class="navbar-nav ms-auto d-flex align-items-center">
+                        <partial name="_CultureSelector" />
+
                         <!-- Cart icon -->
-                        <li class="nav-item me-3">
+                        <li class="nav-item">
                             @await Component.InvokeAsync("CartSummary")
                         </li>
-                        
+
                         <!-- User account/login -->
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -48,32 +52,32 @@
                             <ul class="dropdown-menu dropdown-menu-end">
                                 @if (User.Identity?.IsAuthenticated == true)
                                 {
-                                    <li><span class="dropdown-item-text">Hello @User.Identity?.Name!</span></li>
+                                    <li><span class="dropdown-item-text">@Localizer["Hello"] @User.Identity?.Name!</span></li>
                                     <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">My Account</a></li>
+                                    <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">@Localizer["My Account"]</a></li>
                                     <li>@await Component.InvokeAsync("LatestOrderLink")</li>
 
                                     @if (User.IsInRole("Admin"))
                                     {
                                         <li><hr class="dropdown-divider"></li>
-                                        <li><h6 class="dropdown-header"><i class="bi bi-shield-lock"></i> Admin Panel</h6></li>
-                                        <li><a class="dropdown-item" asp-page="/Admin/Users">User Management</a></li>
-                                        <li><a class="dropdown-item" asp-page="/Admin/Products">Product Management</a></li>
-                                        <li><a class="dropdown-item" asp-page="/Admin/Category/Index">Category Management</a></li>
-                                        <li><a class="dropdown-item" asp-page="/Admin/Orders/Index">Order Management</a></li>
+                                        <li><h6 class="dropdown-header"><i class="bi bi-shield-lock"></i> @Localizer["Admin Panel"]</h6></li>
+                                        <li><a class="dropdown-item" asp-page="/Admin/Users">@Localizer["User Management"]</a></li>
+                                        <li><a class="dropdown-item" asp-page="/Admin/Products">@Localizer["Product Management"]</a></li>
+                                        <li><a class="dropdown-item" asp-page="/Admin/Category/Index">@Localizer["Category Management"]</a></li>
+                                        <li><a class="dropdown-item" asp-page="/Admin/Orders/Index">@Localizer["Order Management"]</a></li>
                                     }
                                     
                                     <li><hr class="dropdown-divider"></li>
                                     <li>
                                         <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
-                                            <button type="submit" class="btn btn-link dropdown-item">Logout</button>
+                                            <button type="submit" class="btn btn-link dropdown-item">@Localizer["Logout"]</button>
                                         </form>
                                     </li>
                                 }
                                 else
                                 {
-                                    <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Login">Login</a></li>
-                                    <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Register">Register</a></li>
+                                    <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Login">@Localizer["Login"]</a></li>
+                                    <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Register">@Localizer["Register"]</a></li>
                                 }
                             </ul>
                         </li>
@@ -103,15 +107,15 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header bg-success text-white">
-                        <h5 class="modal-title">Success</h5>
+                        <h5 class="modal-title">@Localizer["Success"]</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <p>@TempData["CartMessage"]</p>
                     </div>
                     <div class="modal-footer">
-                        <a asp-page="/Cart" class="btn btn-primary">View Cart</a>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Continue Shopping</button>
+                        <a asp-page="/Cart" class="btn btn-primary">@Localizer["View Cart"]</a>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@Localizer["Continue Shopping"]</button>
                     </div>
                 </div>
             </div>

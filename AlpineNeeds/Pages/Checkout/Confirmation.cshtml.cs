@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using AlpineNeeds.Models;
-using AlpineNeeds.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -26,7 +22,6 @@ namespace AlpineNeeds.Pages.Checkout
             OrderId = orderId.Value;
             OrderNumber = $"{orderId:000000}";
             EstimatedDelivery = DateTime.UtcNow.AddDays(5);
-            // TODO: Populate Items, ShippingAddress, OrderTotal from order
             return Page();
         }
     }

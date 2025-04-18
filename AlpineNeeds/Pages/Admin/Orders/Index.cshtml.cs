@@ -64,16 +64,6 @@ namespace AlpineNeeds.Pages.Admin.Orders
 
         public async Task<IActionResult> OnGetAsync()
         {
-            // Initialize status dropdown
-            StatusList = new SelectList(
-                Enum.GetValues(typeof(OrderStatus))
-                    .Cast<OrderStatus>()
-                    .Select(s => new SelectListItem
-                    {
-                        Value = s.ToString(),
-                        Text = s.ToString()
-                    }),
-                "Value", "Text");
 
             // Store route data for pagination
             RouteData = new Dictionary<string, string>
@@ -90,10 +80,7 @@ namespace AlpineNeeds.Pages.Admin.Orders
             
             if (StatusFilter != null && StatusFilter.Any())
             {
-                foreach (var status in StatusFilter)
-                {
-                    RouteData.Add("statusFilter", status.ToString());
-                }
+                RouteData.Add("statusFilter", string.Join(",", StatusFilter.Select(s => s.ToString())));
             }
             
             if (!string.IsNullOrEmpty(SearchTerm))

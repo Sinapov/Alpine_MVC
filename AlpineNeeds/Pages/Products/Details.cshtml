@@ -200,7 +200,7 @@
                 </p>
             }
 
-            <p class="product-price">@Model.Product.Price.ToString("C")</p>
+            <p class="product-price">@Model.Product.Price.ToBgCurrency()</p>
 
             @if (Model.Product.InStock)
             {

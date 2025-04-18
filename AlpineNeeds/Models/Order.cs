@@ -1,6 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.AspNetCore.Identity;
 
 namespace AlpineNeeds.Models
 {
@@ -38,13 +38,21 @@ namespace AlpineNeeds.Models
     
     public enum OrderStatus
     {
+        [Display(Name = "Placed")]
         Placed,
+        [Display(Name = "Confirmed")]
         Confirmed,
+        [Display(Name = "Preparing")]
         Preparing,
+        [Display(Name = "Packed")]
         Packed,
+        [Display(Name = "Delivered")]
         Delivered,
+        [Display(Name = "Finished")]
         Finished,
+        [Display(Name = "Customer Canceled")]
         CustomerCanceled,
+        [Display(Name = "Out Of Stock")]
         OutOfStock
     }
 }

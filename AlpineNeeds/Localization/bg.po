@@ -1,0 +1,804 @@
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: bg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.6\n"
+
+msgid "Remember me?"
+msgstr "Запомни ме"
+
+msgid "Phone number"
+msgstr "Телефонен номер"
+
+msgid "First Name"
+msgstr "Име"
+
+msgid "Last Name"
+msgstr "Фамилия"
+
+msgid "Email"
+msgstr "Имейл"
+
+msgid "The {0} must be at least {2} and at max {1} characters long."
+msgstr "Дължината на {0} трябва да бъде най-малко {2} и най-много {1} символа."
+
+msgid "Password"
+msgstr "Парола"
+
+msgid "Confirm password"
+msgstr "Повторете паролата"
+
+msgid "The password and confirmation password do not match."
+msgstr "Паролата и потвърждението на паролата не съвпадат."
+
+msgid "The {0} must be at most {1} characters long."
+msgstr "{0} трябва да бъде най-много {1} символа."
+
+msgid "Full Name"
+msgstr "Пълно име"
+
+msgid "Address Line 1"
+msgstr "Адрес, ред 1"
+
+msgid "Address Line 2"
+msgstr "Адрес, ред 2"
+
+msgid "State/Province"
+msgstr "Област/Провинция"
+
+msgid "ZIP/Postal Code"
+msgstr "Пощенски код"
+
+msgid "Invalid ZIP/Postal code."
+msgstr "Невалиден пощенски код."
+
+msgid "Address Type"
+msgstr "Тип адрес"
+
+msgid "Save address for future orders"
+msgstr "Запазете адреса за бъдещи поръчки"
+
+msgid "Product name is required"
+msgstr "Името на продукта е задължително"
+
+msgid "Name must be between 2 and 100 characters"
+msgstr "Името трябва да бъде между 2 и 100 символа"
+
+msgid "Product Name"
+msgstr "Име на продукта"
+
+msgid "Description cannot exceed 10 000 characters"
+msgstr "Описанието не може да надвишава 10 000 символа"
+
+msgid "Product Description"
+msgstr "Описание на продукта"
+
+msgid "Category is required"
+msgstr "Категорията е задължителна"
+
+msgid "Category"
+msgstr "Категория"
+
+msgid "Price is required"
+msgstr "Цената е задължителна"
+
+msgid "Price must be between {1} and {2}"
+msgstr "Цената трябва да бъде между {1} и {2}"
+
+msgid "Price"
+msgstr "Цена"
+
+msgid "Available Colors"
+msgstr "Налични цветове"
+
+msgid "Available Sizes"
+msgstr "Налични размери"
+
+msgid "Product Images"
+msgstr "Снимки на продукта"
+
+msgid "Stock Quantity"
+msgstr "Инвентар"
+
+msgid "In Stock"
+msgstr "В наличност"
+
+msgid "Brand"
+msgstr "Марка"
+
+msgid "Featured Product"
+msgstr "Препоръчан продукт"
+
+msgid "Home"
+msgstr "Начало"
+
+msgid "Products"
+msgstr "Продукти"
+
+msgid "Contacts"
+msgstr "Контакти"
+
+msgid "My Orders"
+msgstr "Моите поръчки"
+
+msgid "My Account"
+msgstr "Моят акаунт"
+
+msgid "Admin Panel"
+msgstr "Административен панел"
+
+msgid "User Management"
+msgstr "Управление на потребители"
+
+msgid "Product Management"
+msgstr "Управление на продукти"
+
+msgid "Category Management"
+msgstr "Управление на категории"
+
+msgid "Order Management"
+msgstr "Управление на поръчки"
+
+msgid "Login"
+msgstr "Вход"
+
+msgid "Register"
+msgstr "Регистрация"
+
+msgid "Success"
+msgstr "Успех"
+
+msgid "View Cart"
+msgstr "Преглед на количката"
+
+msgid "Continue Shopping"
+msgstr "Продължете с пазаруването"
+
+msgid "Profile"
+msgstr "Профил"
+
+msgid "Order Summary"
+msgstr "Обобщение на поръчката"
+
+msgid "Subtotal"
+msgstr "Междинна сума"
+
+msgid "Shipping"
+msgstr "Доставка"
+
+msgid "Tax"
+msgstr "Данък"
+
+msgid "Total"
+msgstr "Общо"
+
+msgid "Return to Cart"
+msgstr "Връщане към количката"
+
+msgid "View Details"
+msgstr "Преглед на детайли"
+
+msgid "Shopping Cart"
+msgstr "Количка за пазаруване"
+
+msgid "Your shopping cart is empty."
+msgstr "Вашата количка за пазаруване е празна."
+
+msgid "Cart Items"
+msgstr "Артикули в количката"
+
+msgid "{0} item(s)"
+msgstr "{0} артикул(а)"
+
+msgid "Color: {0}"
+msgstr "Цвят: {0}"
+
+msgid "Size: {0}"
+msgstr "Размер: {0}"
+
+msgid "Subtotal: {0}"
+msgstr "Междинна сума: {0}"
+
+msgid "Proceed to Checkout"
+msgstr "Премини към плащане"
+
+msgid "Secure checkout"
+msgstr "Сигурно плащане"
+
+msgid "Order Confirmation"
+msgstr "Потвърждение на регистрацията"
+
+msgid "Thank you for your order!"
+msgstr "Благодарим ви за вашата поръчка!"
+
+msgid "Your order"
+msgstr "Вашата поръчка"
+
+msgid "has been placed successfully."
+msgstr "беше успешно направена."
+
+msgid "Estimated delivery:"
+msgstr "Очаквана доставка:"
+
+msgid "Track Order"
+msgstr "Проследяване на поръчка"
+
+msgid "Order Details"
+msgstr "Детайли на поръчката"
+
+msgid "Items Purchased"
+msgstr "Закупени артикули"
+
+msgid "x{0}"
+msgstr "x{0}"
+
+msgid "Shipping Address"
+msgstr "Адрес за доставка"
+
+msgid "Order Total"
+msgstr "Обща сума на поръчката"
+
+msgid "View Order Details"
+msgstr "Преглед на детайли на поръчката"
+
+msgid "A confirmation email has been sent to your address."
+msgstr "Потвърдителен имейл беше изпратен на вашия адрес."
+
+msgid "Contacts"
+msgstr "Контакти"
+
+msgid "Our Store"
+msgstr "Нашият магазин"
+
+msgid "Address:"
+msgstr "Тип адрес"
+
+msgid "123 Mountain View Street"
+msgstr "Ул. Планински изглед 123"
+
+msgid "Alpine Heights"
+msgstr "Алпийски височини"
+
+msgid "Sofia, 1000"
+msgstr "София, 1000"
+
+msgid "Bulgaria"
+msgstr "България"
+
+msgid "Phone:"
+msgstr "Телефон:"
+
+msgid "Email:"
+msgstr "Имейл"
+
+msgid "Working Hours"
+msgstr "Работно време"
+
+msgid "Monday - Friday"
+msgstr "Понеделник - Петък"
+
+msgid "Saturday"
+msgstr "Събота"
+
+msgid "Sunday"
+msgstr "Неделя"
+
+msgid "Find Us"
+msgstr "Намерете ни"
+
+msgid "Home Page"
+msgstr "Начало"
+
+msgid "Adventure Awaits at Alpine Needs"
+msgstr "Приключението ви очаква в Alpine Needs"
+
+msgid "Shop Now"
+msgstr "Пазарувайте сега"
+
+msgid "Our Story"
+msgstr "Нашата история"
+
+msgid "Our Mission"
+msgstr "Нашата мисия"
+
+msgid "Featured Products"
+msgstr "Препоръчан продукт"
+
+msgid "No featured products available at the moment."
+msgstr "В момента няма налични препоръчани продукти."
+
+msgid "Filters"
+msgstr "Филтри"
+
+msgid "Show Filters"
+msgstr "Показване на филтри"
+
+msgid "Reset All"
+msgstr "Нулиране на всички"
+
+msgid "Categories"
+msgstr "Категория"
+
+msgid "Price Range"
+msgstr "Цена"
+
+msgid "Apply Filter"
+msgstr "Приложи филтър"
+
+msgid "Availability"
+msgstr "Налични размери"
+
+msgid "All Products"
+msgstr "Всички продукти"
+
+msgid "In Stock Only"
+msgstr "В наличност"
+
+msgid "All Brands"
+msgstr "Всички"
+
+msgid "Search products..."
+msgstr "Търсене на продукти..."
+
+msgid "Search"
+msgstr "Търсене"
+
+msgid "Sort by:"
+msgstr "Сортиране по:"
+
+msgid "Name"
+msgstr "Име"
+
+msgid "Price: Low to High"
+msgstr "Цена: Ниска към висока"
+
+msgid "Price: High to Low"
+msgstr "Цена: Висока към ниска"
+
+msgid "Newest"
+msgstr "Най-нови"
+
+msgid "Showing {0}-{1} of {2} products"
+msgstr "Показване на {0}-{1} от {2} продукта"
+
+msgid "Hide Filters"
+msgstr "Скриване на филтри"
+
+msgid "Categories Management"
+msgstr "Управление на категории"
+
+msgid "Add New Category"
+msgstr "Категория"
+
+msgid "Display Order"
+msgstr "Ред на показване"
+
+msgid "Actions"
+msgstr "Действия"
+
+msgid "Move Up"
+msgstr "Премести нагоре"
+
+msgid "Move Down"
+msgstr "Премести надолу"
+
+msgid "Edit"
+msgstr "Редактиране"
+
+msgid "Are you sure you want to delete this category? This will also delete all subcategories."
+msgstr "Сигурни ли сте, че искате да изтриете тази категория? Това ще изтрие и всички подкатегории."
+
+msgid "Delete"
+msgstr "Изтриване"
+
+msgid "Date From"
+msgstr "Дата от"
+
+msgid "Date To"
+msgstr "Дата до"
+
+msgid "Order Status"
+msgstr "Статус на поръчката"
+
+msgid "Order #, Customer name or email"
+msgstr "Поръчка #, Име на клиент или имейл"
+
+msgid "Min Amount"
+msgstr "Минимална сума"
+
+msgid "Max Amount"
+msgstr "Максимална сума"
+
+msgid "Reset"
+msgstr "Нулиране"
+
+msgid "Apply Filters"
+msgstr "Приложи филтри"
+
+msgid "No orders found matching your criteria."
+msgstr "Не са намерени поръчки, отговарящи на вашите критерии."
+
+msgid "Order #"
+msgstr "Поръчка #"
+
+msgid "Date"
+msgstr "Дата"
+
+msgid "Customer"
+msgstr "Клиент"
+
+msgid "Items"
+msgstr "Артикули"
+
+msgid "Unknown User"
+msgstr "Непознат потребител"
+
+msgid "Showing {0} to {1} of {2} orders"
+msgstr "Показване на {0} до {1} от {2} поръчки"
+
+msgid "First"
+msgstr "Име"
+
+msgid "Previous"
+msgstr "Предишна"
+
+msgid "Next"
+msgstr "Следваща"
+
+msgid "Last"
+msgstr "Фамилия"
+
+msgid "Select Action"
+msgstr "Изберете действие"
+
+msgid "Mark as Confirmed"
+msgstr "Отбележете като потвърдена"
+
+msgid "Mark as Preparing"
+msgstr "Отбележете като подготвяща се"
+
+msgid "Mark as Packed"
+msgstr "Отбележете като опакована"
+
+msgid "Mark as Delivered"
+msgstr "Отбележете като доставена"
+
+msgid "Mark as Finished"
+msgstr "Отбележете като завършена"
+
+msgid "Generate Invoices"
+msgstr "Генериране на фактури"
+
+msgid "Generate Packing Slips"
+msgstr "Генериране на товарителници"
+
+msgid "Apply to Selected"
+msgstr "Приложи към избраните"
+
+msgid "Cancel Order"
+msgstr "Отмяна на поръчка"
+
+msgid "Are you sure you want to cancel this order? This action cannot be undone."
+msgstr "Сигурни ли сте, че искате да отмените тази поръчка? Това действие не може да бъде отменено."
+
+msgid "Cancellation Reason"
+msgstr "Причина за отмяна"
+
+msgid "Close"
+msgstr "Затвори"
+
+msgid "Please choose your username."
+msgstr "Моля, изберете вашето потребителско име."
+
+msgid "Please enter your first name."
+msgstr "Моля, въведете вашето име."
+
+msgid "Please enter your last name."
+msgstr "Моля, въведете вашата фамилия."
+
+msgid "Please enter your phone number."
+msgstr "Моля, въведете вашия телефонен номер."
+
+msgid "Checkout Information"
+msgstr "Информация за плащане"
+
+msgid "Checkout - Shipping & Billing Information"
+msgstr "Плащане - Информация за доставка и фактуриране"
+
+msgid "Same as shipping address"
+msgstr "Същото като адреса за доставка"
+
+msgid "Log in"
+msgstr "Вход"
+
+msgid "Logout"
+msgstr "Изход"
+
+msgid "Use a local account to log in."
+msgstr "Използвайте локален акаунт за вход."
+
+msgid "Forgot your password?"
+msgstr "Забравена парола?"
+
+msgid "Register as a new user"
+msgstr "Регистрирайте се като нов потребител"
+
+msgid "Resend email confirmation"
+msgstr "Изпратете отново потвърждение по имейл"
+
+msgid "Use another service to log in."
+msgstr "Използвайте друга услуга за вход."
+
+msgid "There are no external authentication services configured. See this"
+msgstr "Няма конфигурирани външни услуги за автентикация. Вижте това"
+
+msgid "article about setting up this ASP.NET application to support logging in via external services"
+msgstr "статия за настройка на това ASP.NET приложение за поддръжка на вход чрез външни услуги"
+
+msgid "Log in using your"
+msgstr "Влезте с вашия"
+
+msgid "account"
+msgstr "акаунт"
+
+msgid "Edit Category"
+msgstr "Редактиране на категория"
+
+msgid "Create Category"
+msgstr "Създаване на категория"
+
+msgid "None (Top Level Category)"
+msgstr "Няма (Категория от най-високо ниво)"
+
+msgid "Back to List"
+msgstr "Обратно към списъка"
+
+msgid "Payment"
+msgstr "Плащане"
+
+msgid "Card Number"
+msgstr "Номер на карта"
+
+msgid "1234 5678 9012 3456"
+msgstr "1234 5678 9012 3456"
+
+msgid "Expiry"
+msgstr "Валидност"
+
+msgid "MM/YY"
+msgstr "ММ/ГГ"
+
+msgid "CVC"
+msgstr "CVC"
+
+msgid "123"
+msgstr "123"
+
+msgid "Pay & Place Order"
+msgstr "Платете и направете поръчка"
+
+msgid "Add Product"
+msgstr "Добавяне на продукт"
+
+msgid "Edit Product"
+msgstr "Редактиране на продукт"
+
+msgid "Back to Products"
+msgstr "Обратно към продуктите"
+
+msgid "Description"
+msgstr "Описание"
+
+msgid "Select a category"
+msgstr "Изберете категория"
+
+msgid "Colors (Optional)"
+msgstr "Цветове (по избор)"
+
+msgid "Add"
+msgstr "Добави"
+
+msgid "Add product color options if applicable (e.g., Red, Blue, Black)"
+msgstr "Добавете опции за цвят на продукта, ако е приложимо (напр. Червен, Син, Черен)"
+
+msgid "Sizes (Optional)"
+msgstr "Размери (по избор)"
+
+msgid "Add"
+msgstr "Добави"
+
+msgid "Add product size options if applicable (e.g., S, M, L, XL)"
+msgstr "Добавете опции за размер на продукта, ако е приложимо (напр. S, M, L, XL)"
+
+msgid "Upload"
+msgstr "Качване"
+
+msgid "Upload multiple product images (max 10 files, 5MB each)"
+msgstr "Качете няколко изображения на продукта (макс. 10 файла, по 5MB всеки)"
+
+msgid "Manage Existing Images"
+msgstr "Управление на съществуващи изображения"
+
+msgid "Drag images to reorder them. First image will be the main product image."
+msgstr "Плъзнете изображенията, за да ги пренаредите. Първото изображение ще бъде основното изображение на продукта."
+
+msgid "Delete Image"
+msgstr "Изтриване на изображение"
+
+msgid "Drag to reorder"
+msgstr "Плъзнете за пренареждане"
+
+msgid "ID:"
+msgstr "ИД:"
+
+msgid "Cancel"
+msgstr "Отказ"
+
+msgid "Create a new account."
+msgstr "Създайте нов акаунт."
+
+msgid "John"
+msgstr "Иван"
+
+msgid "Doe"
+msgstr "Димитров"
+
+msgid "Confirm Password"
+msgstr "Повторете паролата"
+
+msgid "Use another service to register."
+msgstr "Използвайте друга услуга за регистрация."
+
+msgid "Register confirmation"
+msgstr "Потвърждение на регистрацията"
+
+msgid "This app does not currently have a real email sender registered, see"
+msgstr "Това приложение в момента няма регистриран реален изпращач на имейли, вижте"
+
+msgid "these docs"
+msgstr "тези документи"
+
+msgid "for how to configure a real email sender."
+msgstr "за това как да конфигурирате реален изпращач на имейли."
+
+msgid "Normally this would be emailed:"
+msgstr "Обикновено това би било изпратено по имейл:"
+
+msgid "Click here to confirm your account"
+msgstr "Кликнете тук, за да потвърдите акаунта си"
+
+msgid "Please check your email to confirm your account."
+msgstr "Моля, проверете имейла си, за да потвърдите акаунта си."
+
+msgid "Username"
+msgstr "Потребителско име"
+
+msgid "Locked"
+msgstr "Заключен"
+
+msgid "Remove Admin"
+msgstr "Премахни администратор"
+
+msgid "Make Admin"
+msgstr "Направи администратор"
+
+msgid "Unlock User"
+msgstr "Отключи потребител"
+
+msgid "Lock User"
+msgstr "Заключи потребител"
+
+msgid "Are you sure you want to delete this user?"
+msgstr "Сигурни ли сте, че искате да изтриете този потребител?"
+
+msgid "Delete User"
+msgstr "Изтрий потребител"
+
+msgid "Page navigation"
+msgstr "Навигация на страница"
+
+msgid "Placed"
+msgstr "Направена"
+
+msgid "Confirmed"
+msgstr "Потвърдена"
+
+msgid "Preparing"
+msgstr "Подготвя се"
+
+msgid "Packed"
+msgstr "Опакована"
+
+msgid "Delivered"
+msgstr "Доставена"
+
+msgid "Finished"
+msgstr "Завършена"
+
+msgid "Customer Canceled"
+msgstr "Отменена от клиента"
+
+msgid "Out Of Stock"
+msgstr "Изчерпана наличност"
+
+msgid "Order #{0} Details"
+msgstr "Детайли на поръчка #{0}"
+
+msgid "Order not found."
+msgstr "Поръчката не е намерена."
+
+msgid "All My Orders"
+msgstr "Всички мои поръчки"
+
+msgid "Order Information"
+msgstr "Информация за поръчката"
+
+msgid "Order Number:"
+msgstr "Номер на поръчка:"
+
+msgid "Order Date:"
+msgstr "Дата на поръчка:"
+
+msgid "Status:"
+msgstr "Статус:"
+
+msgid "Payment Method:"
+msgstr "Метод на плащане:"
+
+msgid "Credit Card"
+msgstr "Кредитна карта"
+
+msgid "Tracking Number:"
+msgstr "Номер за проследяване:"
+
+msgid "Shipping address not available"
+msgstr "Адресът за доставка не е наличен"
+
+msgid "Subtotal:"
+msgstr "Междинна сума:"
+
+msgid "Shipping:"
+msgstr "Доставка:"
+
+msgid "Tax:"
+msgstr "Данък:"
+
+msgid "Discount:"
+msgstr "Отстъпка:"
+
+msgid "Total:"
+msgstr "Общо:"
+
+msgid "Order Items"
+msgstr "Артикули в поръчката"
+
+msgid "Product"
+msgstr "Продукт"
+
+msgid "Quantity"
+msgstr "Количество"
+
+msgid "Color:"
+msgstr "Цвят:"
+
+msgid "Size:"
+msgstr "Размер:"
+
+msgid "Low Stock"
+msgstr "Ниска наличност"
+
+msgid "Reorder"
+msgstr "Поръчай отново"
+
+msgid "Contact Support"
+msgstr "Свържете се с поддръжката"
+
+msgid "Return to Orders"
+msgstr "Връщане към поръчките"
+
+

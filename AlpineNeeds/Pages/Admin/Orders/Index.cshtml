@@ -1,49 +1,50 @@
 @page
 @model AlpineNeeds.Pages.Admin.Orders.IndexModel
+@inject IViewLocalizer Localizer
 @{
-    ViewData["Title"] = "Order Management";
+    ViewData["Title"] = Localizer["Order Management"];
 }
 
 <div class="container-fluid">
-    <h2 class="mb-4">Order Management</h2>
+    <h2 class="mb-4">@Localizer["Order Management"]</h2>
 
     <!-- Filter Panel -->
     <div class="card mb-4">
         <div class="card-header bg-light">
-            <h5 class="mb-0">Filters</h5>
+            <h5 class="mb-0">@Localizer["Filters"]</h5>
         </div>
         <div class="card-body">
             <form method="get" id="filterForm">
                 <div class="row g-3">
                     <div class="col-md-6 col-lg-3">
-                        <label asp-for="DateStart" class="form-label">Date From</label>
+                        <label asp-for="DateStart" class="form-label">@Localizer["Date From"]</label>
                         <input asp-for="DateStart" type="date" class="form-control" />
                     </div>
                     <div class="col-md-6 col-lg-3">
-                        <label asp-for="DateEnd" class="form-label">Date To</label>
+                        <label asp-for="DateEnd" class="form-label">@Localizer["Date To"]</label>
                         <input asp-for="DateEnd" type="date" class="form-control" />
                     </div>
                     <div class="col-md-6 col-lg-3">
-                        <label asp-for="StatusFilter" class="form-label">Order Status</label>
-                        <select asp-for="StatusFilter" asp-items="Model.StatusList" class="form-select" multiple>
+                        <label asp-for="StatusFilter" class="form-label">@Localizer["Order Status"]</label>
+                        <select asp-for="StatusFilter" asp-items="Html.GetEnumSelectList<OrderStatus>()" class="form-select" multiple>
                         </select>
                     </div>
                     <div class="col-md-6 col-lg-3">
-                        <label asp-for="SearchTerm" class="form-label">Search</label>
-                        <input asp-for="SearchTerm" type="text" class="form-control" placeholder="Order #, Customer name or email" />
+                        <label asp-for="SearchTerm" class="form-label">@Localizer["Search"]</label>
+                        <input asp-for="SearchTerm" type="text" class="form-control" placeholder="@Localizer["Order #, Customer name or email"]" />
                     </div>
                     <div class="col-md-6 col-lg-3">
-                        <label asp-for="MinAmount" class="form-label">Min Amount</label>
+                        <label asp-for="MinAmount" class="form-label">@Localizer["Min Amount"]</label>
                         <input asp-for="MinAmount" type="number" step="0.01" class="form-control" />
                     </div>
                     <div class="col-md-6 col-lg-3">
-                        <label asp-for="MaxAmount" class="form-label">Max Amount</label>
+                        <label asp-for="MaxAmount" class="form-label">@Localizer["Max Amount"]</label>
                         <input asp-for="MaxAmount" type="number" step="0.01" class="form-control" />
                     </div>
                     <div class="col-12">
                         <div class="d-flex justify-content-end">
-                            <a href="/Admin/Orders" class="btn btn-secondary me-2">Reset</a>
-                            <button type="submit" class="btn btn-primary">Apply Filters</button>
+                            <a href="/Admin/Orders" class="btn btn-secondary me-2">@Localizer["Reset"]</a>
+                            <button type="submit" class="btn btn-primary">@Localizer["Apply Filters"]</button>
                         </div>
                     </div>
                 </div>
@@ -56,7 +57,7 @@
         <div class="card-body">
             @if (!Model.Orders.Any())
             {
-                <div class="alert alert-info">No orders found matching your criteria.</div>
+                <div class="alert alert-info">@Localizer["No orders found matching your criteria."]</div>
             }
             else
             {
@@ -71,7 +72,7 @@
                                 </th>
                                 <th>
                                     <a asp-page="./Index" asp-route-sortField="Id" asp-route-sortOrder="@Model.SortOrderForLink("Id")">
-                                        Order #
+                                        @Localizer["Order #"]
                                         @if (Model.SortField == "Id")
                                         {
                                             <i class="bi @(Model.SortOrder == "asc" ? "bi-sort-up" : "bi-sort-down")"></i>
@@ -80,18 +81,18 @@
                                 </th>
                                 <th>
                                     <a asp-page="./Index" asp-route-sortField="OrderDate" asp-route-sortOrder="@Model.SortOrderForLink("OrderDate")">
-                                        Date
+                                        @Localizer["Date"]
                                         @if (Model.SortField == "OrderDate")
                                         {
                                             <i class="bi @(Model.SortOrder == "asc" ? "bi-sort-up" : "bi-sort-down")"></i>
                                         }
                                     </a>
                                 </th>
-                                <th>Customer</th>
-                                <th>Items</th>
+                                <th>@Localizer["Customer"]</th>
+                                <th>@Localizer["Items"]</th>
                                 <th>
                                     <a asp-page="./Index" asp-route-sortField="TotalPrice" asp-route-sortOrder="@Model.SortOrderForLink("TotalPrice")">
-                                        Total
+                                        @Localizer["Total"]
                                         @if (Model.SortField == "TotalPrice")
                                         {
                                             <i class="bi @(Model.SortOrder == "asc" ? "bi-sort-up" : "bi-sort-down")"></i>
@@ -100,14 +101,14 @@
                                 </th>
                                 <th>
                                     <a asp-page="./Index" asp-route-sortField="Status" asp-route-sortOrder="@Model.SortOrderForLink("Status")">
-                                        Status
+                                        @Localizer["Status"]
                                         @if (Model.SortField == "Status")
                                         {
                                             <i class="bi @(Model.SortOrder == "asc" ? "bi-sort-up" : "bi-sort-down")"></i>
                                         }
                                     </a>
                                 </th>
-                                <th>Actions</th>
+                                <th>@Localizer["Actions"]</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -128,13 +129,13 @@
                                         }
                                         else
                                         {
-                                            <span>Unknown User</span>
+                                            <span>@Localizer["Unknown User"]</span>
                                         }
                                     </td>
                                     <td>@order.OrderProducts.Count</td>
-                                    <td>$@order.TotalPrice.ToString("F2")</td>
+                                    <td>@order.TotalPrice.ToBgCurrency()</td>
                                     <td>
-                                        <span class="badge @GetStatusBadgeClass(order.Status)">@order.Status</span>
+                                        <span class="badge @GetStatusBadgeClass(order.Status)">@Localizer[order.Status.ToString()]</span>
                                     </td>
                                     <td>
                                         <div class="btn-group">
@@ -160,23 +161,17 @@
                 <nav aria-label="Page navigation">
                     <div class="d-flex justify-content-between align-items-center">
                         <div>
-                            Showing @((Model.CurrentPage - 1) * Model.PageSize + 1) to @(Math.Min(Model.CurrentPage * Model.PageSize, Model.TotalCount)) of @Model.TotalCount orders
+                            @Localizer["Showing {0} to {1} of {2} orders", (Model.CurrentPage - 1) * Model.PageSize + 1, Math.Min(Model.CurrentPage * Model.PageSize, Model.TotalCount), Model.TotalCount]
                         </div>
                         <ul class="pagination">
                             <li class="page-item @(Model.CurrentPage == 1 ? "disabled" : "")">
-                                <a class="page-link" asp-page="./Index" asp-route-pageNumber="1" asp-all-route-data="@Model.RouteData">First</a>
+                                <a class="page-link" asp-page="./Index" asp-route-pageNumber="1" asp-all-route-data="@Model.RouteData">@Localizer["First"]</a>
                             </li>
                             <li class="page-item @(Model.CurrentPage == 1 ? "disabled" : "")">
-                                <a class="page-link" asp-page="./Index" asp-route-pageNumber="@(Model.CurrentPage - 1)" asp-all-route-data="@Model.RouteData">Previous</a>
+                                <a class="page-link" asp-page="./Index" asp-route-pageNumber="@(Model.CurrentPage - 1)" asp-all-route-data="@Model.RouteData">@Localizer["Previous"]</a>
                             </li>
 
-                            @{
-                                int startPage = Math.Max(1, Model.CurrentPage - 2);
-                                int endPage = Math.Min(startPage + 4, Model.TotalPages);
-                                startPage = Math.Max(1, endPage - 4);
-                            }
-
-                            @for (int i = startPage; i <= endPage; i++)
+                            @for (int i = Math.Max(1, Model.CurrentPage - 2); i <= Math.Min(Math.Max(1, Model.CurrentPage - 2) + 4, Model.TotalPages); i++)
                             {
                                 <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
                                     <a class="page-link" asp-page="./Index" asp-route-pageNumber="@i" asp-all-route-data="@Model.RouteData">@i</a>
@@ -184,10 +179,10 @@
                             }
 
                             <li class="page-item @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">
-                                <a class="page-link" asp-page="./Index" asp-route-pageNumber="@(Model.CurrentPage + 1)" asp-all-route-data="@Model.RouteData">Next</a>
+                                <a class="page-link" asp-page="./Index" asp-route-pageNumber="@(Model.CurrentPage + 1)" asp-all-route-data="@Model.RouteData">@Localizer["Next"]</a>
                             </li>
                             <li class="page-item @(Model.CurrentPage == Model.TotalPages ? "disabled" : "")">
-                                <a class="page-link" asp-page="./Index" asp-route-pageNumber="@Model.TotalPages" asp-all-route-data="@Model.RouteData">Last</a>
+                                <a class="page-link" asp-page="./Index" asp-route-pageNumber="@Model.TotalPages" asp-all-route-data="@Model.RouteData">@Localizer["Last"]</a>
                             </li>
                         </ul>
                     </div>
@@ -200,16 +195,16 @@
                     <input type="hidden" id="selectedOrderIds" name="orderIds" value="" />
                     <div class="input-group">
                         <select name="action" class="form-select w-auto" id="batchAction">
-                            <option value="">-- Select Action --</option>
-                            <option value="MarkAsConfirmed">Mark as Confirmed</option>
-                            <option value="MarkAsPreparing">Mark as Preparing</option>
-                            <option value="MarkAsPacked">Mark as Packed</option>
-                            <option value="MarkAsDelivered">Mark as Delivered</option>
-                            <option value="MarkAsFinished">Mark as Finished</option>
-                            <option value="GenerateInvoices">Generate Invoices</option>
-                            <option value="GeneratePackingSlips">Generate Packing Slips</option>
+                            <option value="">-- @Localizer["Select Action"] --</option>
+                            <option value="MarkAsConfirmed">@Localizer["Mark as Confirmed"]</option>
+                            <option value="MarkAsPreparing">@Localizer["Mark as Preparing"]</option>
+                            <option value="MarkAsPacked">@Localizer["Mark as Packed"]</option>
+                            <option value="MarkAsDelivered">@Localizer["Mark as Delivered"]</option>
+                            <option value="MarkAsFinished">@Localizer["Mark as Finished"]</option>
+                            <option value="GenerateInvoices">@Localizer["Generate Invoices"]</option>
+                            <option value="GeneratePackingSlips">@Localizer["Generate Packing Slips"]</option>
                         </select>
-                        <button type="button" id="applyBatchAction" class="btn btn-primary" disabled>Apply to Selected</button>
+                        <button type="button" id="applyBatchAction" class="btn btn-primary" disabled>@Localizer["Apply to Selected"]</button>
                     </div>
                 </form>
             </div>
@@ -224,19 +219,19 @@
             <form method="post" asp-page-handler="CancelOrder">
                 <input type="hidden" id="cancelOrderId" name="orderId" value="" />
                 <div class="modal-header">
-                    <h5 class="modal-title">Cancel Order</h5>
+                    <h5 class="modal-title">@Localizer["Cancel Order"]</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Are you sure you want to cancel this order? This action cannot be undone.</p>
+                    <p>@Localizer["Are you sure you want to cancel this order? This action cannot be undone."]</p>
                     <div class="mb-3">
-                        <label for="cancellationReason" class="form-label">Cancellation Reason</label>
+                        <label for="cancellationReason" class="form-label">@Localizer["Cancellation Reason"]</label>
                         <textarea class="form-control" id="cancellationReason" name="reason" rows="3" required></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-danger">Cancel Order</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@Localizer["Close"]</button>
+                    <button type="submit" class="btn btn-danger">@Localizer["Cancel Order"]</button>
                 </div>
             </form>
         </div>

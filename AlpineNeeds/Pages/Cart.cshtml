@@ -1,17 +1,18 @@
 ﻿@page
 @model AlpineNeeds.Pages.CartModel
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer
 @{
-    ViewData["Title"] = "Shopping Cart";
+    ViewData["Title"] = Localizer["Shopping Cart"];
 }
 
 <div class="container">
-    <h1>Shopping Cart</h1>
+    <h1>@Localizer["Shopping Cart"]</h1>
 
     @if (Model.CartItems.Count == 0)
     {
         <div class="alert alert-info">
-            Your shopping cart is empty. 
-            <a asp-page="/Index">Continue shopping</a>
+            @Localizer["Your shopping cart is empty."] 
+            <a asp-page="/Index">@Localizer["Continue shopping"]</a>
         </div>
     }
     else
@@ -20,8 +21,8 @@
             <!-- Cart Items Section -->
             <div class="col-lg-8">
                 <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h4 class="mb-0">Cart Items</h4>
-                    <span class="text-muted">@Model.CartItems.Count item(s)</span>
+                    <h4 class="mb-0">@Localizer["Cart Items"]</h4>
+                    <span class="text-muted">@Localizer["{0} item(s)", Model.CartItems.Count]</span>
                 </div>
 
                 <!-- Product Cards -->
@@ -45,11 +46,11 @@
                                     <p class="text-muted mb-0">
                                         @if (!string.IsNullOrEmpty(item.Color))
                                         {
-                                            <span class="badge bg-secondary me-1">Color: @item.Color</span>
+                                            <span class="badge bg-secondary me-1">@Localizer["Color: {0}", item.Color]</span>
                                         }
                                         @if (!string.IsNullOrEmpty(item.Size))
                                         {
-                                            <span class="badge bg-info">Size: @item.Size</span>
+                                            <span class="badge bg-info">@Localizer["Size: {0}", item.Size]</span>
                                         }
                                     </p>
                                 </div>
@@ -76,8 +77,8 @@
                                 </div>
                                 <div class="col-md-2">
                                     <div class="d-flex flex-column">
-                                        <span class="fw-bold">@item.Price.ToString("C")</span>
-                                        <small class="text-muted">Subtotal: @item.Subtotal.ToString("C")</small>
+                                        <span class="fw-bold">@item.Price.ToBgCurrency()</span>
+                                        <small class="text-muted">@Localizer["Subtotal: {0}", item.Subtotal.ToBgCurrency()]</small>
                                     </div>
                                 </div>
                                 <div class="col-md-1">
@@ -97,7 +98,7 @@
                 
                 <div class="d-flex justify-content-start mt-4">
                     <a asp-page="/Index" class="btn btn-outline-primary">
-                        <i class="bi bi-arrow-left"></i> Continue Shopping
+                        <i class="bi bi-arrow-left"></i> @Localizer["Continue Shopping"]
                     </a>
                 </div>
             </div>
@@ -105,29 +106,29 @@
             <!-- Summary Section -->
             <div class="col-lg-4">
                 <div class="summary-card p-4 shadow-sm border rounded">
-                    <h5 class="mb-4">Order Summary</h5>
+                    <h5 class="mb-4">@Localizer["Order Summary"]</h5>
                     
                     <div class="d-flex justify-content-between mb-3">
-                        <span class="text-muted">Subtotal:</span>
-                        <span>@Model.CartTotal.ToString("C")</span>
+                        <span class="text-muted">@Localizer["Subtotal:"]</span>
+                        <span>@Model.CartTotal.ToBgCurrency()</span>
                     </div>
                     <div class="d-flex justify-content-between mb-3">
-                        <span class="text-muted">Shipping:</span>
-                        <span>@Model.ShippingCost.ToString("C")</span>
+                        <span class="text-muted">@Localizer["Shipping:"]</span>
+                        <span>@Model.ShippingCost.ToBgCurrency()</span>
                     </div>
                     <hr />
                     <div class="d-flex justify-content-between mb-4 fw-bold">
-                        <span>Total:</span>
-                        <span>@((Model.CartTotal + Model.ShippingCost).ToString("C"))</span>
+                        <span>@Localizer["Total:"]</span>
+                        <span>@((Model.CartTotal + Model.ShippingCost).ToBgCurrency())</span>
                     </div>
 
                     <a asp-page="/Checkout/Information" class="btn btn-success w-100">
-                        <i class="bi bi-credit-card"></i> Proceed to Checkout
+                        <i class="bi bi-credit-card"></i> @Localizer["Proceed to Checkout"]
                     </a>
                     
                     <div class="d-flex justify-content-center gap-2 mt-3">
                         <i class="bi bi-shield-check text-success"></i>
-                        <small class="text-muted">Secure checkout</small>
+                        <small class="text-muted">@Localizer["Secure checkout"]</small>
                     </div>
                 </div>
             </div>

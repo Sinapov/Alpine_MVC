@@ -52,7 +52,7 @@
                                         </a>
                                     </td>
                                     <td>@order.OrderDate.ToString("MMM dd, yyyy")</td>
-                                    <td>@order.TotalPrice.ToString("C")</td>
+                                    <td>@order.TotalPrice.ToBgCurrency()</td>
                                     <td>
                                         <span class="badge @GetStatusBadgeClass(order.Status)">@order.Status</span>
                                     </td>

@@ -13,9 +13,9 @@ Alpine Needs is an e-commerce web application for an outdoor equipment store. Th
 ## Coding Conventions
 
 ### General
+- Use primary constructor without private fields
 - Use PascalCase for class names, method names, and public properties
 - Use camelCase for local variables and private fields
-- Prefix private fields with underscore (_)
 - Use meaningful and descriptive names
 - Keep methods small and focused on a single responsibility
 - Comment complex code sections, but prefer self-documenting code
@@ -25,6 +25,7 @@ Alpine Needs is an e-commerce web application for an outdoor equipment store. Th
 - Keep code-behind files focused on handling requests, move business logic to services
 - Use view components for reusable UI elements
 - Use partial views for repeated page sections
+- Localize razor pages using `@inject IViewLocalizer Localizer`
 
 ### C# Guidelines
 - Use async/await for all I/O operations
@@ -33,6 +34,7 @@ Alpine Needs is an e-commerce web application for an outdoor equipment store. Th
 - Use dependency injection for services
 - Implement proper exception handling
 - Use nullable reference types
+- Localize models and controllers using `IStringLocalizer`
 
 ## Architecture Patterns
 - **Clean Architecture** with separation of concerns:

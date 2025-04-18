@@ -1,0 +1,1850 @@
+#: AlpineNeeds\Areas\Identity\Pages\Account\Login.cshtml.cs:78
+#. [Display(Name = "Remember me?")]
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.LoginModel.InputModel"
+msgid "Remember me?"
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Manage\Index.cshtml.cs:60
+#. [Display(Name = "Phone number")]
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.Manage.IndexModel.InputModel"
+msgid "Phone number"
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Manage\Index.cshtml.cs:64
+#. [Display(Name = "First Name")]
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.Manage.IndexModel.InputModel"
+msgid "First Name"
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Manage\Index.cshtml.cs:68
+#. [Display(Name = "Last Name")]
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.Manage.IndexModel.InputModel"
+msgid "Last Name"
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Register.cshtml.cs:83
+#. [Display(Name = "Email")]
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.RegisterModel.InputModel"
+msgid "Email"
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Register.cshtml.cs:91
+#. [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.RegisterModel.InputModel"
+msgid "The {0} must be at least {2} and at max {1} characters long."
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Register.cshtml.cs:93
+#. [Display(Name = "Password")]
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.RegisterModel.InputModel"
+msgid "Password"
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Register.cshtml.cs:101
+#. [Display(Name = "Confirm password")]
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.RegisterModel.InputModel"
+msgid "Confirm password"
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Register.cshtml.cs:102
+#. [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.RegisterModel.InputModel"
+msgid "The password and confirmation password do not match."
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Register.cshtml.cs:106
+#. [StringLength(50, ErrorMessage = "The {0} must be at most {1} characters long.")]
+#: AlpineNeeds\Areas\Identity\Pages\Account\Register.cshtml.cs:111
+#. [StringLength(50, ErrorMessage = "The {0} must be at most {1} characters long.")]
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.RegisterModel.InputModel"
+msgid "The {0} must be at most {1} characters long."
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Register.cshtml.cs:107
+#. [Display(Name = "First Name")]
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.RegisterModel.InputModel"
+msgid "First Name"
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Register.cshtml.cs:112
+#. [Display(Name = "Last Name")]
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.RegisterModel.InputModel"
+msgid "Last Name"
+msgstr ""
+
+#: AlpineNeeds\Models\CheckoutAddressViewModel.cs:8
+#. [Display(Name = "Full Name")]
+msgctxt "AlpineNeeds.Models.CheckoutAddressViewModel"
+msgid "Full Name"
+msgstr ""
+
+#: AlpineNeeds\Models\CheckoutAddressViewModel.cs:12
+#. [Display(Name = "Address Line 1")]
+msgctxt "AlpineNeeds.Models.CheckoutAddressViewModel"
+msgid "Address Line 1"
+msgstr ""
+
+#: AlpineNeeds\Models\CheckoutAddressViewModel.cs:15
+#. [Display(Name = "Address Line 2")]
+msgctxt "AlpineNeeds.Models.CheckoutAddressViewModel"
+msgid "Address Line 2"
+msgstr ""
+
+#: AlpineNeeds\Models\CheckoutAddressViewModel.cs:21
+#. [Display(Name = "State/Province")]
+msgctxt "AlpineNeeds.Models.CheckoutAddressViewModel"
+msgid "State/Province"
+msgstr ""
+
+#: AlpineNeeds\Models\CheckoutAddressViewModel.cs:25
+#. [Display(Name = "ZIP/Postal Code")]
+msgctxt "AlpineNeeds.Models.CheckoutAddressViewModel"
+msgid "ZIP/Postal Code"
+msgstr ""
+
+#: AlpineNeeds\Models\CheckoutAddressViewModel.cs:26
+#. [RegularExpression(@"^[0-9A-Za-z\- ]+$", ErrorMessage = "Invalid ZIP/Postal code.")]
+msgctxt "AlpineNeeds.Models.CheckoutAddressViewModel"
+msgid "Invalid ZIP/Postal code."
+msgstr ""
+
+#: AlpineNeeds\Models\CheckoutAddressViewModel.cs:34
+#. [Display(Name = "Phone Number")]
+msgctxt "AlpineNeeds.Models.CheckoutAddressViewModel"
+msgid "Phone Number"
+msgstr ""
+
+#: AlpineNeeds\Models\CheckoutAddressViewModel.cs:38
+#. [Display(Name = "Address Type")]
+msgctxt "AlpineNeeds.Models.CheckoutAddressViewModel"
+msgid "Address Type"
+msgstr ""
+
+#: AlpineNeeds\Models\CheckoutAddressViewModel.cs:41
+#. [Display(Name = "Save address for future orders")]
+msgctxt "AlpineNeeds.Models.CheckoutAddressViewModel"
+msgid "Save address for future orders"
+msgstr ""
+
+#: AlpineNeeds\Models\Product.cs:11
+#. [Required(ErrorMessage = "Product name is required")]
+msgctxt "AlpineNeeds.Models.Product"
+msgid "Product name is required"
+msgstr ""
+
+#: AlpineNeeds\Models\Product.cs:12
+#. [StringLength(100, MinimumLength = 2, ErrorMessage = "Name must be between 2 and 100 characters")]
+msgctxt "AlpineNeeds.Models.Product"
+msgid "Name must be between 2 and 100 characters"
+msgstr ""
+
+#: AlpineNeeds\Models\Product.cs:13
+#. [Display(Name = "Product Name")]
+msgctxt "AlpineNeeds.Models.Product"
+msgid "Product Name"
+msgstr ""
+
+#: AlpineNeeds\Models\Product.cs:16
+#. [StringLength(10_000, ErrorMessage = "Description cannot exceed 10 000 characters")]
+msgctxt "AlpineNeeds.Models.Product"
+msgid "Description cannot exceed 10 000 characters"
+msgstr ""
+
+#: AlpineNeeds\Models\Product.cs:17
+#. [Display(Name = "Product Description")]
+msgctxt "AlpineNeeds.Models.Product"
+msgid "Product Description"
+msgstr ""
+
+#: AlpineNeeds\Models\Product.cs:20
+#. [Required(ErrorMessage = "Category is required")]
+msgctxt "AlpineNeeds.Models.Product"
+msgid "Category is required"
+msgstr ""
+
+#: AlpineNeeds\Models\Product.cs:21
+#. [Display(Name = "Category")]
+msgctxt "AlpineNeeds.Models.Product"
+msgid "Category"
+msgstr ""
+
+#: AlpineNeeds\Models\Product.cs:27
+#. [Required(ErrorMessage = "Price is required")]
+msgctxt "AlpineNeeds.Models.Product"
+msgid "Price is required"
+msgstr ""
+
+#: AlpineNeeds\Models\Product.cs:28
+#. [Range(0.01, 100000, ErrorMessage = "Price must be between {1} and {2}")]
+msgctxt "AlpineNeeds.Models.Product"
+msgid "Price must be between {1} and {2}"
+msgstr ""
+
+#: AlpineNeeds\Models\Product.cs:30
+#. [Display(Name = "Price")]
+msgctxt "AlpineNeeds.Models.Product"
+msgid "Price"
+msgstr ""
+
+#: AlpineNeeds\Models\Product.cs:35
+#. [Display(Name = "Available Colors")]
+msgctxt "AlpineNeeds.Models.Product"
+msgid "Available Colors"
+msgstr ""
+
+#: AlpineNeeds\Models\Product.cs:38
+#. [Display(Name = "Available Sizes")]
+msgctxt "AlpineNeeds.Models.Product"
+msgid "Available Sizes"
+msgstr ""
+
+#: AlpineNeeds\Models\Product.cs:42
+#. [Display(Name = "Product Images")]
+msgctxt "AlpineNeeds.Models.Product"
+msgid "Product Images"
+msgstr ""
+
+#: AlpineNeeds\Models\Product.cs:46
+#. [Display(Name = "Stock Quantity")]
+msgctxt "AlpineNeeds.Models.Product"
+msgid "Stock Quantity"
+msgstr ""
+
+#: AlpineNeeds\Models\Product.cs:49
+#. [Display(Name = "In Stock")]
+msgctxt "AlpineNeeds.Models.Product"
+msgid "In Stock"
+msgstr ""
+
+#: AlpineNeeds\Models\Product.cs:53
+#. [Display(Name = "Brand")]
+msgctxt "AlpineNeeds.Models.Product"
+msgid "Brand"
+msgstr ""
+
+#: AlpineNeeds\Models\Product.cs:56
+#. [Display(Name = "Featured Product")]
+msgctxt "AlpineNeeds.Models.Product"
+msgid "Featured Product"
+msgstr ""
+
+#: AlpineNeeds\Views\Shared\_Layout.cshtml:28
+#. <a class="nav-link" asp-page="/Index"><i class="bi bi-house"></i> @Localizer["Home"]</a>
+msgctxt "AlpineNeeds.Views.Shared._Layout"
+msgid "Home"
+msgstr ""
+
+#: AlpineNeeds\Views\Shared\_Layout.cshtml:31
+#. <a class="nav-link" asp-page="/Products/Index"><i class="bi bi-shop"></i> @Localizer["Products"]</a>
+msgctxt "AlpineNeeds.Views.Shared._Layout"
+msgid "Products"
+msgstr ""
+
+#: AlpineNeeds\Views\Shared\_Layout.cshtml:34
+#. <a class="nav-link" asp-page="/Contacts"><i class="bi bi-envelope"></i> @Localizer["Contacts"]</a>
+msgctxt "AlpineNeeds.Views.Shared._Layout"
+msgid "Contacts"
+msgstr ""
+
+#: AlpineNeeds\Views\Shared\_Layout.cshtml:57
+#. <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">@Localizer["My Account"]</a></li>
+msgctxt "AlpineNeeds.Views.Shared._Layout"
+msgid "My Account"
+msgstr ""
+
+#: AlpineNeeds\Views\Shared\_Layout.cshtml:63
+#. <li><h6 class="dropdown-header"><i class="bi bi-shield-lock"></i> @Localizer["Admin Panel"]</h6></li>
+msgctxt "AlpineNeeds.Views.Shared._Layout"
+msgid "Admin Panel"
+msgstr ""
+
+#: AlpineNeeds\Views\Shared\_Layout.cshtml:64
+#. <li><a class="dropdown-item" asp-page="/Admin/Users">@Localizer["User Management"]</a></li>
+msgctxt "AlpineNeeds.Views.Shared._Layout"
+msgid "User Management"
+msgstr ""
+
+#: AlpineNeeds\Views\Shared\_Layout.cshtml:65
+#. <li><a class="dropdown-item" asp-page="/Admin/Products">@Localizer["Product Management"]</a></li>
+msgctxt "AlpineNeeds.Views.Shared._Layout"
+msgid "Product Management"
+msgstr ""
+
+#: AlpineNeeds\Views\Shared\_Layout.cshtml:66
+#. <li><a class="dropdown-item" asp-page="/Admin/Category/Index">@Localizer["Category Management"]</a></li>
+msgctxt "AlpineNeeds.Views.Shared._Layout"
+msgid "Category Management"
+msgstr ""
+
+#: AlpineNeeds\Views\Shared\_Layout.cshtml:67
+#. <li><a class="dropdown-item" asp-page="/Admin/Orders/Index">@Localizer["Order Management"]</a></li>
+msgctxt "AlpineNeeds.Views.Shared._Layout"
+msgid "Order Management"
+msgstr ""
+
+#: AlpineNeeds\Views\Shared\_Layout.cshtml:79
+#. <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Login">@Localizer["Login"]</a></li>
+msgctxt "AlpineNeeds.Views.Shared._Layout"
+msgid "Login"
+msgstr ""
+
+#: AlpineNeeds\Views\Shared\_Layout.cshtml:80
+#. <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Register">@Localizer["Register"]</a></li>
+msgctxt "AlpineNeeds.Views.Shared._Layout"
+msgid "Register"
+msgstr ""
+
+#: AlpineNeeds\Views\Shared\_Layout.cshtml:110
+#. <h5 class="modal-title">@Localizer["Success"]</h5>
+msgctxt "AlpineNeeds.Views.Shared._Layout"
+msgid "Success"
+msgstr ""
+
+#: AlpineNeeds\Views\Shared\_Layout.cshtml:117
+#. <a asp-page="/Cart" class="btn btn-primary">@Localizer["View Cart"]</a>
+msgctxt "AlpineNeeds.Views.Shared._Layout"
+msgid "View Cart"
+msgstr ""
+
+#: AlpineNeeds\Views\Shared\_Layout.cshtml:118
+#. <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@Localizer["Continue Shopping"]</button>
+msgctxt "AlpineNeeds.Views.Shared._Layout"
+msgid "Continue Shopping"
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Manage\_ManageNav.cshtml:7
+#. <li class="nav-item"><a class="nav-link @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">@Localizer["Profile"]</a></li>
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.Manage._ManageNav"
+msgid "Profile"
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Manage\_ManageNav.cshtml:8
+#. <li class="nav-item"><a class="nav-link @ManageNavPages.EmailNavClass(ViewContext)" id="email" asp-page="./Email">@Localizer["Email"]</a></li>
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.Manage._ManageNav"
+msgid "Email"
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Manage\_ManageNav.cshtml:9
+#. <li class="nav-item"><a class="nav-link @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">@Localizer["Password"]</a></li>
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.Manage._ManageNav"
+msgid "Password"
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Manage\_ManageNav.cshtml:12
+#. <li id="external-logins" class="nav-item"><a id="external-login" class="nav-link @ManageNavPages.ExternalLoginsNavClass(ViewContext)" asp-page="./ExternalLogins">@Localizer["External logins"]</a></li>
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.Manage._ManageNav"
+msgid "External logins"
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Manage\_ManageNav.cshtml:14
+#. <li class="nav-item"><a class="nav-link @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">@Localizer["Two-factor authentication"]</a></li>
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.Manage._ManageNav"
+msgid "Two-factor authentication"
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Manage\_ManageNav.cshtml:15
+#. <li class="nav-item"><a class="nav-link @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">@Localizer["Personal data"]</a></li>
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.Manage._ManageNav"
+msgid "Personal data"
+msgstr ""
+
+#: AlpineNeeds\Pages\Checkout\_OrderSummary.cshtml:5
+#. <strong>@Localizer["Order Summary"]</strong>
+msgctxt "AlpineNeeds.Pages.Checkout._OrderSummary"
+msgid "Order Summary"
+msgstr ""
+
+#: AlpineNeeds\Pages\Checkout\_OrderSummary.cshtml:11
+#. <h6 class="my-0">@Localizer["Subtotal"]</h6>
+msgctxt "AlpineNeeds.Pages.Checkout._OrderSummary"
+msgid "Subtotal"
+msgstr ""
+
+#: AlpineNeeds\Pages\Checkout\_OrderSummary.cshtml:17
+#. <h6 class="my-0">@Localizer["Shipping"]</h6>
+msgctxt "AlpineNeeds.Pages.Checkout._OrderSummary"
+msgid "Shipping"
+msgstr ""
+
+#: AlpineNeeds\Pages\Checkout\_OrderSummary.cshtml:23
+#. <h6 class="my-0">@Localizer["Tax"]</h6>
+msgctxt "AlpineNeeds.Pages.Checkout._OrderSummary"
+msgid "Tax"
+msgstr ""
+
+#: AlpineNeeds\Pages\Checkout\_OrderSummary.cshtml:28
+#. <span>@Localizer["Total"]</span>
+msgctxt "AlpineNeeds.Pages.Checkout._OrderSummary"
+msgid "Total"
+msgstr ""
+
+#: AlpineNeeds\Pages\Checkout\_OrderSummary.cshtml:33
+#. <button type="submit" class="btn btn-primary">@Localizer["Continue to Payment"]</button>
+msgctxt "AlpineNeeds.Pages.Checkout._OrderSummary"
+msgid "Continue to Payment"
+msgstr ""
+
+#: AlpineNeeds\Pages\Checkout\_OrderSummary.cshtml:34
+#. <a asp-page="/Cart" class="btn btn-link">@Localizer["Return to Cart"]</a>
+msgctxt "AlpineNeeds.Pages.Checkout._OrderSummary"
+msgid "Return to Cart"
+msgstr ""
+
+#: AlpineNeeds\Pages\Shared\_ProductCardPartial.cshtml:19
+#. <i class="fas fa-check-circle"></i> @Localizer["In Stock"]
+msgctxt "AlpineNeeds.Pages.Shared._ProductCardPartial"
+msgid "In Stock"
+msgstr ""
+
+#: AlpineNeeds\Pages\Shared\_ProductCardPartial.cshtml:25
+#. <i class="fas fa-times-circle"></i> @Localizer["Out of Stock"]
+#: AlpineNeeds\Pages\Shared\_ProductCardPartial.cshtml:41
+#. <span>@Localizer["Out of Stock"]</span>
+msgctxt "AlpineNeeds.Pages.Shared._ProductCardPartial"
+msgid "Out of Stock"
+msgstr ""
+
+#: AlpineNeeds\Pages\Shared\_ProductCardPartial.cshtml:32
+#. @Localizer["View Details"]
+msgctxt "AlpineNeeds.Pages.Shared._ProductCardPartial"
+msgid "View Details"
+msgstr ""
+
+#: AlpineNeeds\Pages\Cart.cshtml:4
+#. @{
+#: AlpineNeeds\Pages\Cart.cshtml:9
+#. <h1>@Localizer["Shopping Cart"]</h1>
+msgctxt "AlpineNeeds.Pages.Cart"
+msgid "Shopping Cart"
+msgstr ""
+
+#: AlpineNeeds\Pages\Cart.cshtml:14
+#. @Localizer["Your shopping cart is empty."]
+msgctxt "AlpineNeeds.Pages.Cart"
+msgid "Your shopping cart is empty."
+msgstr ""
+
+#: AlpineNeeds\Pages\Cart.cshtml:15
+#. <a asp-page="/Index">@Localizer["Continue shopping"]</a>
+msgctxt "AlpineNeeds.Pages.Cart"
+msgid "Continue shopping"
+msgstr ""
+
+#: AlpineNeeds\Pages\Cart.cshtml:24
+#. <h4 class="mb-0">@Localizer["Cart Items"]</h4>
+msgctxt "AlpineNeeds.Pages.Cart"
+msgid "Cart Items"
+msgstr ""
+
+#: AlpineNeeds\Pages\Cart.cshtml:25
+#. <span class="text-muted">@Localizer["{0} item(s)", Model.CartItems.Count]</span>
+msgctxt "AlpineNeeds.Pages.Cart"
+msgid "{0} item(s)"
+msgstr ""
+
+#: AlpineNeeds\Pages\Cart.cshtml:49
+#. <span class="badge bg-secondary me-1">@Localizer["Color: {0}", item.Color]</span>
+msgctxt "AlpineNeeds.Pages.Cart"
+msgid "Color: {0}"
+msgstr ""
+
+#: AlpineNeeds\Pages\Cart.cshtml:53
+#. <span class="badge bg-info">@Localizer["Size: {0}", item.Size]</span>
+msgctxt "AlpineNeeds.Pages.Cart"
+msgid "Size: {0}"
+msgstr ""
+
+#: AlpineNeeds\Pages\Cart.cshtml:81
+#. <small class="text-muted">@Localizer["Subtotal: {0}", item.Subtotal.ToBgCurrency()]</small>
+msgctxt "AlpineNeeds.Pages.Cart"
+msgid "Subtotal: {0}"
+msgstr ""
+
+#: AlpineNeeds\Pages\Cart.cshtml:101
+#. <i class="bi bi-arrow-left"></i> @Localizer["Continue Shopping"]
+msgctxt "AlpineNeeds.Pages.Cart"
+msgid "Continue Shopping"
+msgstr ""
+
+#: AlpineNeeds\Pages\Cart.cshtml:109
+#. <h5 class="mb-4">@Localizer["Order Summary"]</h5>
+msgctxt "AlpineNeeds.Pages.Cart"
+msgid "Order Summary"
+msgstr ""
+
+#: AlpineNeeds\Pages\Cart.cshtml:112
+#. <span class="text-muted">@Localizer["Subtotal:"]</span>
+msgctxt "AlpineNeeds.Pages.Cart"
+msgid "Subtotal:"
+msgstr ""
+
+#: AlpineNeeds\Pages\Cart.cshtml:116
+#. <span class="text-muted">@Localizer["Shipping:"]</span>
+msgctxt "AlpineNeeds.Pages.Cart"
+msgid "Shipping:"
+msgstr ""
+
+#: AlpineNeeds\Pages\Cart.cshtml:121
+#. <span>@Localizer["Total:"]</span>
+msgctxt "AlpineNeeds.Pages.Cart"
+msgid "Total:"
+msgstr ""
+
+#: AlpineNeeds\Pages\Cart.cshtml:126
+#. <i class="bi bi-credit-card"></i> @Localizer["Proceed to Checkout"]
+msgctxt "AlpineNeeds.Pages.Cart"
+msgid "Proceed to Checkout"
+msgstr ""
+
+#: AlpineNeeds\Pages\Cart.cshtml:131
+#. <small class="text-muted">@Localizer["Secure checkout"]</small>
+msgctxt "AlpineNeeds.Pages.Cart"
+msgid "Secure checkout"
+msgstr ""
+
+#: AlpineNeeds\Pages\Checkout\Confirmation.cshtml:4
+#. @{
+msgctxt "AlpineNeeds.Pages.Checkout.Confirmation"
+msgid "Order Confirmation"
+msgstr ""
+
+#: AlpineNeeds\Pages\Checkout\Confirmation.cshtml:10
+#. <h2>@Localizer["Thank you for your order!"]</h2>
+msgctxt "AlpineNeeds.Pages.Checkout.Confirmation"
+msgid "Thank you for your order!"
+msgstr ""
+
+#: AlpineNeeds\Pages\Checkout\Confirmation.cshtml:11
+#. <p>@Localizer["Your order"] <strong>#@Model.OrderNumber</strong> @Localizer["has been placed successfully."]</p>
+msgctxt "AlpineNeeds.Pages.Checkout.Confirmation"
+msgid "Your order"
+msgstr ""
+
+#: AlpineNeeds\Pages\Checkout\Confirmation.cshtml:11
+#. <p>@Localizer["Your order"] <strong>#@Model.OrderNumber</strong> @Localizer["has been placed successfully."]</p>
+msgctxt "AlpineNeeds.Pages.Checkout.Confirmation"
+msgid "has been placed successfully."
+msgstr ""
+
+#: AlpineNeeds\Pages\Checkout\Confirmation.cshtml:12
+#. <p>@Localizer["Estimated delivery:"] <strong>@Model.EstimatedDelivery.ToString("D")</strong></p>
+msgctxt "AlpineNeeds.Pages.Checkout.Confirmation"
+msgid "Estimated delivery:"
+msgstr ""
+
+#: AlpineNeeds\Pages\Checkout\Confirmation.cshtml:13
+#. <a asp-page="/Account/Orders/Details" asp-route-id="@Model.OrderId" class="btn btn-outline-primary mt-2">@Localizer["Track Order"]</a>
+msgctxt "AlpineNeeds.Pages.Checkout.Confirmation"
+msgid "Track Order"
+msgstr ""
+
+#: AlpineNeeds\Pages\Checkout\Confirmation.cshtml:18
+#. <strong>@Localizer["Order Details"]</strong>
+msgctxt "AlpineNeeds.Pages.Checkout.Confirmation"
+msgid "Order Details"
+msgstr ""
+
+#: AlpineNeeds\Pages\Checkout\Confirmation.cshtml:21
+#. <h5>@Localizer["Items Purchased"]</h5>
+msgctxt "AlpineNeeds.Pages.Checkout.Confirmation"
+msgid "Items Purchased"
+msgstr ""
+
+#: AlpineNeeds\Pages\Checkout\Confirmation.cshtml:26
+#. <span>@item.ProductName (@Localizer["x{0}", item.Quantity])</span>
+msgctxt "AlpineNeeds.Pages.Checkout.Confirmation"
+msgid "x{0}"
+msgstr ""
+
+#: AlpineNeeds\Pages\Checkout\Confirmation.cshtml:31
+#. <h5>@Localizer["Shipping Address"]</h5>
+msgctxt "AlpineNeeds.Pages.Checkout.Confirmation"
+msgid "Shipping Address"
+msgstr ""
+
+#: AlpineNeeds\Pages\Checkout\Confirmation.cshtml:35
+#. <h5>@Localizer["Order Total"]</h5>
+msgctxt "AlpineNeeds.Pages.Checkout.Confirmation"
+msgid "Order Total"
+msgstr ""
+
+#: AlpineNeeds\Pages\Checkout\Confirmation.cshtml:41
+#. <a asp-page="/Index" class="btn btn-success">@Localizer["Continue Shopping"]</a>
+msgctxt "AlpineNeeds.Pages.Checkout.Confirmation"
+msgid "Continue Shopping"
+msgstr ""
+
+#: AlpineNeeds\Pages\Checkout\Confirmation.cshtml:42
+#. <a asp-page="/Account/Orders/Details" asp-route-id="@Model.OrderId" class="btn btn-outline-secondary">@Localizer["View Order Details"]</a>
+msgctxt "AlpineNeeds.Pages.Checkout.Confirmation"
+msgid "View Order Details"
+msgstr ""
+
+#: AlpineNeeds\Pages\Checkout\Confirmation.cshtml:45
+#. <i class="bi bi-envelope"></i> @Localizer["A confirmation email has been sent to your address."]
+msgctxt "AlpineNeeds.Pages.Checkout.Confirmation"
+msgid "A confirmation email has been sent to your address."
+msgstr ""
+
+#: AlpineNeeds\Pages\Contacts.cshtml:4
+#. @{
+msgctxt "AlpineNeeds.Pages.Contacts"
+msgid "Contacts"
+msgstr ""
+
+#: AlpineNeeds\Pages\Contacts.cshtml:15
+#. <h5 class="card-title"><i class="bi bi-shop"></i> @Localizer["Our Store"]</h5>
+msgctxt "AlpineNeeds.Pages.Contacts"
+msgid "Our Store"
+msgstr ""
+
+#: AlpineNeeds\Pages\Contacts.cshtml:16
+#. <p class="card-text">@Localizer["Visit our store for the best mountain sports equipment and professional advice from our team."]</p>
+msgctxt "AlpineNeeds.Pages.Contacts"
+msgid "Visit our store for the best mountain sports equipment and professional advice from our team."
+msgstr ""
+
+#: AlpineNeeds\Pages\Contacts.cshtml:18
+#. <h6><i class="bi bi-geo-alt-fill"></i> @Localizer["Address:"]</h6>
+msgctxt "AlpineNeeds.Pages.Contacts"
+msgid "Address:"
+msgstr ""
+
+#: AlpineNeeds\Pages\Contacts.cshtml:20
+#. @Localizer["123 Mountain View Street"]<br />
+msgctxt "AlpineNeeds.Pages.Contacts"
+msgid "123 Mountain View Street"
+msgstr ""
+
+#: AlpineNeeds\Pages\Contacts.cshtml:21
+#. @Localizer["Alpine Heights"]<br />
+msgctxt "AlpineNeeds.Pages.Contacts"
+msgid "Alpine Heights"
+msgstr ""
+
+#: AlpineNeeds\Pages\Contacts.cshtml:22
+#. @Localizer["Sofia, 1000"]<br />
+msgctxt "AlpineNeeds.Pages.Contacts"
+msgid "Sofia, 1000"
+msgstr ""
+
+#: AlpineNeeds\Pages\Contacts.cshtml:23
+#. @Localizer["Bulgaria"]
+msgctxt "AlpineNeeds.Pages.Contacts"
+msgid "Bulgaria"
+msgstr ""
+
+#: AlpineNeeds\Pages\Contacts.cshtml:26
+#. <h6><i class="bi bi-telephone-fill"></i> @Localizer["Phone:"]</h6>
+msgctxt "AlpineNeeds.Pages.Contacts"
+msgid "Phone:"
+msgstr ""
+
+#: AlpineNeeds\Pages\Contacts.cshtml:29
+#. <h6><i class="bi bi-envelope-fill"></i> @Localizer["Email:"]</h6>
+msgctxt "AlpineNeeds.Pages.Contacts"
+msgid "Email:"
+msgstr ""
+
+#: AlpineNeeds\Pages\Contacts.cshtml:38
+#. <h5 class="card-title"><i class="bi bi-clock"></i> @Localizer["Working Hours"]</h5>
+msgctxt "AlpineNeeds.Pages.Contacts"
+msgid "Working Hours"
+msgstr ""
+
+#: AlpineNeeds\Pages\Contacts.cshtml:41
+#. <span>@Localizer["Monday - Friday"]</span>
+msgctxt "AlpineNeeds.Pages.Contacts"
+msgid "Monday - Friday"
+msgstr ""
+
+#: AlpineNeeds\Pages\Contacts.cshtml:45
+#. <span>@Localizer["Saturday"]</span>
+msgctxt "AlpineNeeds.Pages.Contacts"
+msgid "Saturday"
+msgstr ""
+
+#: AlpineNeeds\Pages\Contacts.cshtml:49
+#. <span>@Localizer["Sunday"]</span>
+msgctxt "AlpineNeeds.Pages.Contacts"
+msgid "Sunday"
+msgstr ""
+
+#: AlpineNeeds\Pages\Contacts.cshtml:62
+#. <h5 class="card-title"><i class="bi bi-map"></i> @Localizer["Find Us"]</h5>
+msgctxt "AlpineNeeds.Pages.Contacts"
+msgid "Find Us"
+msgstr ""
+
+#: AlpineNeeds\Pages\Index.cshtml:5
+#. @{
+msgctxt "AlpineNeeds.Pages.Index"
+msgid "Home Page"
+msgstr ""
+
+#: AlpineNeeds\Pages\Index.cshtml:0
+msgctxt "AlpineNeeds.Pages.Index"
+msgid "Alpine Needs - Your premier destination for high-quality outdoor gear and equipment. Shop camping, hiking and climbing equipment."
+msgstr ""
+
+#: AlpineNeeds\Pages\Index.cshtml:131
+#. <h2 class="text-center mb-5">@Localizer["Featured Products"]</h2>
+msgctxt "AlpineNeeds.Pages.Index"
+msgid "Featured Products"
+msgstr ""
+
+#: AlpineNeeds\Pages\Index.cshtml:173
+#. <p class="text-center">@Localizer["No featured products available at the moment."]</p>
+msgctxt "AlpineNeeds.Pages.Index"
+msgid "No featured products available at the moment."
+msgstr ""
+
+#: AlpineNeeds\Pages\Products\Index.cshtml:5
+#. @{
+#: AlpineNeeds\Pages\Products\Index.cshtml:166
+#. <h1 class="mb-4">@Localizer["Products"]</h1>
+msgctxt "AlpineNeeds.Pages.Products.Index"
+msgid "Products"
+msgstr ""
+
+#: AlpineNeeds\Pages\Products\Index.cshtml:173
+#. <h5 class="mb-0">@Localizer["Filters"]</h5>
+msgctxt "AlpineNeeds.Pages.Products.Index"
+msgid "Filters"
+msgstr ""
+
+#: AlpineNeeds\Pages\Products\Index.cshtml:175
+#. <span class="toggle-text">@Localizer["Show Filters"]</span>
+#: AlpineNeeds\Pages\Products\Index.cshtml:492
+#. const toggleText = $('#filterContent').hasClass('show') ? '@Localizer["Hide Filters"]' : '@Localizer["Show Filters"]';
+msgctxt "AlpineNeeds.Pages.Products.Index"
+msgid "Show Filters"
+msgstr ""
+
+#: AlpineNeeds\Pages\Products\Index.cshtml:178
+#. <button id="resetFilters" class="btn btn-sm btn-outline-danger">@Localizer["Reset All"]</button>
+msgctxt "AlpineNeeds.Pages.Products.Index"
+msgid "Reset All"
+msgstr ""
+
+#: AlpineNeeds\Pages\Products\Index.cshtml:189
+#. <h6 class="font-weight-bold">@Localizer["Categories"]</h6>
+msgctxt "AlpineNeeds.Pages.Products.Index"
+msgid "Categories"
+msgstr ""
+
+#: AlpineNeeds\Pages\Products\Index.cshtml:197
+#. <h6 class="font-weight-bold">@Localizer["Price Range"]</h6>
+msgctxt "AlpineNeeds.Pages.Products.Index"
+msgid "Price Range"
+msgstr ""
+
+#: AlpineNeeds\Pages\Products\Index.cshtml:215
+#. @Localizer["Apply Filter"]
+msgctxt "AlpineNeeds.Pages.Products.Index"
+msgid "Apply Filter"
+msgstr ""
+
+#: AlpineNeeds\Pages\Products\Index.cshtml:221
+#. <h6 class="font-weight-bold">@Localizer["Availability"]</h6>
+msgctxt "AlpineNeeds.Pages.Products.Index"
+msgid "Availability"
+msgstr ""
+
+#: AlpineNeeds\Pages\Products\Index.cshtml:226
+#. @Localizer["All Products"]
+msgctxt "AlpineNeeds.Pages.Products.Index"
+msgid "All Products"
+msgstr ""
+
+#: AlpineNeeds\Pages\Products\Index.cshtml:233
+#. @Localizer["In Stock Only"]
+msgctxt "AlpineNeeds.Pages.Products.Index"
+msgid "In Stock Only"
+msgstr ""
+
+#: AlpineNeeds\Pages\Products\Index.cshtml:240
+#. <h6 class="font-weight-bold">@Localizer["Brand"]</h6>
+msgctxt "AlpineNeeds.Pages.Products.Index"
+msgid "Brand"
+msgstr ""
+
+#: AlpineNeeds\Pages\Products\Index.cshtml:248
+#. @Localizer["All Brands"]
+msgctxt "AlpineNeeds.Pages.Products.Index"
+msgid "All Brands"
+msgstr ""
+
+#: AlpineNeeds\Pages\Products\Index.cshtml:278
+#. <input type="text" class="form-control" placeholder="@Localizer["Search products..."]"
+msgctxt "AlpineNeeds.Pages.Products.Index"
+msgid "Search products..."
+msgstr ""
+
+#: AlpineNeeds\Pages\Products\Index.cshtml:281
+#. <button class="btn btn-primary" id="searchButton" type="button">@Localizer["Search"]</button>
+msgctxt "AlpineNeeds.Pages.Products.Index"
+msgid "Search"
+msgstr ""
+
+#: AlpineNeeds\Pages\Products\Index.cshtml:286
+#. <span class="me-2">@Localizer["Sort by:"]</span>
+msgctxt "AlpineNeeds.Pages.Products.Index"
+msgid "Sort by:"
+msgstr ""
+
+#: AlpineNeeds\Pages\Products\Index.cshtml:288
+#. <option value="name" selected="@(Model.SortBy == "name")">@Localizer["Name"]</option>
+msgctxt "AlpineNeeds.Pages.Products.Index"
+msgid "Name"
+msgstr ""
+
+#: AlpineNeeds\Pages\Products\Index.cshtml:289
+#. <option value="price_asc" selected="@(Model.SortBy == "price_asc")">@Localizer["Price: Low to High"]</option>
+msgctxt "AlpineNeeds.Pages.Products.Index"
+msgid "Price: Low to High"
+msgstr ""
+
+#: AlpineNeeds\Pages\Products\Index.cshtml:290
+#. <option value="price_desc" selected="@(Model.SortBy == "price_desc")">@Localizer["Price: High to Low"]</option>
+msgctxt "AlpineNeeds.Pages.Products.Index"
+msgid "Price: High to Low"
+msgstr ""
+
+#: AlpineNeeds\Pages\Products\Index.cshtml:291
+#. <option value="newest" selected="@(Model.SortBy == "newest")">@Localizer["Newest"]</option>
+msgctxt "AlpineNeeds.Pages.Products.Index"
+msgid "Newest"
+msgstr ""
+
+#: AlpineNeeds\Pages\Products\Index.cshtml:310
+#. @Localizer["Showing {0}-{1} of {2} products",
+msgctxt "AlpineNeeds.Pages.Products.Index"
+msgid "Showing {0}-{1} of {2} products"
+msgstr ""
+
+#: AlpineNeeds\Pages\Products\Index.cshtml:492
+#. const toggleText = $('#filterContent').hasClass('show') ? '@Localizer["Hide Filters"]' : '@Localizer["Show Filters"]';
+msgctxt "AlpineNeeds.Pages.Products.Index"
+msgid "Hide Filters"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Category\Index.cshtml:4
+#. @{
+#: AlpineNeeds\Pages\Admin\Category\Index.cshtml:11
+#. <h2>@Localizer["Categories Management"]</h2>
+msgctxt "AlpineNeeds.Pages.Admin.Category.Index"
+msgid "Categories Management"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Category\Index.cshtml:13
+#. <i class="bi bi-plus-circle"></i> @Localizer["Add New Category"]
+msgctxt "AlpineNeeds.Pages.Admin.Category.Index"
+msgid "Add New Category"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Category\Index.cshtml:23
+#. <th>@Localizer["Name"]</th>
+msgctxt "AlpineNeeds.Pages.Admin.Category.Index"
+msgid "Name"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Category\Index.cshtml:24
+#. <th>@Localizer["Display Order"]</th>
+msgctxt "AlpineNeeds.Pages.Admin.Category.Index"
+msgid "Display Order"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Category\Index.cshtml:25
+#. <th style="width: 150px;">@Localizer["Actions"]</th>
+msgctxt "AlpineNeeds.Pages.Admin.Category.Index"
+msgid "Actions"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Category\Index.cshtml:48
+#. title="@Localizer["Move Up"]">
+msgctxt "AlpineNeeds.Pages.Admin.Category.Index"
+msgid "Move Up"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Category\Index.cshtml:57
+#. title="@Localizer["Move Down"]">
+msgctxt "AlpineNeeds.Pages.Admin.Category.Index"
+msgid "Move Down"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Category\Index.cshtml:66
+#. title="@Localizer["Edit"]">
+msgctxt "AlpineNeeds.Pages.Admin.Category.Index"
+msgid "Edit"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Category\Index.cshtml:70
+#. onsubmit="return confirm('@Localizer["Are you sure you want to delete this category? This will also delete all subcategories."]')">
+msgctxt "AlpineNeeds.Pages.Admin.Category.Index"
+msgid "Are you sure you want to delete this category? This will also delete all subcategories."
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Category\Index.cshtml:73
+#. title="@Localizer["Delete"]">
+msgctxt "AlpineNeeds.Pages.Admin.Category.Index"
+msgid "Delete"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Orders\Index.cshtml:4
+#. @{
+#: AlpineNeeds\Pages\Admin\Orders\Index.cshtml:9
+#. <h2 class="mb-4">@Localizer["Order Management"]</h2>
+msgctxt "AlpineNeeds.Pages.Admin.Orders.Index"
+msgid "Order Management"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Orders\Index.cshtml:14
+#. <h5 class="mb-0">@Localizer["Filters"]</h5>
+msgctxt "AlpineNeeds.Pages.Admin.Orders.Index"
+msgid "Filters"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Orders\Index.cshtml:20
+#. <label asp-for="DateStart" class="form-label">@Localizer["Date From"]</label>
+msgctxt "AlpineNeeds.Pages.Admin.Orders.Index"
+msgid "Date From"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Orders\Index.cshtml:24
+#. <label asp-for="DateEnd" class="form-label">@Localizer["Date To"]</label>
+msgctxt "AlpineNeeds.Pages.Admin.Orders.Index"
+msgid "Date To"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Orders\Index.cshtml:28
+#. <label asp-for="StatusFilter" class="form-label">@Localizer["Order Status"]</label>
+msgctxt "AlpineNeeds.Pages.Admin.Orders.Index"
+msgid "Order Status"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Orders\Index.cshtml:33
+#. <label asp-for="SearchTerm" class="form-label">@Localizer["Search"]</label>
+msgctxt "AlpineNeeds.Pages.Admin.Orders.Index"
+msgid "Search"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Orders\Index.cshtml:34
+#. <input asp-for="SearchTerm" type="text" class="form-control" placeholder="@Localizer["Order #, Customer name or email"]" />
+msgctxt "AlpineNeeds.Pages.Admin.Orders.Index"
+msgid "Order #, Customer name or email"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Orders\Index.cshtml:37
+#. <label asp-for="MinAmount" class="form-label">@Localizer["Min Amount"]</label>
+msgctxt "AlpineNeeds.Pages.Admin.Orders.Index"
+msgid "Min Amount"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Orders\Index.cshtml:41
+#. <label asp-for="MaxAmount" class="form-label">@Localizer["Max Amount"]</label>
+msgctxt "AlpineNeeds.Pages.Admin.Orders.Index"
+msgid "Max Amount"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Orders\Index.cshtml:46
+#. <a href="/Admin/Orders" class="btn btn-secondary me-2">@Localizer["Reset"]</a>
+msgctxt "AlpineNeeds.Pages.Admin.Orders.Index"
+msgid "Reset"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Orders\Index.cshtml:47
+#. <button type="submit" class="btn btn-primary">@Localizer["Apply Filters"]</button>
+msgctxt "AlpineNeeds.Pages.Admin.Orders.Index"
+msgid "Apply Filters"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Orders\Index.cshtml:60
+#. <div class="alert alert-info">@Localizer["No orders found matching your criteria."]</div>
+msgctxt "AlpineNeeds.Pages.Admin.Orders.Index"
+msgid "No orders found matching your criteria."
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Orders\Index.cshtml:75
+#. @Localizer["Order #"]
+msgctxt "AlpineNeeds.Pages.Admin.Orders.Index"
+msgid "Order #"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Orders\Index.cshtml:84
+#. @Localizer["Date"]
+msgctxt "AlpineNeeds.Pages.Admin.Orders.Index"
+msgid "Date"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Orders\Index.cshtml:91
+#. <th>@Localizer["Customer"]</th>
+msgctxt "AlpineNeeds.Pages.Admin.Orders.Index"
+msgid "Customer"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Orders\Index.cshtml:92
+#. <th>@Localizer["Items"]</th>
+msgctxt "AlpineNeeds.Pages.Admin.Orders.Index"
+msgid "Items"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Orders\Index.cshtml:95
+#. @Localizer["Total"]
+msgctxt "AlpineNeeds.Pages.Admin.Orders.Index"
+msgid "Total"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Orders\Index.cshtml:104
+#. @Localizer["Status"]
+msgctxt "AlpineNeeds.Pages.Admin.Orders.Index"
+msgid "Status"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Orders\Index.cshtml:111
+#. <th>@Localizer["Actions"]</th>
+msgctxt "AlpineNeeds.Pages.Admin.Orders.Index"
+msgid "Actions"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Orders\Index.cshtml:132
+#. <span>@Localizer["Unknown User"]</span>
+msgctxt "AlpineNeeds.Pages.Admin.Orders.Index"
+msgid "Unknown User"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Orders\Index.cshtml:164
+#. @Localizer["Showing {0} to {1} of {2} orders", (Model.CurrentPage - 1) * Model.PageSize + 1, Math.Min(Model.CurrentPage * Model.PageSize, Model.TotalCount), Model.TotalCount]
+msgctxt "AlpineNeeds.Pages.Admin.Orders.Index"
+msgid "Showing {0} to {1} of {2} orders"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Orders\Index.cshtml:168
+#. <a class="page-link" asp-page="./Index" asp-route-pageNumber="1" asp-all-route-data="@Model.RouteData">@Localizer["First"]</a>
+msgctxt "AlpineNeeds.Pages.Admin.Orders.Index"
+msgid "First"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Orders\Index.cshtml:171
+#. <a class="page-link" asp-page="./Index" asp-route-pageNumber="@(Model.CurrentPage - 1)" asp-all-route-data="@Model.RouteData">@Localizer["Previous"]</a>
+msgctxt "AlpineNeeds.Pages.Admin.Orders.Index"
+msgid "Previous"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Orders\Index.cshtml:182
+#. <a class="page-link" asp-page="./Index" asp-route-pageNumber="@(Model.CurrentPage + 1)" asp-all-route-data="@Model.RouteData">@Localizer["Next"]</a>
+msgctxt "AlpineNeeds.Pages.Admin.Orders.Index"
+msgid "Next"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Orders\Index.cshtml:185
+#. <a class="page-link" asp-page="./Index" asp-route-pageNumber="@Model.TotalPages" asp-all-route-data="@Model.RouteData">@Localizer["Last"]</a>
+msgctxt "AlpineNeeds.Pages.Admin.Orders.Index"
+msgid "Last"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Orders\Index.cshtml:198
+#. <option value="">-- @Localizer["Select Action"] --</option>
+msgctxt "AlpineNeeds.Pages.Admin.Orders.Index"
+msgid "Select Action"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Orders\Index.cshtml:199
+#. <option value="MarkAsConfirmed">@Localizer["Mark as Confirmed"]</option>
+msgctxt "AlpineNeeds.Pages.Admin.Orders.Index"
+msgid "Mark as Confirmed"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Orders\Index.cshtml:200
+#. <option value="MarkAsPreparing">@Localizer["Mark as Preparing"]</option>
+msgctxt "AlpineNeeds.Pages.Admin.Orders.Index"
+msgid "Mark as Preparing"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Orders\Index.cshtml:201
+#. <option value="MarkAsPacked">@Localizer["Mark as Packed"]</option>
+msgctxt "AlpineNeeds.Pages.Admin.Orders.Index"
+msgid "Mark as Packed"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Orders\Index.cshtml:202
+#. <option value="MarkAsDelivered">@Localizer["Mark as Delivered"]</option>
+msgctxt "AlpineNeeds.Pages.Admin.Orders.Index"
+msgid "Mark as Delivered"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Orders\Index.cshtml:203
+#. <option value="MarkAsFinished">@Localizer["Mark as Finished"]</option>
+msgctxt "AlpineNeeds.Pages.Admin.Orders.Index"
+msgid "Mark as Finished"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Orders\Index.cshtml:204
+#. <option value="GenerateInvoices">@Localizer["Generate Invoices"]</option>
+msgctxt "AlpineNeeds.Pages.Admin.Orders.Index"
+msgid "Generate Invoices"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Orders\Index.cshtml:205
+#. <option value="GeneratePackingSlips">@Localizer["Generate Packing Slips"]</option>
+msgctxt "AlpineNeeds.Pages.Admin.Orders.Index"
+msgid "Generate Packing Slips"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Orders\Index.cshtml:207
+#. <button type="button" id="applyBatchAction" class="btn btn-primary" disabled>@Localizer["Apply to Selected"]</button>
+msgctxt "AlpineNeeds.Pages.Admin.Orders.Index"
+msgid "Apply to Selected"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Orders\Index.cshtml:222
+#. <h5 class="modal-title">@Localizer["Cancel Order"]</h5>
+#: AlpineNeeds\Pages\Admin\Orders\Index.cshtml:234
+#. <button type="submit" class="btn btn-danger">@Localizer["Cancel Order"]</button>
+msgctxt "AlpineNeeds.Pages.Admin.Orders.Index"
+msgid "Cancel Order"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Orders\Index.cshtml:226
+#. <p>@Localizer["Are you sure you want to cancel this order? This action cannot be undone."]</p>
+msgctxt "AlpineNeeds.Pages.Admin.Orders.Index"
+msgid "Are you sure you want to cancel this order? This action cannot be undone."
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Orders\Index.cshtml:228
+#. <label for="cancellationReason" class="form-label">@Localizer["Cancellation Reason"]</label>
+msgctxt "AlpineNeeds.Pages.Admin.Orders.Index"
+msgid "Cancellation Reason"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Orders\Index.cshtml:233
+#. <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">@Localizer["Close"]</button>
+msgctxt "AlpineNeeds.Pages.Admin.Orders.Index"
+msgid "Close"
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Manage\Index.cshtml:4
+#. @{
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.Manage.Index"
+msgid "Profile"
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Manage\Index.cshtml:16
+#. <input asp-for="Username" class="form-control" placeholder="@Localizer["Please choose your username."]" disabled />
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.Manage.Index"
+msgid "Please choose your username."
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Manage\Index.cshtml:20
+#. <input asp-for="Input.FirstName" class="form-control" placeholder="@Localizer["Please enter your first name."]" />
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.Manage.Index"
+msgid "Please enter your first name."
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Manage\Index.cshtml:25
+#. <input asp-for="Input.LastName" class="form-control" placeholder="@Localizer["Please enter your last name."]" />
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.Manage.Index"
+msgid "Please enter your last name."
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Manage\Index.cshtml:30
+#. <input asp-for="Input.PhoneNumber" class="form-control" placeholder="@Localizer["Please enter your phone number."]"/>
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.Manage.Index"
+msgid "Please enter your phone number."
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Manage\Index.cshtml:34
+#. <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">@Localizer["Save"]</button>
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.Manage.Index"
+msgid "Save"
+msgstr ""
+
+#: AlpineNeeds\Pages\Checkout\Information.cshtml:4
+#. @{
+msgctxt "AlpineNeeds.Pages.Checkout.Information"
+msgid "Checkout Information"
+msgstr ""
+
+#: AlpineNeeds\Pages\Checkout\Information.cshtml:9
+#. <h2>@Localizer["Checkout - Shipping & Billing Information"]</h2>
+msgctxt "AlpineNeeds.Pages.Checkout.Information"
+msgid "Checkout - Shipping & Billing Information"
+msgstr ""
+
+#: AlpineNeeds\Pages\Checkout\Information.cshtml:24
+#. <h4>@Localizer["Shipping Address"]</h4>
+msgctxt "AlpineNeeds.Pages.Checkout.Information"
+msgid "Shipping Address"
+msgstr ""
+
+#: AlpineNeeds\Pages\Checkout\Information.cshtml:27
+#. <h4>@Localizer["Billing Address"]</h4>
+msgctxt "AlpineNeeds.Pages.Checkout.Information"
+msgid "Billing Address"
+msgstr ""
+
+#: AlpineNeeds\Pages\Checkout\Information.cshtml:30
+#. <label class="form-check-label" for="SameAsShipping">@Localizer["Same as shipping address"]</label>
+msgctxt "AlpineNeeds.Pages.Checkout.Information"
+msgid "Same as shipping address"
+msgstr ""
+
+#: AlpineNeeds\Pages\Checkout\Information.cshtml:35
+#. <button type="submit" class="btn btn-primary mt-3">@Localizer["Continue to Payment"]</button>
+msgctxt "AlpineNeeds.Pages.Checkout.Information"
+msgid "Continue to Payment"
+msgstr ""
+
+#: AlpineNeeds\Pages\Checkout\Information.cshtml:36
+#. <a asp-page="/Cart" class="btn btn-link mt-3">@Localizer["Return to Cart"]</a>
+msgctxt "AlpineNeeds.Pages.Checkout.Information"
+msgid "Return to Cart"
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Login.cshtml:5
+#. @{
+#: AlpineNeeds\Areas\Identity\Pages\Account\Login.cshtml:34
+#. <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">@Localizer["Log in"]</button>
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.Login"
+msgid "Log in"
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Login.cshtml:14
+#. <h2>@Localizer["Use a local account to log in."]</h2>
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.Login"
+msgid "Use a local account to log in."
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Login.cshtml:19
+#. <label asp-for="Input.Email" class="form-label">@Localizer["Email"]</label>
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.Login"
+msgid "Email"
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Login.cshtml:24
+#. <label asp-for="Input.Password" class="form-label">@Localizer["Password"]</label>
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.Login"
+msgid "Password"
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Login.cshtml:38
+#. <a id="forgot-password" asp-page="./ForgotPassword">@Localizer["Forgot your password?"]</a>
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.Login"
+msgid "Forgot your password?"
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Login.cshtml:41
+#. <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">@Localizer["Register as a new user"]</a>
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.Login"
+msgid "Register as a new user"
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Login.cshtml:44
+#. <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">@Localizer["Resend email confirmation"]</a>
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.Login"
+msgid "Resend email confirmation"
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Login.cshtml:52
+#. <h3>@Localizer["Use another service to log in."]</h3>
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.Login"
+msgid "Use another service to log in."
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Login.cshtml:59
+#. @Localizer["There are no external authentication services configured. See this"] <a href="https://go.microsoft.com/fwlink/?LinkID=532715">@Localizer["article about setting up this ASP.NET application to support logging in via external services"]</a>.
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.Login"
+msgid "There are no external authentication services configured. See this"
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Login.cshtml:59
+#. @Localizer["There are no external authentication services configured. See this"] <a href="https://go.microsoft.com/fwlink/?LinkID=532715">@Localizer["article about setting up this ASP.NET application to support logging in via external services"]</a>.
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.Login"
+msgid "article about setting up this ASP.NET application to support logging in via external services"
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Login.cshtml:70
+#. <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="@Localizer["Log in using your"] @provider.DisplayName @Localizer["account"]">@provider.DisplayName</button>
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.Login"
+msgid "Log in using your"
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Login.cshtml:0
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.Login"
+msgid "account"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Category\Manage.cshtml:0
+msgctxt "AlpineNeeds.Pages.Admin.Category.Manage"
+msgid "Edit Category"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Category\Manage.cshtml:0
+msgctxt "AlpineNeeds.Pages.Admin.Category.Manage"
+msgid "Create Category"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Category\Manage.cshtml:12
+#. <h2>@(isEdit ? Localizer["Edit"] : Localizer["Create"]) @Localizer["Category"]</h2>
+msgctxt "AlpineNeeds.Pages.Admin.Category.Manage"
+msgid "Edit"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Category\Manage.cshtml:12
+#. <h2>@(isEdit ? Localizer["Edit"] : Localizer["Create"]) @Localizer["Category"]</h2>
+msgctxt "AlpineNeeds.Pages.Admin.Category.Manage"
+msgid "Create"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Category\Manage.cshtml:12
+#. <h2>@(isEdit ? Localizer["Edit"] : Localizer["Create"]) @Localizer["Category"]</h2>
+msgctxt "AlpineNeeds.Pages.Admin.Category.Manage"
+msgid "Category"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Category\Manage.cshtml:27
+#. <label asp-for="Category.Name" class="form-label">@Localizer["Name"]</label>
+msgctxt "AlpineNeeds.Pages.Admin.Category.Manage"
+msgid "Name"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Category\Manage.cshtml:33
+#. <label asp-for="Category.ParentCategoryId" class="form-label">@Localizer["Parent Category"]</label>
+msgctxt "AlpineNeeds.Pages.Admin.Category.Manage"
+msgid "Parent Category"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Category\Manage.cshtml:36
+#. <option value="">-- @Localizer["None (Top Level Category)"] --</option>
+msgctxt "AlpineNeeds.Pages.Admin.Category.Manage"
+msgid "None (Top Level Category)"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Category\Manage.cshtml:42
+#. <a asp-page="./Index" class="btn btn-secondary">@Localizer["Back to List"]</a>
+msgctxt "AlpineNeeds.Pages.Admin.Category.Manage"
+msgid "Back to List"
+msgstr ""
+
+#: AlpineNeeds\Pages\Checkout\Payment.cshtml:4
+#. @{
+#: AlpineNeeds\Pages\Checkout\Payment.cshtml:9
+#. <h2>@Localizer["Payment"]</h2>
+msgctxt "AlpineNeeds.Pages.Checkout.Payment"
+msgid "Payment"
+msgstr ""
+
+#: AlpineNeeds\Pages\Checkout\Payment.cshtml:12
+#. <label for="cardNumber" class="form-label">@Localizer["Card Number"]</label>
+msgctxt "AlpineNeeds.Pages.Checkout.Payment"
+msgid "Card Number"
+msgstr ""
+
+#: AlpineNeeds\Pages\Checkout\Payment.cshtml:13
+#. <input type="text" class="form-control" id="cardNumber" name="cardNumber" maxlength="19" placeholder="@Localizer["1234 5678 9012 3456"]" required />
+msgctxt "AlpineNeeds.Pages.Checkout.Payment"
+msgid "1234 5678 9012 3456"
+msgstr ""
+
+#: AlpineNeeds\Pages\Checkout\Payment.cshtml:17
+#. <label for="expiry" class="form-label">@Localizer["Expiry"]</label>
+msgctxt "AlpineNeeds.Pages.Checkout.Payment"
+msgid "Expiry"
+msgstr ""
+
+#: AlpineNeeds\Pages\Checkout\Payment.cshtml:18
+#. <input type="text" class="form-control" id="expiry" name="expiry" maxlength="5" placeholder="@Localizer["MM/YY"]" required />
+msgctxt "AlpineNeeds.Pages.Checkout.Payment"
+msgid "MM/YY"
+msgstr ""
+
+#: AlpineNeeds\Pages\Checkout\Payment.cshtml:21
+#. <label for="cvc" class="form-label">@Localizer["CVC"]</label>
+msgctxt "AlpineNeeds.Pages.Checkout.Payment"
+msgid "CVC"
+msgstr ""
+
+#: AlpineNeeds\Pages\Checkout\Payment.cshtml:22
+#. <input type="text" class="form-control" id="cvc" name="cvc" maxlength="4" placeholder="@Localizer["123"]" required />
+msgctxt "AlpineNeeds.Pages.Checkout.Payment"
+msgid "123"
+msgstr ""
+
+#: AlpineNeeds\Pages\Checkout\Payment.cshtml:25
+#. <button type="submit" class="btn btn-success">@Localizer["Pay & Place Order"]</button>
+msgctxt "AlpineNeeds.Pages.Checkout.Payment"
+msgid "Pay & Place Order"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\ProductEdit.cshtml:4
+#. @{
+#: AlpineNeeds\Pages\Admin\ProductEdit.cshtml:15
+#. <h2>@(Model.IsNewProduct ? Localizer["Add Product"] : Localizer["Edit Product"])</h2>
+msgctxt "AlpineNeeds.Pages.Admin.ProductEdit"
+msgid "Add Product"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\ProductEdit.cshtml:4
+#. @{
+#: AlpineNeeds\Pages\Admin\ProductEdit.cshtml:15
+#. <h2>@(Model.IsNewProduct ? Localizer["Add Product"] : Localizer["Edit Product"])</h2>
+msgctxt "AlpineNeeds.Pages.Admin.ProductEdit"
+msgid "Edit Product"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\ProductEdit.cshtml:18
+#. <i class="bi bi-arrow-left me-2"></i>@Localizer["Back to Products"]
+msgctxt "AlpineNeeds.Pages.Admin.ProductEdit"
+msgid "Back to Products"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\ProductEdit.cshtml:29
+#. class="form-label">@Localizer["Name"]</label>
+msgctxt "AlpineNeeds.Pages.Admin.ProductEdit"
+msgid "Name"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\ProductEdit.cshtml:40
+#. class="form-label">@Localizer["Description"]</label>
+msgctxt "AlpineNeeds.Pages.Admin.ProductEdit"
+msgid "Description"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\ProductEdit.cshtml:49
+#. class="form-label">@Localizer["Category"]</label>
+msgctxt "AlpineNeeds.Pages.Admin.ProductEdit"
+msgid "Category"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\ProductEdit.cshtml:54
+#. <option value="">@Localizer["Select a category"]</option>
+msgctxt "AlpineNeeds.Pages.Admin.ProductEdit"
+msgid "Select a category"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\ProductEdit.cshtml:61
+#. class="form-label">@Localizer["Price"]</label>
+msgctxt "AlpineNeeds.Pages.Admin.ProductEdit"
+msgid "Price"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\ProductEdit.cshtml:75
+#. <label asp-for="Product.StockQuantity" class="form-label">@Localizer["Stock Quantity"]</label>
+msgctxt "AlpineNeeds.Pages.Admin.ProductEdit"
+msgid "Stock Quantity"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\ProductEdit.cshtml:86
+#. <label asp-for="Product.Brand" class="form-label">@Localizer["Brand"]</label>
+msgctxt "AlpineNeeds.Pages.Admin.ProductEdit"
+msgid "Brand"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\ProductEdit.cshtml:96
+#. <label asp-for="Product.IsFeatured" class="form-check-label">@Localizer["Featured Product"]</label>
+msgctxt "AlpineNeeds.Pages.Admin.ProductEdit"
+msgid "Featured Product"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\ProductEdit.cshtml:97
+#. <div class="form-text">@Localizer["Featured products will be displayed on the home page carousel"]</div>
+msgctxt "AlpineNeeds.Pages.Admin.ProductEdit"
+msgid "Featured products will be displayed on the home page carousel"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\ProductEdit.cshtml:103
+#. <label class="form-label">@Localizer["Colors (Optional)"]</label>
+msgctxt "AlpineNeeds.Pages.Admin.ProductEdit"
+msgid "Colors (Optional)"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\ProductEdit.cshtml:110
+#. onclick="addColor()">@Localizer["Add"]</button>
+#: AlpineNeeds\Pages\Admin\ProductEdit.cshtml:125
+#. onclick="addSize()">@Localizer["Add"]</button>
+msgctxt "AlpineNeeds.Pages.Admin.ProductEdit"
+msgid "Add"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\ProductEdit.cshtml:115
+#. <div class="form-text">@Localizer["Add product color options if applicable (e.g., Red, Blue, Black)"]</div>
+msgctxt "AlpineNeeds.Pages.Admin.ProductEdit"
+msgid "Add product color options if applicable (e.g., Red, Blue, Black)"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\ProductEdit.cshtml:118
+#. <label class="form-label">@Localizer["Sizes (Optional)"]</label>
+msgctxt "AlpineNeeds.Pages.Admin.ProductEdit"
+msgid "Sizes (Optional)"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\ProductEdit.cshtml:130
+#. <div class="form-text">@Localizer["Add product size options if applicable (e.g., S, M, L, XL)"]</div>
+msgctxt "AlpineNeeds.Pages.Admin.ProductEdit"
+msgid "Add product size options if applicable (e.g., S, M, L, XL)"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\ProductEdit.cshtml:135
+#. <label class="form-label">@Localizer["Product Images"]</label>
+msgctxt "AlpineNeeds.Pages.Admin.ProductEdit"
+msgid "Product Images"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\ProductEdit.cshtml:143
+#. <label class="input-group-text" for="productImageInput">@Localizer["Upload"]</label>
+msgctxt "AlpineNeeds.Pages.Admin.ProductEdit"
+msgid "Upload"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\ProductEdit.cshtml:145
+#. <div class="form-text">@Localizer["Upload multiple product images (max 10 files, 5MB each)"]</div>
+msgctxt "AlpineNeeds.Pages.Admin.ProductEdit"
+msgid "Upload multiple product images (max 10 files, 5MB each)"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\ProductEdit.cshtml:152
+#. <h5>@Localizer["Manage Existing Images"]</h5>
+msgctxt "AlpineNeeds.Pages.Admin.ProductEdit"
+msgid "Manage Existing Images"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\ProductEdit.cshtml:153
+#. <p class="text-muted small">@Localizer["Drag images to reorder them. First image will be the main product image."]</p>
+msgctxt "AlpineNeeds.Pages.Admin.ProductEdit"
+msgid "Drag images to reorder them. First image will be the main product image."
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\ProductEdit.cshtml:163
+#. data-id="@image.Id" title="@Localizer["Delete Image"]">
+msgctxt "AlpineNeeds.Pages.Admin.ProductEdit"
+msgid "Delete Image"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\ProductEdit.cshtml:169
+#. <i class="bi bi-arrows-move" title="@Localizer["Drag to reorder"]"></i>
+msgctxt "AlpineNeeds.Pages.Admin.ProductEdit"
+msgid "Drag to reorder"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\ProductEdit.cshtml:170
+#. <span class="ms-2 small text-muted">@Localizer["ID:"] @image.Id</span>
+msgctxt "AlpineNeeds.Pages.Admin.ProductEdit"
+msgid "ID:"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\ProductEdit.cshtml:184
+#. class="btn btn-secondary">@Localizer["Cancel"]</a>
+msgctxt "AlpineNeeds.Pages.Admin.ProductEdit"
+msgid "Cancel"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\ProductEdit.cshtml:186
+#. class="btn btn-primary">@Localizer["Save"]</button>
+msgctxt "AlpineNeeds.Pages.Admin.ProductEdit"
+msgid "Save"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Products.cshtml:4
+#. @{
+msgctxt "AlpineNeeds.Pages.Admin.Products"
+msgid "Product Management"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Products.cshtml:12
+#. <h2>@Localizer["Products"]</h2>
+msgctxt "AlpineNeeds.Pages.Admin.Products"
+msgid "Products"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Products.cshtml:15
+#. <i class="bi bi-plus-circle me-2"></i>@Localizer["Add Product"]
+msgctxt "AlpineNeeds.Pages.Admin.Products"
+msgid "Add Product"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Products.cshtml:30
+#. <span>@Localizer["Name"]</span>
+msgctxt "AlpineNeeds.Pages.Admin.Products"
+msgid "Name"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Products.cshtml:43
+#. <th>@Localizer["Category"]</th>
+msgctxt "AlpineNeeds.Pages.Admin.Products"
+msgid "Category"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Products.cshtml:44
+#. <th>@Localizer["Price"]</th>
+msgctxt "AlpineNeeds.Pages.Admin.Products"
+msgid "Price"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Products.cshtml:45
+#. <th>@Localizer["Stock"]</th>
+msgctxt "AlpineNeeds.Pages.Admin.Products"
+msgid "Stock"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Products.cshtml:46
+#. <th>@Localizer["Brand"]</th>
+msgctxt "AlpineNeeds.Pages.Admin.Products"
+msgid "Brand"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Products.cshtml:47
+#. <th>@Localizer["Colors"]</th>
+msgctxt "AlpineNeeds.Pages.Admin.Products"
+msgid "Colors"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Products.cshtml:48
+#. <th>@Localizer["Sizes"]</th>
+msgctxt "AlpineNeeds.Pages.Admin.Products"
+msgid "Sizes"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Products.cshtml:49
+#. <th class="text-end">@Localizer["Actions"]</th>
+msgctxt "AlpineNeeds.Pages.Admin.Products"
+msgid "Actions"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Products.cshtml:73
+#. onsubmit="return confirm('@Localizer["Are you sure you want to delete this product?"]');">
+msgctxt "AlpineNeeds.Pages.Admin.Products"
+msgid "Are you sure you want to delete this product?"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Products.cshtml:90
+#. <nav aria-label="@Localizer["Page navigation"]"
+msgctxt "AlpineNeeds.Pages.Admin.Products"
+msgid "Page navigation"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Products.cshtml:100
+#. asp-route-sortOrder="@Model.SortOrder.ToString().ToLower()">@Localizer["Previous"]</a>
+#: AlpineNeeds\Pages\Admin\Products.cshtml:106
+#. <span class="page-link">@Localizer["Previous"]</span>
+msgctxt "AlpineNeeds.Pages.Admin.Products"
+msgid "Previous"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Products.cshtml:128
+#. asp-route-sortOrder="@Model.SortOrder.ToString().ToLower()">@Localizer["Next"]</a>
+#: AlpineNeeds\Pages\Admin\Products.cshtml:134
+#. <span class="page-link">@Localizer["Next"]</span>
+msgctxt "AlpineNeeds.Pages.Admin.Products"
+msgid "Next"
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Register.cshtml:4
+#. @{
+#: AlpineNeeds\Areas\Identity\Pages\Account\Register.cshtml:41
+#. <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">@Localizer["Register"]</button>
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.Register"
+msgid "Register"
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Register.cshtml:13
+#. <h2>@Localizer["Create a new account."]</h2>
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.Register"
+msgid "Create a new account."
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Register.cshtml:17
+#. <input asp-for="Input.FirstName" class="form-control" autocomplete="given-name" aria-required="true" placeholder="@Localizer["John"]" />
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.Register"
+msgid "John"
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Register.cshtml:18
+#. <label asp-for="Input.FirstName">@Localizer["First Name"]</label>
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.Register"
+msgid "First Name"
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Register.cshtml:22
+#. <input asp-for="Input.LastName" class="form-control" autocomplete="family-name" aria-required="true" placeholder="@Localizer["Doe"]" />
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.Register"
+msgid "Doe"
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Register.cshtml:23
+#. <label asp-for="Input.LastName">@Localizer["Last Name"]</label>
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.Register"
+msgid "Last Name"
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Register.cshtml:28
+#. <label asp-for="Input.Email">@Localizer["Email"]</label>
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.Register"
+msgid "Email"
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Register.cshtml:33
+#. <label asp-for="Input.Password">@Localizer["Password"]</label>
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.Register"
+msgid "Password"
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Register.cshtml:38
+#. <label asp-for="Input.ConfirmPassword">@Localizer["Confirm Password"]</label>
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.Register"
+msgid "Confirm Password"
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\Register.cshtml:46
+#. <h3>@Localizer["Use another service to register."]</h3>
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.Register"
+msgid "Use another service to register."
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\RegisterConfirmation.cshtml:4
+#. @{
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.RegisterConfirmation"
+msgid "Register confirmation"
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\RegisterConfirmation.cshtml:13
+#. @Localizer["This app does not currently have a real email sender registered, see"] <a href="https://aka.ms/aspaccountconf">@Localizer["these docs"]</a> @Localizer["for how to configure a real email sender."]
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.RegisterConfirmation"
+msgid "This app does not currently have a real email sender registered, see"
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\RegisterConfirmation.cshtml:13
+#. @Localizer["This app does not currently have a real email sender registered, see"] <a href="https://aka.ms/aspaccountconf">@Localizer["these docs"]</a> @Localizer["for how to configure a real email sender."]
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.RegisterConfirmation"
+msgid "these docs"
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\RegisterConfirmation.cshtml:13
+#. @Localizer["This app does not currently have a real email sender registered, see"] <a href="https://aka.ms/aspaccountconf">@Localizer["these docs"]</a> @Localizer["for how to configure a real email sender."]
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.RegisterConfirmation"
+msgid "for how to configure a real email sender."
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\RegisterConfirmation.cshtml:14
+#. @Localizer["Normally this would be emailed:"] <a id="confirm-link"
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.RegisterConfirmation"
+msgid "Normally this would be emailed:"
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\RegisterConfirmation.cshtml:15
+#. href="@Model.EmailConfirmationUrl">@Localizer["Click here to confirm your account"]</a>
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.RegisterConfirmation"
+msgid "Click here to confirm your account"
+msgstr ""
+
+#: AlpineNeeds\Areas\Identity\Pages\Account\RegisterConfirmation.cshtml:21
+#. @Localizer["Please check your email to confirm your account."]
+msgctxt "AlpineNeeds.Areas.Identity.Pages.Account.RegisterConfirmation"
+msgid "Please check your email to confirm your account."
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Users.cshtml:4
+#. @{
+msgctxt "AlpineNeeds.Pages.Admin.Users"
+msgid "User Management"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Users.cshtml:24
+#. <span>@Localizer["Username"]</span>
+msgctxt "AlpineNeeds.Pages.Admin.Users"
+msgid "Username"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Users.cshtml:43
+#. <span>@Localizer["Name"]</span>
+msgctxt "AlpineNeeds.Pages.Admin.Users"
+msgid "Name"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Users.cshtml:62
+#. <span>@Localizer["Email"]</span>
+msgctxt "AlpineNeeds.Pages.Admin.Users"
+msgid "Email"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Users.cshtml:74
+#. <th>@Localizer["Status"]</th>
+msgctxt "AlpineNeeds.Pages.Admin.Users"
+msgid "Status"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Users.cshtml:75
+#. <th class="text-end">@Localizer["Actions"]</th>
+msgctxt "AlpineNeeds.Pages.Admin.Users"
+msgid "Actions"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Users.cshtml:89
+#. <span class="badge bg-primary">@Localizer["Admin"]</span>
+msgctxt "AlpineNeeds.Pages.Admin.Users"
+msgid "Admin"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Users.cshtml:93
+#. <span class="badge bg-danger">@Localizer["Locked"]</span>
+msgctxt "AlpineNeeds.Pages.Admin.Users"
+msgid "Locked"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Users.cshtml:110
+#. <span>@Localizer["Remove Admin"]</span>
+msgctxt "AlpineNeeds.Pages.Admin.Users"
+msgid "Remove Admin"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Users.cshtml:115
+#. <span>@Localizer["Make Admin"]</span>
+msgctxt "AlpineNeeds.Pages.Admin.Users"
+msgid "Make Admin"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Users.cshtml:127
+#. <span>@Localizer["Unlock User"]</span>
+msgctxt "AlpineNeeds.Pages.Admin.Users"
+msgid "Unlock User"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Users.cshtml:132
+#. <span>@Localizer["Lock User"]</span>
+msgctxt "AlpineNeeds.Pages.Admin.Users"
+msgid "Lock User"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Users.cshtml:140
+#. onsubmit="return confirm('@Localizer["Are you sure you want to delete this user?"]');">
+msgctxt "AlpineNeeds.Pages.Admin.Users"
+msgid "Are you sure you want to delete this user?"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Users.cshtml:144
+#. <span>@Localizer["Delete User"]</span>
+msgctxt "AlpineNeeds.Pages.Admin.Users"
+msgid "Delete User"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Users.cshtml:157
+#. <nav aria-label="@Localizer["Page navigation"]" class="mt-3">
+msgctxt "AlpineNeeds.Pages.Admin.Users"
+msgid "Page navigation"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Users.cshtml:165
+#. asp-route-sortOrder="@Model.SortOrder.ToString().ToLower()">@Localizer["Previous"]</a>
+#: AlpineNeeds\Pages\Admin\Users.cshtml:171
+#. <span class="page-link">@Localizer["Previous"]</span>
+msgctxt "AlpineNeeds.Pages.Admin.Users"
+msgid "Previous"
+msgstr ""
+
+#: AlpineNeeds\Pages\Admin\Users.cshtml:191
+#. asp-route-sortOrder="@Model.SortOrder.ToString().ToLower()">@Localizer["Next"]</a>
+#: AlpineNeeds\Pages\Admin\Users.cshtml:197
+#. <span class="page-link">@Localizer["Next"]</span>
+msgctxt "AlpineNeeds.Pages.Admin.Users"
+msgid "Next"
+msgstr ""
+

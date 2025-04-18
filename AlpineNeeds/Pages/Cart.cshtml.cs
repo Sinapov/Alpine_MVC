@@ -3,6 +3,7 @@ using AlpineNeeds.Services;
 using AlpineNeeds.Pages.Shared;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using AlpineNeeds.Utilities;
 
 namespace AlpineNeeds.Pages
 {
@@ -90,7 +91,7 @@ namespace AlpineNeeds.Pages
                     
                     return new JsonResult(new { 
                         success = true, 
-                        total = cartTotal.ToString("C"), 
+                        total = cartTotal.ToBgCurrency(),
                         count = cartItemCount,
                         message = "Cart updated" 
                     });

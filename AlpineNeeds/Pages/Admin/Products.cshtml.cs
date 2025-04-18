@@ -4,11 +4,12 @@ using AlpineNeeds.Pages.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 
 namespace AlpineNeeds.Pages.Admin;
 
 [Authorize(Roles = "Admin")]
-public class ProductsModel(ApplicationDbContext context) : BasePageModel
+public class ProductsModel(ApplicationDbContext context, IStringLocalizer<ProductsModel> localizer) : BasePageModel
 {
     private readonly int _pageSize = 10;
 
@@ -78,7 +79,7 @@ public class ProductsModel(ApplicationDbContext context) : BasePageModel
         var product = await context.Products.FindAsync(id);
         if (product == null)
         {
-            AddPageError("Product not found.");
+            AddPageError(localizer["Product not found."]);
             return RedirectToPage();
         }
 
@@ -86,11 +87,11 @@ public class ProductsModel(ApplicationDbContext context) : BasePageModel
         {
             context.Products.Remove(product);
             await context.SaveChangesAsync();
-            AddPageSuccess("Product deleted successfully.");
+            AddPageSuccess(localizer["Product deleted successfully."]);
         }
         catch (Exception ex)
         {
-            AddPageError($"An error occurred while deleting the product: {ex.Message}");
+            AddPageError(localizer["An error occurred while deleting the product: {0}", ex.Message]);
         }
 
         return RedirectToPage();

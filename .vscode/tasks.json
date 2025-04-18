@@ -31,9 +31,11 @@
             "type": "process",
             "args": [
                 "watch",
-                "run",
                 "--project",
-                "${workspaceFolder}/AlpineNeeds/AlpineNeeds.csproj"
+                "${workspaceFolder}/AlpineNeeds/AlpineNeeds.csproj",
+                "run",
+                "--launch-profile",
+                "https",
             ],
             "problemMatcher": "$msCompile"
         },
@@ -90,6 +92,22 @@
                 "${workspaceFolder}/AlpineNeeds/AlpineNeeds.csproj"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Extract translations",
+            "command": "extractpo",
+            "type": "process",
+            "args": [
+                "${workspaceFolder}/AlpineNeeds",
+                "${workspaceFolder}/AlpineNeeds/Localization",
+                "-l",
+                "C#",
+                "-t",
+                "razor",
+                "--localizer",
+                "Localizer"
+            ],
+            "problemMatcher": []
         }
     ],
     "inputs": [

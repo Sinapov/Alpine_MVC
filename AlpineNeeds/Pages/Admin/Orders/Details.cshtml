@@ -60,7 +60,7 @@
                     </div>
                     <div class="row mb-2">
                         <div class="col-5 text-muted">Total:</div>
-                        <div class="col-7 fw-bold">$@Model.Order.TotalPrice.ToString("F2")</div>
+                        <div class="col-7 fw-bold">@Model.Order.TotalPrice.ToBgCurrency()</div>
                     </div>
                 </div>
             </div>
@@ -161,16 +161,16 @@
                                                 <div class="text-muted small">SKU: @item.Product.Id</div>
                                             }
                                         </td>
-                                        <td>$@item.Price.ToString("F2")</td>
+                                        <td>@item.Price.ToBgCurrency()</td>
                                         <td>@item.Quantity</td>
-                                        <td>$@((item.Price * item.Quantity).ToString("F2"))</td>
+                                        <td>@((item.Price * item.Quantity).ToBgCurrency())</td>
                                     </tr>
                                 }
                             </tbody>
                             <tfoot class="table-light">
                                 <tr>
                                     <td colspan="4" class="text-end fw-bold">Total:</td>
-                                    <td class="fw-bold">$@Model.Order.TotalPrice.ToString("F2")</td>
+                                    <td class="fw-bold">@Model.Order.TotalPrice.ToBgCurrency()</td>
                                 </tr>
                             </tfoot>
                         </table>

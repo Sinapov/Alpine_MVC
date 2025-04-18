@@ -1,7 +1,8 @@
 ﻿@page
 @model UsersModel
+@inject IViewLocalizer Localizer
 @{
-    ViewData["Title"] = "User Management";
+    ViewData["Title"] = Localizer["User Management"];
 }
 
 <div class="container">
@@ -20,7 +21,7 @@
                            asp-route-pageNumber="@Model.PageIndex"
                            class="text-dark text-decoration-none">
                             <div class="d-flex align-items-center">
-                                <span>Username</span>
+                                <span>@Localizer["Username"]</span>
                                 @if (Model.SortColumn == "username")
                                 {
                                     <i class="bi @(Model.SortOrder == SortOrder.Ascending ? "bi-arrow-up" : "bi-arrow-down") ms-1"></i>
@@ -39,7 +40,7 @@
                            asp-route-pageNumber="@Model.PageIndex"
                            class="text-dark text-decoration-none">
                             <div class="d-flex align-items-center">
-                                <span>Name</span>
+                                <span>@Localizer["Name"]</span>
                                 @if (Model.SortColumn == "firstname")
                                 {
                                     <i class="bi @(Model.SortOrder == SortOrder.Ascending ? "bi-arrow-up" : "bi-arrow-down") ms-1"></i>
@@ -58,7 +59,7 @@
                            asp-route-pageNumber="@Model.PageIndex"
                            class="text-dark text-decoration-none">
                             <div class="d-flex align-items-center">
-                                <span>Email</span>
+                                <span>@Localizer["Email"]</span>
                                 @if (Model.SortColumn == "email")
                                 {
                                     <i class="bi @(Model.SortOrder == SortOrder.Ascending ? "bi-arrow-up" : "bi-arrow-down") ms-1"></i>
@@ -70,8 +71,8 @@
                             </div>
                         </a>
                     </th>
-                    <th>Status</th>
-                    <th class="text-end">Actions</th>
+                    <th>@Localizer["Status"]</th>
+                    <th class="text-end">@Localizer["Actions"]</th>
                 </tr>
             </thead>
             <tbody>
@@ -85,11 +86,11 @@
                             <div class="d-flex gap-2 align-items-center">
                                 @if (user.IsAdmin)
                                 {
-                                    <span class="badge bg-primary">Admin</span>
+                                    <span class="badge bg-primary">@Localizer["Admin"]</span>
                                 }
                                 @if (user.IsLockedOut)
                                 {
-                                    <span class="badge bg-danger">Locked</span>
+                                    <span class="badge bg-danger">@Localizer["Locked"]</span>
                                 }
                             </div>
                         </td>
@@ -106,12 +107,12 @@
                                                 @if (user.IsAdmin)
                                                 {
                                                     <i class="bi bi-person-dash me-2"></i>
-                                                    <span>Remove Admin</span>
+                                                    <span>@Localizer["Remove Admin"]</span>
                                                 }
                                                 else
                                                 {
                                                     <i class="bi bi-person-plus me-2"></i>
-                                                    <span>Make Admin</span>
+                                                    <span>@Localizer["Make Admin"]</span>
                                                 }
                                             </button>
                                         </form>
@@ -123,12 +124,12 @@
                                                 @if (user.IsLockedOut)
                                                 {
                                                     <i class="bi bi-unlock me-2"></i>
-                                                    <span>Unlock User</span>
+                                                    <span>@Localizer["Unlock User"]</span>
                                                 }
                                                 else
                                                 {
                                                     <i class="bi bi-lock me-2"></i>
-                                                    <span>Lock User</span>
+                                                    <span>@Localizer["Lock User"]</span>
                                                 }
                                             </button>
                                         </form>
@@ -136,11 +137,11 @@
                                     <li><hr class="dropdown-divider"></li>
                                     <li>
                                         <form method="post" asp-page-handler="DeleteUser" class="d-inline" 
-                                              onsubmit="return confirm('Are you sure you want to delete this user?');">
+                                              onsubmit="return confirm('@Localizer["Are you sure you want to delete this user?"]');">
                                             <input type="hidden" name="id" value="@user.Id" />
                                             <button type="submit" class="dropdown-item text-danger">
                                                 <i class="bi bi-trash me-2"></i>
-                                                <span>Delete User</span>
+                                                <span>@Localizer["Delete User"]</span>
                                             </button>
                                         </form>
                                     </li>
@@ -153,7 +154,7 @@
         </table>
     </div>
 
-    <nav aria-label="Page navigation" class="mt-3">
+    <nav aria-label="@Localizer["Page navigation"]" class="mt-3">
         <ul class="pagination justify-content-center flex-wrap">
             @if (Model.HasPreviousPage)
             {
@@ -161,13 +162,13 @@
                     <a class="page-link" asp-page="./Users" 
                        asp-route-pageNumber="@(Model.PageIndex - 1)"
                        asp-route-sortColumn="@Model.SortColumn"
-                       asp-route-sortOrder="@Model.SortOrder.ToString().ToLower()">Previous</a>
+                       asp-route-sortOrder="@Model.SortOrder.ToString().ToLower()">@Localizer["Previous"]</a>
                 </li>
             }
             else
             {
                 <li class="page-item disabled">
-                    <span class="page-link">Previous</span>
+                    <span class="page-link">@Localizer["Previous"]</span>
                 </li>
             }
 
@@ -187,13 +188,13 @@
                     <a class="page-link" asp-page="./Users" 
                        asp-route-pageNumber="@(Model.PageIndex + 1)"
                        asp-route-sortColumn="@Model.SortColumn"
-                       asp-route-sortOrder="@Model.SortOrder.ToString().ToLower()">Next</a>
+                       asp-route-sortOrder="@Model.SortOrder.ToString().ToLower()">@Localizer["Next"]</a>
                 </li>
             }
             else
             {
                 <li class="page-item disabled">
-                    <span class="page-link">Next</span>
+                    <span class="page-link">@Localizer["Next"]</span>
                 </li>
             }
         </ul>

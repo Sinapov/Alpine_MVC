@@ -1,15 +1,16 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using AlpineNeeds.Models;
 using AlpineNeeds.Pages.Shared;
+using Microsoft.Extensions.Localization;
 
 namespace AlpineNeeds.Pages.Admin;
 
 [Authorize(Roles = "Admin")]
 public class UsersModel(
-    UserManager<ApplicationUser> userManager) : BasePageModel
+    UserManager<ApplicationUser> userManager,
+    IStringLocalizer<UsersModel> localizer) : BasePageModel
 {
 
     public PaginatedList<UserViewModel> Model { get; private set; } = null!;
@@ -38,22 +39,22 @@ public class UsersModel(
         switch (sortColumn.ToLower())
         {
             case "username":
-                usersQuery = sortOrder.ToLower() == "desc" 
+                usersQuery = sortOrder.ToLower() == "desc"
                     ? usersQuery.OrderByDescending(u => u.UserName)
                     : usersQuery.OrderBy(u => u.UserName);
                 break;
             case "email":
-                usersQuery = sortOrder.ToLower() == "desc" 
+                usersQuery = sortOrder.ToLower() == "desc"
                     ? usersQuery.OrderByDescending(u => u.Email)
                     : usersQuery.OrderBy(u => u.Email);
                 break;
             case "firstname":
-                usersQuery = sortOrder.ToLower() == "desc" 
+                usersQuery = sortOrder.ToLower() == "desc"
                     ? usersQuery.OrderByDescending(u => u.FirstName)
                     : usersQuery.OrderBy(u => u.FirstName);
                 break;
             case "lastname":
-                usersQuery = sortOrder.ToLower() == "desc" 
+                usersQuery = sortOrder.ToLower() == "desc"
                     ? usersQuery.OrderByDescending(u => u.LastName)
                     : usersQuery.OrderBy(u => u.LastName);
                 break;
@@ -64,7 +65,7 @@ public class UsersModel(
 
         // Get paginated results
         var paginatedUsers = await PaginatedList<ApplicationUser>.CreateAsync(
-            usersQuery, 
+            usersQuery,
             pageNumber.Value,
             pageSize,
             sortColumn,
@@ -110,17 +111,18 @@ public class UsersModel(
         var user = await userManager.FindByIdAsync(id);
         if (user == null)
         {
+            AddPageError(localizer["User not found."]);
             return NotFound();
         }
 
         var result = await userManager.DeleteAsync(user);
         if (!result.Succeeded)
         {
-            AddPageError("Failed to delete user.");
+            AddPageError(localizer["Failed to delete user."]);
             return RedirectToPage();
         }
 
-        AddPageSuccess("User deleted successfully.");
+        AddPageSuccess(localizer["User deleted successfully."]);
         return RedirectToPage();
     }
 
@@ -129,6 +131,7 @@ public class UsersModel(
         var user = await userManager.FindByIdAsync(id);
         if (user == null)
         {
+            AddPageError(localizer["User not found."]);
             return NotFound();
         }
 
@@ -136,33 +139,30 @@ public class UsersModel(
 
         if (isAdmin)
         {
-            // Remove admin role
             var result = await userManager.RemoveFromRoleAsync(user, "Admin");
             if (!result.Succeeded)
             {
-                AddPageError("Failed to remove admin role.");
+                AddPageError(localizer["Failed to remove admin role."]);
                 return RedirectToPage();
             }
 
-            // Ensure user has User role
             if (!await userManager.IsInRoleAsync(user, "User"))
             {
                 await userManager.AddToRoleAsync(user, "User");
             }
 
-            AddPageSuccess("Admin role removed successfully.");
+            AddPageSuccess(localizer["Admin role removed successfully."]);
         }
         else
         {
-            // Add admin role
             var result = await userManager.AddToRoleAsync(user, "Admin");
             if (!result.Succeeded)
             {
-                AddPageError("Failed to assign admin role.");
+                AddPageError(localizer["Failed to assign admin role."]);
                 return RedirectToPage();
             }
 
-            AddPageSuccess("Admin role assigned successfully.");
+            AddPageSuccess(localizer["Admin role assigned successfully."]);
         }
 
         return RedirectToPage();
@@ -173,6 +173,7 @@ public class UsersModel(
         var user = await userManager.FindByIdAsync(id);
         if (user == null)
         {
+            AddPageError(localizer["User not found."]);
             return NotFound();
         }
 
@@ -181,27 +182,25 @@ public class UsersModel(
 
         if (isLockedOut)
         {
-            // Unlock the user
             var result = await userManager.SetLockoutEndDateAsync(user, null);
             if (!result.Succeeded)
             {
-                AddPageError("Failed to unlock user.");
+                AddPageError(localizer["Failed to unlock user."]);
                 return RedirectToPage();
             }
 
-            AddPageSuccess("User unlocked successfully.");
+            AddPageSuccess(localizer["User unlocked successfully."]);
         }
         else
         {
-            // Lock the user for one year
             var result = await userManager.SetLockoutEndDateAsync(user, DateTimeOffset.Now.AddYears(1));
             if (!result.Succeeded)
             {
-                AddPageError("Failed to lock user.");
+                AddPageError(localizer["Failed to lock user."]);
                 return RedirectToPage();
             }
 
-            AddPageSuccess("User locked successfully.");
+            AddPageSuccess(localizer["User locked successfully."]);
         }
 
         return RedirectToPage();

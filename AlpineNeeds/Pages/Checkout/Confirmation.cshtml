@@ -1,46 +1,47 @@
 @page
 @model AlpineNeeds.Pages.Checkout.ConfirmationModel
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer
 @{
-    ViewData["Title"] = "Order Confirmation";
+    ViewData["Title"] = Localizer["Order Confirmation"];
 }
 
 <div class="container my-5">
     <div class="alert alert-success text-center">
-        <h2>Thank you for your order!</h2>
-        <p>Your order <strong>#@Model.OrderNumber</strong> has been placed successfully.</p>
-        <p>Estimated delivery: <strong>@Model.EstimatedDelivery.ToString("D")</strong></p>
-        <a asp-page="/Account/Orders/Details" asp-route-id="@Model.OrderId" class="btn btn-outline-primary mt-2">Track Order</a>
+        <h2>@Localizer["Thank you for your order!"]</h2>
+        <p>@Localizer["Your order"] <strong>#@Model.OrderNumber</strong> @Localizer["has been placed successfully."]</p>
+        <p>@Localizer["Estimated delivery:"] <strong>@Model.EstimatedDelivery.ToString("D")</strong></p>
+        <a asp-page="/Account/Orders/Details" asp-route-id="@Model.OrderId" class="btn btn-outline-primary mt-2">@Localizer["Track Order"]</a>
     </div>
 
     <div class="card mb-4">
         <div class="card-header">
-            <strong>Order Details</strong>
+            <strong>@Localizer["Order Details"]</strong>
         </div>
         <div class="card-body">
-            <h5>Items Purchased</h5>
+            <h5>@Localizer["Items Purchased"]</h5>
             <ul class="list-group mb-3">
                 @foreach (var item in Model.Items)
                 {
                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                        <span>@item.ProductName (x@item.Quantity)</span>
-                        <span>@item.TotalPrice.ToString("C")</span>
+                        <span>@item.ProductName (@Localizer["x{0}", item.Quantity])</span>
+                        <span>@item.TotalPrice.ToBgCurrency()</span>
                     </li>
                 }
             </ul>
-            <h5>Shipping Address</h5>
+            <h5>@Localizer["Shipping Address"]</h5>
             <address>
                 @Model.ShippingAddress
             </address>
-            <h5>Order Total</h5>
-            <p class="fw-bold">@Model.OrderTotal.ToString("C")</p>
+            <h5>@Localizer["Order Total"]</h5>
+            <p class="fw-bold">@Model.OrderTotal.ToBgCurrency()</p>
         </div>
     </div>
 
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <a asp-page="/Index" class="btn btn-success">Continue Shopping</a>
-        <a asp-page="/Account/Orders/Details" asp-route-id="@Model.OrderId" class="btn btn-outline-secondary">View Order Details</a>
+        <a asp-page="/Index" class="btn btn-success">@Localizer["Continue Shopping"]</a>
+        <a asp-page="/Account/Orders/Details" asp-route-id="@Model.OrderId" class="btn btn-outline-secondary">@Localizer["View Order Details"]</a>
     </div>
     <div class="alert alert-info text-center">
-        <i class="bi bi-envelope"></i> A confirmation email has been sent to your address.
+        <i class="bi bi-envelope"></i> @Localizer["A confirmation email has been sent to your address."]
     </div>
 </div>

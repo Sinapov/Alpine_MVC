@@ -4,11 +4,12 @@ using AlpineNeeds.Pages.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 
 namespace AlpineNeeds.Pages.Admin.Category;
 
 [Authorize(Roles = "Admin")]
-public class IndexModel(ApplicationDbContext context) : BasePageModel
+public class IndexModel(ApplicationDbContext context, IStringLocalizer<IndexModel> localizer) : BasePageModel
 {
     public List<CategoryViewModel> Categories { get; set; } = new List<CategoryViewModel>();
 
@@ -29,7 +30,7 @@ public class IndexModel(ApplicationDbContext context) : BasePageModel
             return NotFound();
         category.DisplayOrder = newOrder;
         await context.SaveChangesAsync();
-        AddPageSuccess("Category order updated successfully.");
+        AddPageSuccess(localizer["Category order updated successfully."]);
         return RedirectToPage();
     }
     
@@ -59,11 +60,11 @@ public class IndexModel(ApplicationDbContext context) : BasePageModel
                 siblingCategories[i].DisplayOrder = i;
             }
             await context.SaveChangesAsync();
-            AddPageSuccess($"Category '{category.Name}' and its descendants were deleted successfully.");
+            AddPageSuccess(localizer["Category '{0}' and its descendants were deleted successfully.", category.Name]);
         }
         catch (Exception ex)
         {
-            AddPageError($"Error deleting category: {ex.Message}");
+            AddPageError(localizer["Error deleting category: {0}", ex.Message]);
         }
         
         return RedirectToPage();

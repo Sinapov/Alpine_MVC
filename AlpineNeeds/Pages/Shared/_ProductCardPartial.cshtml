@@ -1,4 +1,5 @@
 ﻿@model AlpineNeeds.Models.Product
+@inject IViewLocalizer Localizer
 
 <div class="card product-card h-100">
     <div class="product-img-container">
@@ -10,25 +11,25 @@
     </div>
     <div class="card-body d-flex flex-column">
         <h5 class="card-title product-title">@Model.Name</h5>
-        <p class="card-text mb-1">@Model.Price.ToString("F2")</p>
+        <p class="card-text mb-1">@Model.Price.ToBgCurrency()</p>
         
         @if (Model.InStock)
         {
             <p class="card-text mb-2 in-stock">
-                <i class="fas fa-check-circle"></i> In Stock
+                <i class="fas fa-check-circle"></i> @Localizer["In Stock"]
             </p>
         }
         else
         {
             <p class="card-text mb-2 out-of-stock">
-                <i class="fas fa-times-circle"></i> Out of Stock
+                <i class="fas fa-times-circle"></i> @Localizer["Out of Stock"]
             </p>
         }
         
         <div class="mt-auto">
             <div class="d-grid gap-2">
                 <a href="/Products/Details?id=@Model.Id" class="btn btn-outline-primary btn-sm">
-                    View Details
+                    @Localizer["View Details"]
                 </a>
                 @if (Model.InStock)
                 {
@@ -37,7 +38,7 @@
                 else
                 {
                     <button type="button" class="btn btn-primary btn-sm" disabled>
-                        <span>Out of Stock</span>
+                        <span>@Localizer["Out of Stock"]</span>
                     </button>
                 }
             </div>

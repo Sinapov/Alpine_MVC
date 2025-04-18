@@ -4,7 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using AlpineNeeds.Models;
 using AlpineNeeds.Services;
+using Microsoft.AspNetCore.Localization;
+using System.Globalization;
 
+
+System.Console.WriteLine("Starting AlpineNeeds application...");
 var builder = WebApplication.CreateBuilder(args);
 
 // Add optional local configuration
@@ -21,6 +25,25 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddCartMergeOnLogin(); // Add custom SignInManager
+
+// Configure Localization
+builder.Services.AddPortableObjectLocalization(options =>
+{
+    options.ResourcesPath = "Localization";
+});
+
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    var supportedCultures = new[]
+    {
+        new CultureInfo("en"),
+        new CultureInfo("bg")
+    };
+    options.DefaultRequestCulture = new RequestCulture("bg");
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+    options.ApplyCurrentCultureToResponseHeaders = true;
+});
 
 // Add HttpContextAccessor, required for the CartService
 builder.Services.AddHttpContextAccessor();
@@ -44,7 +67,15 @@ builder.Services.AddScoped<IOrderService, OrderService>();
 // Bind AdminCredentials section to options
 builder.Services.Configure<AdminCredentials>(builder.Configuration.GetSection("AdminCredentials"));
 
+builder.Services
+    .AddRazorPages()
+    .AddViewLocalization()
+    .AddDataAnnotationsLocalization();
+
 var app = builder.Build();
+
+// Add localization middleware
+app.UseRequestLocalization();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

@@ -4,14 +4,13 @@ using AlpineNeeds.Pages.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 
 namespace AlpineNeeds.Pages.Admin;
 
 [Authorize(Roles = "Admin")]
-public class ProductEditModel(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment) : BasePageModel
+public class ProductEditModel(ApplicationDbContext context, IWebHostEnvironment webHostEnvironment, IStringLocalizer<ProductEditModel> localizer) : BasePageModel
 {
-    private readonly IWebHostEnvironment _webHostEnvironment = webHostEnvironment;
-
     [BindProperty]
     public Product Product { get; set; } = null!;
 
@@ -34,7 +33,7 @@ public class ProductEditModel(ApplicationDbContext context, IWebHostEnvironment 
 
         if (!Categories.Any())
         {
-            AddPageError("Please create at least one category before adding products.");
+            AddPageError(localizer["Please create at least one category before adding products."]);
             return RedirectToPage("./Products");
         }
 
@@ -162,12 +161,12 @@ public class ProductEditModel(ApplicationDbContext context, IWebHostEnvironment 
             }
 
             await context.SaveChangesAsync();
-            AddPageSuccess($"Product {(IsNewProduct ? "created" : "updated")} successfully.");
+            AddPageSuccess(localizer[$"Product {(IsNewProduct ? "created" : "updated")} successfully."]);
             return RedirectToPage("./Products");
         }
         catch (Exception ex)
         {
-            AddPageError($"Error {(Product.Id == 0 ? "creating" : "updating")} product: {ex.Message}");
+            AddPageError(localizer[$"Error {(Product.Id == 0 ? "creating" : "updating")} product: {ex.Message}"]);
             Categories = await context.Categories.ToListAsync();
             return Page();
         }
@@ -175,7 +174,7 @@ public class ProductEditModel(ApplicationDbContext context, IWebHostEnvironment 
 
     private async Task ProcessUploadedImages()
     {
-        string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images", "products");
+        string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "images", "products");
         
         // Create the directory if it doesn't exist
         if (!Directory.Exists(uploadsFolder))
@@ -219,7 +218,7 @@ public class ProductEditModel(ApplicationDbContext context, IWebHostEnvironment 
 
             // Convert URL to file path
             var fileName = Path.GetFileName(imageUrl);
-            var filePath = Path.Combine(_webHostEnvironment.WebRootPath, "images", "products", fileName);
+            var filePath = Path.Combine(webHostEnvironment.WebRootPath, "images", "products", fileName);
 
             if (System.IO.File.Exists(filePath))
             {

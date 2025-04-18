@@ -55,3 +55,4 @@
  - [x] Admin manage orders
  - [] Add shipping cost and shipping time 
  - [] Localize
+ - [] Confirmation not working

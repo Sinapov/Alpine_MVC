@@ -1,8 +1,9 @@
 ﻿@page
 @using System.Globalization
 @model AlpineNeeds.Pages.Products.IndexModel
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer
 @{
-    ViewData["Title"] = "Products";
+    ViewData["Title"] = Localizer["Products"];
 }
 
 @section Styles {
@@ -162,19 +163,19 @@
 }
 
 <div class="container py-5">
-    <h1 class="mb-4">Products</h1>
+    <h1 class="mb-4">@Localizer["Products"]</h1>
 
     <div class="row">
         <!-- Filter Sidebar (Left side) -->
         <div class="col-lg-3 mb-4">
             <div class="filter-sidebar">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h5 class="mb-0">Filters</h5>
+                    <h5 class="mb-0">@Localizer["Filters"]</h5>
                     <button id="toggleFilter" class="btn btn-sm btn-outline-secondary filter-toggle">
-                        <span class="toggle-text">Show Filters</span>
+                        <span class="toggle-text">@Localizer["Show Filters"]</span>
                         <i class="fas fa-chevron-down"></i>
                     </button>
-                    <button id="resetFilters" class="btn btn-sm btn-outline-danger">Reset All</button>
+                    <button id="resetFilters" class="btn btn-sm btn-outline-danger">@Localizer["Reset All"]</button>
                 </div>
 
                 <div id="filterContent">
@@ -185,7 +186,7 @@
 
                         <!-- Category Filter -->
                         <div class="category-filter mb-4">
-                            <h6 class="font-weight-bold">Categories</h6>
+                            <h6 class="font-weight-bold">@Localizer["Categories"]</h6>
                             <div class="nested-categories">
                                 @await Html.PartialAsync("_CategoryHierarchyPartial", Model.CategoryHierarchy)
                             </div>
@@ -193,7 +194,7 @@
 
                         <!-- Price Range Filter -->
                         <div class="price-filter mb-4">
-                            <h6 class="font-weight-bold">Price Range</h6>
+                            <h6 class="font-weight-bold">@Localizer["Price Range"]</h6>
                             <div class="price-slider" id="price-slider"></div>
                             <div class="price-inputs mt-2">
                                 <div class="input-group input-group-sm">
@@ -211,32 +212,32 @@
                                 </div>
                             </div>
                             <button type="button" class="btn btn-sm btn-primary mt-2 w-100" id="applyPriceFilter">
-                                Apply Filter
+                                @Localizer["Apply Filter"]
                             </button>
                         </div>
 
                         <!-- Stock Filter -->
                         <div class="stock-filter mb-4">
-                            <h6 class="font-weight-bold">Availability</h6>
+                            <h6 class="font-weight-bold">@Localizer["Availability"]</h6>
                             <div class="form-check">
                                 <input class="form-check-input filter-radio" type="radio" name="StockFilter" id="stockAll"
                                        value="All" @(Model.StockFilter != "InStock" ? "checked" : "") data-filter="stock">
                                 <label class="form-check-label" for="stockAll">
-                                    All Products
+                                    @Localizer["All Products"]
                                 </label>
                             </div>
                             <div class="form-check">
                                 <input class="form-check-input filter-radio" type="radio" name="StockFilter" id="stockInStock"
                                        value="InStock" @(Model.StockFilter == "InStock" ? "checked" : "") data-filter="stock">
                                 <label class="form-check-label" for="stockInStock">
-                                    In Stock Only
+                                    @Localizer["In Stock Only"]
                                 </label>
                             </div>
                         </div>
 
                         <!-- Brand Filter -->
                         <div class="brand-filter mb-4">
-                            <h6 class="font-weight-bold">Brand</h6>
+                            <h6 class="font-weight-bold">@Localizer["Brand"]</h6>
                             <div class="brand-list">
                                 <div class="form-check">
                                     <input class="form-check-input brand-checkbox" type="checkbox" name="Brands" 
@@ -244,7 +245,7 @@
                                            @(string.IsNullOrEmpty(Model.Brand) || Model.Brand == "All" ? "checked" : "") 
                                            data-filter="brand" data-is-all="true">
                                     <label class="form-check-label" for="brandAll">
-                                        All Brands
+                                        @Localizer["All Brands"]
                                     </label>
                                 </div>
                                 @foreach (var brand in Model.AvailableBrands)
@@ -274,20 +275,20 @@
             <div class="row mb-4">
                 <div class="col-md-6 mb-3 mb-md-0">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search products..." 
+                        <input type="text" class="form-control" placeholder="@Localizer["Search products..."]" 
                                id="searchInput" value="@Model.SearchTerm">
                         <div class="input-group-append">
-                            <button class="btn btn-primary" id="searchButton" type="button">Search</button>
+                            <button class="btn btn-primary" id="searchButton" type="button">@Localizer["Search"]</button>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6 d-flex justify-content-md-end align-items-center">
-                    <span class="me-2">Sort by:</span>
+                    <span class="me-2">@Localizer["Sort by:"]</span>
                     <select class="form-select" id="sortSelect">
-                        <option value="name" selected="@(Model.SortBy == "name")">Name</option>
-                        <option value="price_asc" selected="@(Model.SortBy == "price_asc")">Price: Low to High</option>
-                        <option value="price_desc" selected="@(Model.SortBy == "price_desc")">Price: High to Low</option>
-                        <option value="newest" selected="@(Model.SortBy == "newest")">Newest</option>
+                        <option value="name" selected="@(Model.SortBy == "name")">@Localizer["Name"]</option>
+                        <option value="price_asc" selected="@(Model.SortBy == "price_asc")">@Localizer["Price: Low to High"]</option>
+                        <option value="price_desc" selected="@(Model.SortBy == "price_desc")">@Localizer["Price: High to Low"]</option>
+                        <option value="newest" selected="@(Model.SortBy == "newest")">@Localizer["Newest"]</option>
                     </select>
                 </div>
             </div>
@@ -306,8 +307,10 @@
                 <!-- Pagination -->
                 <div class="d-flex justify-content-between align-items-center mt-4">
                     <p class="text-muted mb-0">
-                        Showing @((Model.PageIndex - 1) * 24 + 1)-@(Math.Min(Model.PageIndex * 24, Model.TotalProducts)) 
-                        of @Model.TotalProducts products
+                        @Localizer["Showing {0}-{1} of {2} products", 
+                            (Model.PageIndex - 1) * 24 + 1, 
+                            Math.Min(Model.PageIndex * 24, Model.TotalProducts), 
+                            Model.TotalProducts]
                     </p>
                     <nav>
                         <ul class="pagination">
@@ -486,7 +489,7 @@
             // Toggle filter sidebar on mobile
             $('#toggleFilter').click(function() {
                 $('#filterContent').toggleClass('show');
-                const toggleText = $('#filterContent').hasClass('show') ? 'Hide Filters' : 'Show Filters';
+                const toggleText = $('#filterContent').hasClass('show') ? '@Localizer["Hide Filters"]' : '@Localizer["Show Filters"]';
                 $('.toggle-text').text(toggleText);
                 $(this).find('i').toggleClass('fa-chevron-down fa-chevron-up');
             });
