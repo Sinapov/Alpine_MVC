@@ -272,15 +272,11 @@
     <!-- Action Buttons -->
     <div class="row">
         <div class="col-md-12 mb-4">
-            <div class="d-flex gap-2">
-                <form method="post" asp-page-handler="Reorder" asp-route-id="@Model.Order.Id">
+            <div class="d-flex gap-2">                <form method="post" asp-page-handler="Reorder" asp-route-id="@Model.Order.Id">
                     <button type="submit" class="btn btn-primary" @(Model.AllItemsAvailableForReorder ? "" : "disabled")>
                         <i class="bi bi-cart-plus me-1"></i> @Localizer["Reorder"]
                     </button>
                 </form>
-                <a href="#" class="btn btn-outline-primary">
-                    <i class="bi bi-headset me-1"></i> @Localizer["Contact Support"]
-                </a>
                 <a href="/Account/Orders" class="btn btn-outline-secondary">
                     <i class="bi bi-arrow-left me-1"></i> @Localizer["Return to Orders"]
                 </a>

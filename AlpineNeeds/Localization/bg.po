@@ -48,6 +48,9 @@ msgstr "Адрес, ред 1"
 msgid "Address Line 2"
 msgstr "Адрес, ред 2"
 
+msgid "Visit our store for the best mountain sports equipment and professional advice from our team."
+msgstr "Посетете нашия магазин за най-доброто оборудване за планински спортове и професионални съвети от нашия екип."
+
 msgid "State/Province"
 msgstr "Област/Провинция"
 
@@ -291,11 +294,14 @@ msgstr "Неделя"
 msgid "Find Us"
 msgstr "Намерете ни"
 
+msgid "AlpineNeeds"
+msgstr "Алпийски нужди"
+
 msgid "Home Page"
 msgstr "Начало"
 
 msgid "Adventure Awaits at Alpine Needs"
-msgstr "Приключението ви очаква в Alpine Needs"
+msgstr "Приключението ви очаква в Алпийски нужди"
 
 msgid "Shop Now"
 msgstr "Пазарувайте сега"
@@ -505,13 +511,13 @@ msgid "Explore the Outdoors"
 msgstr "Изследвайте природата"
 
 msgid "Alpine Needs provides premium quality outdoor gear for adventurers, climbers, and nature enthusiasts."
-msgstr "Alpine Needs предлага висококачествено оборудване за открито за авантюристи, катерачи и любители на природата."
+msgstr "Алпийски нужди предлага висококачествено оборудване за открито за авантюристи, катерачи и любители на природата."
 
 msgid "Welcome to Alpine Needs"
-msgstr "Добре дошли в Alpine Needs"
+msgstr "Добре дошли в Алпийски нужди"
 
 msgid "Since 2010, Alpine Needs has been a trusted provider of high-quality outdoor equipment. Our mission is to equip adventurers with reliable gear that enhances their outdoor experiences while promoting sustainable exploration of nature."
-msgstr "От 2010 г. Alpine Needs е доверен доставчик на висококачествено оборудване за открито. Нашата мисия е да оборудваме авантюристите с надеждно оборудване, което подобрява преживяванията им на открито, като същевременно насърчава устойчивото изследване на природата."
+msgstr "От 2010 г. Алпийски нужди е доверен доставчик на висококачествено оборудване за открито. Нашата мисия е да оборудваме авантюристите с надеждно оборудване, което подобрява преживяванията им на открито, като същевременно насърчава устойчивото изследване на природата."
 
 msgid "We carefully select each product in our inventory, ensuring durability, performance, and value for our customers. From camping essentials to specialized climbing gear, we have everything you need for your next adventure."
 msgstr "Внимателно подбираме всеки продукт в нашия инвентар, осигурявайки издръжливост, производителност и стойност за нашите клиенти. От основните принадлежности за къмпинг до специализирано оборудване за катерене, ние имаме всичко необходимо за вашето следващо приключение."
@@ -520,7 +526,7 @@ msgid "Learn More About Us"
 msgstr "Научете повече за нас"
 
 msgid "Alpine Needs store interior"
-msgstr "Интериор на магазина Alpine Needs"
+msgstr "Интериор на магазина Алпийски нужди"
 
 msgid "Mountain landscape with hiking trail"
 msgstr "Планински пейзаж с туристическа пътека"
